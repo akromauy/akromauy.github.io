@@ -1,0 +1,344 @@
+/* GENERALES */
+body{
+    background-color: #0e0927;   
+    color: white;
+    font-family: 'Oxanium';
+}
+
+#sabermasbtn {
+  color: white;
+}
+
+/* NAVBAR CAMBIANTES */
+
+/* Estilo inicial de la barra de navegación */
+.navbar {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  padding: 10px 20px;
+  background: transparent;
+  transition: background-color 0.3s ease;
+  z-index: 1000;
+}
+
+
+/* Asegúrate de que el fondo se aplique correctamente */
+.navbar.scrolled {
+  background-color: #0e0927 !important; /* Utiliza !important para asegurar que tenga prioridad */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+.navbar-nav .nav-link.active {
+  color: white !important;
+}
+
+
+
+
+
+#Landing {
+background: url(img/landing.jpg);
+background-blend-mode: multiply;
+background-size: cover;
+background-position: center;
+background-repeat: no-repeat;
+justify-content: center; /* Centra el contenido horizontalmente */
+align-items: center; /* Centra el contenido verticalmente */
+color: white;
+text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Hace que el texto sea más legible */
+height: 950px;
+}
+
+@media (max-width:991px){
+  .sidebar{
+    background-color: rgba(24, 19, 48, 0.8);
+    backdrop-filter: blur(10px);
+  }
+  .navbar .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .navbar-brand {
+    flex-grow: 1;
+    text-align: center;
+  }
+
+  .navbar-toggler {
+    margin-left: auto;
+  }
+  #bienvenido, 
+  #Landing p { /* Selecciona el título y el párrafo */
+    text-align: center; /* Centrar texto horizontalmente */
+    margin: 0 auto; /* Eliminar cualquier desplazamiento */
+    padding: 1rem; /* Espaciado interno */
+    background-color: rgba(255, 255, 255, 0.8); /* Fondo blanco con 50% de transparencia */
+    border-radius: 5px; /* Bordes redondeados para mejor estética */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Opcional: Añade sombra para resaltar */
+    width: 90%; /* Ajusta el ancho al 90% del contenedor */
+    color: #0e0927;
+    text-shadow: none;
+    padding-top: 0;
+    margin-bottom: 5%;
+    justify-content: center;
+  }
+  .pt-5 {
+    padding-top: 1rem !important;
+}
+.navbar img {
+  max-width: 200px; /* Asegúrate de que el logo no sea demasiado grande */
+  height: auto; /* Mantén las proporciones del logo */
+}
+}
+
+#bienvenido {
+  text-shadow: 4px 4px 6px rgba(0,0,0,0.5);
+}
+
+.nav-item:hover {
+  color: white!important;
+text-decoration:underline;
+}
+
+#companiayservicios {
+  background: url(img/espacio.jpg);
+  background-blend-mode: multiply;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.offcanvas-body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* Centra verticalmente */
+  align-items: center; /* Centra horizontalmente */
+  height: 100%; /* Asegura que ocupe toda la altura del contenedor */
+  text-align: center; /* Opcional, alinea el texto */
+}
+
+/* COMPANIA */
+
+.section {
+  text-align: center;
+  padding: 2rem;
+  position: relative;
+}
+
+.section h1 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+.section p {
+  font-size: 1rem;
+  line-height: 1.5;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+/* Agregar líneas entre las secciones */
+.section:not(:last-child)::after {
+  content: '';
+  display: block;
+  height: 2px;
+  width: 80%;
+  background: white;
+  margin: 2rem auto 0 auto; /* Espaciado superior */
+}
+
+#compania {
+  padding-top: 5%;
+}
+
+/* SERVICIOS */
+.nav-link:hover {
+  color: white;
+}
+
+.accordion-item {
+  background-color: rgba(255, 255, 255, 0.1);
+  color: white;
+}
+
+.accordion-button{
+  background-color: rgba(14, 9, 39, 0.8)!important;
+  color: white!important;
+}
+
+
+.card {
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  transition: transform 0.3s, box-shadow 0.3s;
+  padding: 20px;
+  margin: 2%;
+
+}
+
+.card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 15px rgba(255, 255, 255, 0.2);
+  background: white!important;
+  color: #0e0927!important;
+}
+
+.card-title {
+  font-weight: bold;
+  font-size: 1.4rem;
+}
+
+.card-text {
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+.carousel-inner {
+  min-height: 300px;
+}
+
+@media (max-width: 768px) {
+  .carousel .row {
+      flex-wrap: nowrap;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+  }
+  .carousel .col-md-4 {
+      flex: 0 0 100%;
+      max-width: 100%;
+  }
+  .card {
+    height: auto !important;
+}
+
+.card-body {
+    overflow: hidden;
+    padding: 15px; /* Reduce padding para mejorar el espacio */
+}
+}
+
+.card-body {
+  padding: 20px;
+  overflow: hidden;  /* Asegura que no haya desbordamientos */
+}
+
+
+#servicios {
+  padding-top: 5%;
+}
+
+
+
+/* CONTACTO */
+
+.contact-section {
+  background: url('img/footer.jpg') no-repeat center center/cover;
+  padding: 60px 0;
+}
+
+.contact-section h2 {
+  font-weight: bold;
+  font-size: 2rem;
+}
+
+.contact-section p {
+  font-size: 1.1rem;
+}
+
+.contact-section .form-control {
+  background-color: rgba(255, 255, 255, 0.2);
+  border: none;
+  color: white;
+}
+
+.contact-section .form-control::placeholder {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.contact-section .btn-outline-light {
+  border: 2px solid white;
+  color: white;
+  padding: 10px 20px;
+}
+
+.contact-section .btn-outline-light:hover {
+  background-color: white;
+  color: #0e0927;
+}
+
+/* Responsividad para dispositivos móviles */
+@media (max-width: 768px) {
+  .contact-section .row {
+      flex-direction: column;
+      text-align: center;
+  }
+
+  .contact-section .col-md-6 {
+      width: 100%;
+  }
+
+  .contact-section form {
+      text-align: center;
+  }
+
+  .contact-section .btn-outline-light {
+      width: 100%;
+  }
+}
+
+#Landing, #companiayservicios, .contact-section {
+  backdrop-filter: blur(10px);
+  transition: backdrop-filter 0.5s ease-in-out;
+}
+
+.accordion-body {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  overflow: hidden;
+  padding: 0;
+}
+
+.text-content {
+  flex: 1;
+  color: #fff;
+}
+
+#soporteyredesimagen {
+  flex: 1;
+  background-image: url('img/redes.jpg');
+  background-size: cover;
+  background-position: center;
+  height: 300px; /* Ajusta según sea necesario */
+  clip-path: polygon(30% 0%, 100% 0%, 100% 100%, 0% 100%);
+}
+
+#consultoriaimagen {
+  flex: 1;
+  background-image: url('img/consultoria.jpg');
+  background-size: cover;
+  background-position: center;
+  height: 300px; /* Ajusta según sea necesario */
+  clip-path: polygon(30% 0%, 100% 0%, 100% 100%, 0% 100%);
+}
+
+#monitoreoimagen {
+  flex: 1;
+  background-image: url('img/monitoreo.jpg');
+  background-size: cover;
+  background-position: center;
+  height: 300px; /* Ajusta según sea necesario */
+  clip-path: polygon(30% 0%, 100% 0%, 100% 100%, 0% 100%);
+}
+
+#solucionesimagen {
+  flex: 1;
+  background-image: url('img/soluciones.jpg');
+  background-size: cover;
+  background-position: center;
+  height: 300px; /* Ajusta según sea necesario */
+  clip-path: polygon(30% 0%, 100% 0%, 100% 100%, 0% 100%);
+}
