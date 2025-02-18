@@ -9,6 +9,10 @@ body{
   color: white;
 }
 
+.logoimg {
+  width: 20%;
+}
+
 /* NAVBAR CAMBIANTES */
 
 /* Estilo inicial de la barra de navegación */
@@ -16,7 +20,6 @@ body{
   position: fixed;
   top: 0;
   width: 100%;
-  padding: 10px 20px;
   background: transparent;
   transition: background-color 0.3s ease;
   z-index: 1000;
@@ -34,20 +37,29 @@ body{
 }
 
 
-
-
-
 #Landing {
-background: url(img/landing.jpg);
-background-blend-mode: multiply;
-background-size: cover;
-background-position: center;
-background-repeat: no-repeat;
-justify-content: center; /* Centra el contenido horizontalmente */
-align-items: center; /* Centra el contenido verticalmente */
-color: white;
-text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Hace que el texto sea más legible */
-height: 950px;
+  background: url(img/landing.jpg);
+  background-blend-mode: multiply;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  height: 950px;
+  position: relative; /* Necesario para el pseudo-elemento */
+}
+
+#Landing::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 200px;
+  background: linear-gradient(to bottom, rgba(14, 9, 39, 0) 0%, #0e0927 100%);
+  pointer-events: none; /* Para que no afecte la interacción con el contenido */
 }
 
 @media (max-width:991px){
@@ -103,12 +115,53 @@ text-decoration:underline;
 }
 
 #companiayservicios {
-  background: url(img/espacio.jpg);
-  background-blend-mode: multiply;
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
+  position: relative;
 }
+
+#companiayservicios::before {
+  content: "";
+  background: url(img/pattern.png);
+  opacity: 0.5;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+}
+
+#companiayservicios::after {
+  content: "";
+  background: linear-gradient(rgb(14, 9, 39), transparent);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+}
+
+.backcompania {
+  animation: slide 10s ease-in-out infinite alternate;
+  background-image: linear-gradient(-60deg, rgb(255, 255, 255) 50%, rgba(0, 0, 0, 0.5) 50%);
+  background-size: 150%;
+  background-position: 0% 50%;
+  opacity: 1;
+  z-index: 0;
+  position: relative; /* Mantiene su lugar normal en el flujo */
+  padding: 20px; /* O lo que necesites para tu contenido */
+}
+
+@keyframes slide {
+  0% {
+    background-position: 0% 50%;
+  }
+  100% {
+    background-position: 100% 50%;
+  }
+}
+
+
 
 .offcanvas-body {
   display: flex;
@@ -232,12 +285,30 @@ text-decoration:underline;
 
 
 /* CONTACTO */
-
 .contact-section {
+  position: relative;  /* Add this */
   background: url('img/footer.jpg') no-repeat center center/cover;
   padding: 60px 0;
 }
 
+/* Add this new rule for the overlay */
+.contact-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.60);  /* 50% black overlay */
+}
+
+/* Add this to ensure content stays above the overlay */
+.contact-section > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* Rest of your existing styles */
 .contact-section h2 {
   font-weight: bold;
   font-size: 2rem;
@@ -248,13 +319,13 @@ text-decoration:underline;
 }
 
 .contact-section .form-control {
-  background-color: rgba(255, 255, 255, 0.2);
+  background-color: rgba(255, 255, 255, 0.45);
   border: none;
   color: white;
 }
 
 .contact-section .form-control::placeholder {
-  color: rgba(255, 255, 255, 0.8);
+  color: white;
 }
 
 .contact-section .btn-outline-light {
@@ -288,7 +359,7 @@ text-decoration:underline;
   }
 }
 
-#Landing, #companiayservicios, .contact-section {
+#Landing, .contact-section {
   backdrop-filter: blur(10px);
   transition: backdrop-filter 0.5s ease-in-out;
 }
@@ -341,4 +412,164 @@ text-decoration:underline;
   background-position: center;
   height: 300px; /* Ajusta según sea necesario */
   clip-path: polygon(30% 0%, 100% 0%, 100% 100%, 0% 100%);
+}
+
+.companiayservicios {
+  padding: 50px 0;
+}
+
+.section {
+  background: #fff;
+  padding: 20px;
+  margin: 20px 0;
+  border-radius: 10px;
+  overflow-y: auto;
+  color: #0e0927;
+  
+  /* Add these properties for vertical centering */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+
+/* Optional: if you want to center the h2 as well */
+.section h2 {
+  margin-bottom: 1rem; /* Adds some space between title and paragraph */
+}
+
+.contenido {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: #0e0927;
+  position: relative;
+}
+
+.texto {
+  width: 50%;
+  z-index: 2;
+}
+
+#quienessomos {
+  width: 50%;
+  height: 250px;
+  background-image: url('img/somos.jpg');
+  background-size: cover;
+  background-position: center;
+  clip-path: polygon(25% 0%, 100% 0%, 100% 100%, 0% 100%);
+}
+
+#futuro {
+  width: 50%;
+  height: 250px;
+  background-image: url('img/futuro.jpg');
+  background-size: cover;
+  background-position: center;
+  clip-path: polygon(25% 0%, 100% 0%, 100% 100%, 0% 100%);
+}
+
+#proposito {
+  width: 50%;
+  height: 250px;
+  background-image: url('img/proposito.jpg');
+  background-size: cover;
+  background-position: center;
+  clip-path: polygon(25% 0%, 100% 0%, 100% 100%, 0% 100%);
+}
+
+/* GRID */ 
+
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* Forces 2 columns */
+  gap: 1.5rem;
+  padding: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Make it responsive for mobile */
+@media (max-width: 768px) {
+  .services-grid {
+      grid-template-columns: 1fr; /* Stack cards on mobile */
+  }
+}
+
+.service-card {
+  position: relative;
+  height: 350px;
+  overflow: hidden;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  border: 2px solid white;
+}
+
+.card-title {
+  padding: 1rem;
+  background: #0e0927;
+  color: white;
+  text-align: center;
+  z-index: 2;
+  margin: 0;
+  font-size: 1.2rem;
+}
+
+.image-container {
+  position: relative;
+  flex-grow: 1;
+  overflow: hidden;
+}
+
+.service-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.service-content {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.70);
+  color: white;
+  padding: 1.5rem;
+  transform: translateY(100%);
+  transition: transform 0.3s ease;
+  overflow-y: auto;
+}
+
+.service-card:hover .service-content {
+  transform: translateY(0);
+}
+
+.service-content ul {
+  list-style-type: none;
+  padding-left: 0;
+  margin-top: 1rem;
+}
+
+.service-content li {
+  margin-bottom: 0.5rem;
+  font-size: 0.9rem;
+}
+
+.service-content li:before {
+  content: "•";
+  color: white;
+  display: inline-block;
+  width: 1em;
+  margin-left: -1em;
+}
+
+.mediumpost {
+  border: 2px solid white;
+  border-radius: 10px;
+  background-color: white;
+  color: #0e0927;
 }

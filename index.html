@@ -22,7 +22,7 @@
   <nav class="navbar navbar-expand-lg navbar-dark bg-transparent fixed-top" id="navbar">
     <div class="container position-relative">
       <!-- Logo -->
-      <a class="navbar-brand fs-4" href="#inicio"><img src="img/AkromaNav.png" alt="Logo" class="d-inline-block align-text-top img-fluid w-25"></a>
+      <a class="navbar-brand fs-4" href="#inicio"><img src="img/AkromaNav.png" alt="Logo" class="d-inline-block align-text-top img-fluid logoimg"></a>
     <!-- Toggle Btn -->
       <button class="navbar-toggler justify-self-end border-0" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -71,66 +71,91 @@
       </a>
     </div>        
   </div>
-  <div id="companiayservicios">
-  <div class="companiayservicios"  id="compania">
-    <section class="section">
-    <h2>¿QUIENES SOMOS?</h2>
-    <p>Somos un grupo de especialistas apacionados por la teconologia informatica. En conjunto nuestro equipo acumula 
-      mas de 40 años  de experiencia trabajando para grandes empresas del sector IT, enfocados principalmente en 
-      infraestructura y redes.
-      Nuestro conocimiento abarca desde manejo de servidores Windows y Linux, equipamiento de red multi marca, 
-      monitoreo de infraestructura informática y desarrollo web sobre diferentes plataformas.</p>
-    </section>
-    <section class="section">
-      <h2>UNA MIRADA HACIA EL FUTURO</h2>
-    <p>El mundo de la informática se expande a pasos acelerados y la centralización de servicios bajo grandes corporaciones a 
-      degradado el soporte ofrecido.      
-      En Akroma creemos que las empresas de mediano y pequeño porte merecen tener la misma calidad de soporte que 
-      empresas de gran tamaño, para solventar problemas que afectan su capacidad de operación.</p>
-    </section>
-    <section class="section">
-      <h2>PROPOSITO</h2>
-    <p>En Akroma, nuestro principal objetivo es, facilitar el acceso a servicios y conocimiento de calidad, sobre tecnologías 
-      fundamentales para la operativa de empresas modernas.
-      
-      Ofrecemos soporte informático personalizado hacia empresas, independiente de rubros, alcance, tamaño país o idiomas.</p>
-    </section>
-  </div>
-  <section class="servicios d-flex justify-content-center pt-5"  id="servicios">    
-    <div class="container mt-5">
-      <h1 class="text-center mb-4 mt-5">NUESTROS SERVICIOS</h1>  
-      <div class="accordion" id="accordionservicios">  
-          <!-- Consultoría Informática -->
-          <div class="accordion-item">
-              <h2 class="accordion-header">
-                  <button class="accordion-button text-white bg-dark" type="button" data-bs-toggle="collapse" data-bs-target="#consultoria" aria-expanded="true">
-                      Consultoría Informática
-                  </button>
-              </h2>
-              <div id="consultoria" class="accordion-collapse collapse">
-                  <div class="accordion-body">
-                    <div class="text-content">
-                      <ul>
-                          <li>Manejo de herramientas</li>
-                          <li>Adopción de prácticas ITIL/Agile</li>
-                          <li>Implementación de CRMs</li>
-                      </ul>
-                  </div>
-                  <div id="consultoriaimagen"></div>
-                  </div>
+<div class="offbackcompania"> 
+  <div id="companiayservicios">      
+    <div class="container companiayservicios" id="compania">
+      <div class="row">
+        <div class="col-md-10">
+          <section class="section">
+            <div class="contenido">
+              <div class="texto">
+                <h2>¿QUIÉNES SOMOS?</h2>
+                <p>Somos un grupo de especialistas apasionados por la tecnología informática. En conjunto nuestro equipo acumula 
+                  más de 40 años de experiencia trabajando para grandes empresas del sector IT, enfocados principalmente en 
+                  infraestructura y redes.
+                  Nuestro conocimiento abarca desde manejo de servidores Windows y Linux, equipamiento de red multi marca, 
+                  monitoreo de infraestructura informática y desarrollo web sobre diferentes plataformas.</p>
               </div>
-          </div>
+              <div class="imagen" id="quienessomos"></div>
+            </div>
+          </section>
+        </div>
+      </div>
+
+
+      <div class="row">
+        <div class="col-md-10 offset-md-1">
+          <section class="section">
+            <div class="contenido">
+              <div class="texto">
+                <h2>UNA MIRADA HACIA EL FUTURO</h2>
+                <p>El mundo de la informática se expande a pasos acelerados y la centralización de servicios bajo grandes corporaciones a 
+                  degradado el soporte ofrecido.      
+                  En Akroma creemos que las empresas de mediano y pequeño porte merecen tener la misma calidad de soporte que 
+                  empresas de gran tamaño, para solventar problemas que afectan su capacidad de operación.</p>
+              </div>
+              <div class="imagen" id="futuro"></div>
+            </div>
+          </section>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-10 offset-md-2">
+          <section class="section">
+            <div class="contenido">
+              <div class="texto">
+                <h2>PROPOSITO</h2>
+            <p>En Akroma, nuestro principal objetivo es, facilitar el acceso a servicios y conocimiento de calidad, sobre tecnologías 
+              fundamentales para la operativa de empresas modernas.
+              
+              Ofrecemos soporte informático personalizado hacia empresas, independiente de rubros, alcance, tamaño país o idiomas.</p>
+              </div>
+              <div class="imagen" id="proposito"></div>
+            </div>
+          </section>
+        </div>
+      </div> 
   
-          <!-- Soporte e implementación en redes y servidores -->
-          <div class="accordion-item">
-            <h2 class="accordion-header">
-                <button class="accordion-button collapsed text-white bg-dark" type="button" data-bs-toggle="collapse" data-bs-target="#soporte" aria-expanded="false">
-                    Soporte e implementación en redes y servidores
-                </button>
-            </h2>
-            <div id="soporte" class="accordion-collapse collapse">
-                <div class="accordion-body d-flex align-items-center" id="soporteyredes">
-                    <div class="text-content">
+<!-- GRID -->
+
+<section class="servicios" id="servicios">
+    <div class="container">
+        <h1 class="text-center mb-4 mt-5">NUESTROS SERVICIOS</h1>
+        <div class="services-grid">
+            <!-- First Row -->
+            
+            <!-- Consultoría Informática -->
+            <div class="service-card">
+                <h3 class="card-title">Consultoría Informática</h3>
+                <div class="image-container">
+                    <img src="img/consultoria.jpg" alt="Consultoría Informática" class="service-image">
+                    <div class="service-content">
+                        <ul>
+                            <li>Manejo de herramientas</li>
+                            <li>Adopción de prácticas ITIL/Agile</li>
+                            <li>Implementación de CRMs</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Soporte e implementación -->
+            <div class="service-card">
+                <h3 class="card-title">Soporte e implementación en redes y servidores</h3>
+                <div class="image-container">
+                    <img src="img/redes.jpg" alt="Soporte e implementación" class="service-image">
+                    <div class="service-content">
                         <ul>
                             <li>Router, Switching y Wireless Networks</li>
                             <li>SDWAN</li>
@@ -145,60 +170,48 @@
                             <li>Infraestructuras de Certificados y PKI</li>
                         </ul>
                     </div>
-                    <div id="soporteyredesimagen"></div>
+                </div>
+            </div>
+
+            <!-- Second Row -->
+            
+            <!-- Capacitación -->
+            <div class="service-card">
+                <h3 class="card-title">Capacitación</h3>
+                <div class="image-container">
+                    <img src="img/monitoreo.jpg" alt="Capacitación" class="service-image">
+                    <div class="service-content">
+                        <ul>
+                            <li>Administración de Sistemas y redes</li>
+                            <li>Estrategias de monitoreo</li>
+                            <li>Buenas prácticas de documentación</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Despliegue de soluciones -->
+            <div class="service-card">
+                <h3 class="card-title">Despliegue de soluciones y herramientas informáticas</h3>
+                <div class="image-container">
+                    <img src="img/soluciones.jpg" alt="Despliegue de soluciones" class="service-image">
+                    <div class="service-content">
+                        <ul>
+                            <li>Soluciones de monitoreo</li>
+                            <li>Backups</li>
+                            <li>Automatismos</li>
+                            <li>Domótica</li>
+                            <li>Dominios Windows</li>
+                            <li>Ambientes Linux</li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>
-        
-  
-          <!-- Capacitación -->
-          <div class="accordion-item">
-            <h2 class="accordion-header">
-                <button class="accordion-button text-white bg-dark" type="button" data-bs-toggle="collapse" data-bs-target="#monitoreo" aria-expanded="true">
-                    Capacitación
-                </button>
-            </h2>
-            <div id="monitoreo" class="accordion-collapse collapse">
-                <div class="accordion-body">
-                  <div class="text-content">
-                    <ul>
-                        <li>Administración de Sistemas y redes</li>
-                        <li>Estrategias de monitoreo</li>
-                        <li>Buenas prácticas de documentación</li>
-                    </ul>
-                </div>
-                <div id="monitoreoimagen"></div>
-                </div>
-            </div>
-        </div>
-  
-          <!-- Despliegue de soluciones y herramientas informáticas -->
-          <div class="accordion-item">
-            <h2 class="accordion-header">
-                <button class="accordion-button text-white bg-dark" type="button" data-bs-toggle="collapse" data-bs-target="#soluciones" aria-expanded="true">
-                  Despliegue de soluciones y herramientas informáticas
-                </button>
-            </h2>
-            <div id="soluciones" class="accordion-collapse collapse">
-                <div class="accordion-body">
-                  <div class="text-content">
-                    <ul>
-                        <li>Soluciones de monitoreo</li>
-                        <li>Backups</li>
-                        <li>Automatismos</li>
-                        <li>Domótica</li>
-                        <li>Dominios Windows</li>
-                        <li>Ambientes Linux</li>
-                    </ul>
-                </div>
-                <div id="solucionesimagen"></div>
-                </div>
-            </div>
-        </div> 
-      </div>
-  </div>
-  
+    </div>
 </section>
+
+
   
 <section class="where-we-excel text-center text-white pt-5">
   <div class="container">
@@ -211,7 +224,7 @@
                       <div class="col-md-4">
                           <div class="card border-light h-100 bg-transparent text-white">
                               <div class="card-body">
-                                  <h5 class="card-title">Dominio, redes y certificados Windows</h5>
+                                  <h5 class="card-titlec">Dominio, redes y certificados Windows</h5>
                                   <p class="card-text">Fundamento de la infraestructura IT basada en Microsoft.</p>
                               </div>
                           </div>
@@ -219,7 +232,7 @@
                       <div class="col-md-4">
                           <div class="card border-light h-100 bg-transparent text-white">
                               <div class="card-body">
-                                  <h5 class="card-title">Servidores DELL/HP/IBM</h5>
+                                  <h5 class="card-titlec">Servidores DELL/HP/IBM</h5>
                                   <p class="card-text">Rendimiento robusto para entornos empresariales críticos.</p>
                               </div>
                           </div>
@@ -227,7 +240,7 @@
                       <div class="col-md-4">
                           <div class="card border-light h-100 bg-transparent text-white">
                               <div class="card-body">
-                                  <h5 class="card-title">Redes Cisco y HP</h5>
+                                  <h5 class="card-titlec">Redes Cisco y HP</h5>
                                   <p class="card-text">Soluciones de conectividad confiables y escalables para infraestructuras empresariales de alto rendimiento.</p>
                               </div>
                           </div>
@@ -241,7 +254,7 @@
                       <div class="col-md-4">
                           <div class="card border-light h-100 bg-transparent text-white">
                               <div class="card-body">
-                                  <h5 class="card-title">Redhat Enterprise Linux</h5>
+                                  <h5 class="card-titlec">Redhat Enterprise Linux</h5>
                                   <p class="card-text">Lider del Open Source.</p>
                               </div>
                           </div>
@@ -249,7 +262,7 @@
                       <div class="col-md-4">
                           <div class="card border-light h-100 bg-transparent text-white">
                               <div class="card-body">
-                                  <h5 class="card-title">Asterisk Telefonía</h5>
+                                  <h5 class="card-titlec">Asterisk Telefonía</h5>
                                   <p class="card-text">Solución de telefonía IP de código abierto.</p>
                               </div>
                           </div>
@@ -257,7 +270,7 @@
                       <div class="col-md-4">
                           <div class="card border-light h-100 bg-transparent text-white">
                               <div class="card-body">
-                                  <h5 class="card-title">MS Exchange and Office 365</h5>
+                                  <h5 class="card-titlec">MS Exchange and Office 365</h5>
                                   <p class="card-text">Colaboración y productividad en el ecosistema Microsoft.</p>
                               </div>
                           </div>
@@ -271,7 +284,7 @@
                       <div class="col-md-4">
                           <div class="card border-light h-100 bg-transparent text-white">
                               <div class="card-body">
-                                  <h5 class="card-title">SDWAN Aruba Silverpeak</h5>
+                                  <h5 class="card-titlec">SDWAN Aruba Silverpeak</h5>
                                   <p class="card-text">Innovación en redes definidas por software para optimización del tráfico.</p>
                               </div>
                           </div>
@@ -279,7 +292,7 @@
                       <div class="col-md-4">
                           <div class="card border-light h-100 bg-transparent text-white">
                               <div class="card-body">
-                                  <h5 class="card-title">Contenedores Docker y Swarm</h5>
+                                  <h5 class="card-titlec">Contenedores Docker y Swarm</h5>
                                   <p class="card-text">Implementación ágil y escalable de aplicaciones.</p>
                               </div>
                           </div>
@@ -287,7 +300,7 @@
                       <div class="col-md-4">
                           <div class="card border-light h-100 bg-transparent text-white">
                               <div class="card-body">
-                                  <h5 class="card-title">Azure y Amazon Web Services</h5>
+                                  <h5 class="card-titlec">Azure y Amazon Web Services</h5>
                                   <p class="card-text">Innovación y escalabilidad en servicios en la nube.</p>
                               </div>
                           </div>
@@ -300,7 +313,7 @@
                     <div class="col-md-4">
                         <div class="card border-light h-100 bg-transparent text-white">
                             <div class="card-body">
-                                <h5 class="card-title">ITIL tools, ServiceNow y Atlassian Tools</h5>
+                                <h5 class="card-titlec">ITIL tools, ServiceNow y Atlassian Tools</h5>
                                 <p class="card-text">Gestión eficiente de servicios y proyectos IT.</p>
                             </div>
                         </div>
@@ -308,7 +321,7 @@
                     <div class="col-md-4">
                         <div class="card border-light h-100 bg-transparent text-white">
                             <div class="card-body">
-                                <h5 class="card-title">Firewalls FortiGate y Sophos</h5>
+                                <h5 class="card-titlec">Firewalls FortiGate y Sophos</h5>
                                 <p class="card-text">Seguridad de red avanzada y gestión centralizada.</p>
                             </div>
                         </div>
@@ -316,7 +329,7 @@
                     <div class="col-md-4">
                         <div class="card border-light h-100 bg-transparent text-white">
                             <div class="card-body">
-                                <h5 class="card-title">VEEAM Backup</h5>
+                                <h5 class="card-titlec">VEEAM Backup</h5>
                                 <p class="card-text">Protección avanzada de datos y recuperación rápida.</p>
                             </div>
                         </div>
@@ -329,7 +342,7 @@
                   <div class="col-md-4">
                       <div class="card border-light h-100 bg-transparent text-white">
                           <div class="card-body">
-                              <h5 class="card-title">Zabbix y Grafana</h5>
+                              <h5 class="card-titlec">Zabbix y Grafana</h5>
                               <p class="card-text">Monitorización y visualización de sistemas en tiempo real.</p>
                           </div>
                       </div>
@@ -337,7 +350,7 @@
                   <div class="col-md-4">
                       <div class="card border-light h-100 bg-transparent text-white">
                           <div class="card-body">
-                              <h5 class="card-title">VMWare</h5>
+                              <h5 class="card-titlec">VMWare</h5>
                               <p class="card-text">Líder en virtualización y soluciones de infraestructura digital.</p>
                           </div>
                       </div>
@@ -345,7 +358,7 @@
                   <div class="col-md-4">
                       <div class="card border-light h-100 bg-transparent text-white">
                           <div class="card-body">
-                              <h5 class="card-title">Automatismos vía scripting (Python, Bash, PowerShell y Ansible)</h5>
+                              <h5 class="card-titlec">Automatismos vía scripting (Python, Bash, PowerShell y Ansible)</h5>
                               <p class="card-text">Eficiencia operativa a través de la automatización.</p>
                           </div>
                       </div>
@@ -356,46 +369,50 @@
       </div>
   </div>
 </section>
+
+<div class="mediumpost col-md-12">
+    <div class='sk-ww-medium-publication-feed' data-embed-id='25524873'></div>
+<script src='https://widgets.sociablekit.com/medium-publication-feed/widget.js' defer></script>
+</div>
+
+</div>
 </div>
 <section class="contact-section py-5 text-white" id="contacto">
   <div class="container">
       <div class="row">
           <!-- Formulario de contacto -->
           <div class="col-md-6">
-              <h2 class="mb-4">¡Hablemos!</h2>
-              <form>
-                  <div class="row">
-                      <div class="col-md-6 mb-3">
-                          <input type="text" class="form-control" placeholder="Nombre" required>
-                      </div>
-                      <div class="col-md-6 mb-3">
-                          <input type="text" class="form-control" placeholder="Apellido" required>
-                      </div>
-                  </div>
-                  <div class="row">
-                      <div class="col-md-6 mb-3">
-                          <input type="email" class="form-control" placeholder="E-mail" required>
-                      </div>
-                      <div class="col-md-6 mb-3">
-                          <input type="text" class="form-control" placeholder="Telefono" required>
-                      </div>
-                  </div>
-                  <div class="mb-3">
-                      <textarea class="form-control" placeholder="¿Como te podemos ayudar?" rows="4" required></textarea>
-                  </div>
-                  <button type="submit" class="btn btn-outline-light">Enviar</button>
-              </form>
-          </div>
+            <h2 class="mb-4">¡Hablemos!</h2>
+            <form id="contact-form">
+                <div class="row">
+                    <div class="col-md-12 mb-3">
+                        <input type="text" class="form-control" placeholder="Nombre Completo" required name="name" id="name">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <input type="email" class="form-control" placeholder="E-mail" required name="email" id="email">
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <input type="text" class="form-control" placeholder="Telefono" required name="phone" id="phone">
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <textarea class="form-control" placeholder="¿Cómo te podemos ayudar?" rows="4" required name="message" id="message"></textarea>
+                </div>
+                <button id="button" type="submit" class="btn btn-outline-light">Enviar</button>
+            </form>
+        </div>
 
           <!-- Información de contacto -->
           <div class="col-md-6 text-center text-md-start mt-5 mt-md-0 text-end">
               <h2 class="mb-4 text-end">Información de Contacto</h2>
               <p class="text-end">Chaná 2120 <br class="text-end"> Montevideo, <br class="text-end"> Uruguay</p>
-              <p class="text-end"><strong>Telefono:</strong> +598 98989898</p>
+              <p class="text-end"><strong>Telefono:</strong> +598 98 291 514</p>
               <p class="text-end"><strong>Horario de Atención:</strong> 9am - 6pm UY</p>
 
               <h4 class="mt-4 text-end">¡Seguinos!</h4>
-              <p class="text-end">Facebook - Instagram - Linkedin</p>
+              <p class="text-end">Facebook - Instagram - Linkedin - Medium</p>
           </div>
       </div>
 
@@ -447,7 +464,5 @@ document.addEventListener('scroll', function () {
 });
 
   </script>
-  
-
-</body>
+  </body>
 </html>
