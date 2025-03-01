@@ -42,7 +42,7 @@
               <a class="nav-link" aria-current="page" href="#body">INICIO</a>
             </li>
             <li class="nav-item mx-2">
-              <a class="nav-link" href="#compania">COMPAÑIA</a>
+              <a class="nav-link" href="#compania">COMPAÑÍA</a>
             </li>
             <li class="nav-item mx-2">
               <a class="nav-link" href="#servicios">SERVICIOS</a>
@@ -60,17 +60,19 @@
   </nav>
   <!-- Landing -->
   <div id="Landing" class="w-100 vh-100 d-flex flex-column justify-content-center align-items-center text-white">
-    <div>
-      <h1 id="bienvenido" class="col-md-3 d-flex justify-content-end p-3 pt-5 offset-7 text-end">BIENVENIDOS A AKROMA</h1>
-      <p class="col-md-3 d-flex justify-content-end p-3 offset-7 ps-0 text-end" >Desde redes hasta desarrollo web, estamos enfocados en 
-        ofrecer soluciones ágiles, personalizadas y a la altura de 
-        las grandes empresas, sin importar tu tamaño o sector. 
-        
-        ¡Listos para llevar a tu empresa al nivel que se merece!</p>
-        <a href="#servicios" class="btn btn-outline-light col-md-1 d-flex justify-content-center offset-9 sabermas">
-          Saber Más
-      </a>
-    </div>        
+    <div class="container">
+      <div class="col-md-12 ms-auto text-end">
+        <h1 id="bienvenido" class="pt-5">
+          BIENVENIDOS A AKROMA
+        </h1>
+        <p class="landingtext">
+          Infraestructura robusta, soporte confiable, tecnología sin límites.
+        </p>
+        <a href="https://calendly.com/akromauy-info/30min" class="btn btn-outline-light sabermas" target="_blank">
+          <strong>¡Agenda una reunión de diagnóstico!</strong>
+        </a>
+      </div>
+    </div>
   </div>
 
   <!-- divisor diagonal -->
@@ -79,17 +81,18 @@
 <div class="offbackcompania"> 
   <div id="companiayservicios">      
     <div class="container companiayservicios" id="compania">
+      <h1 class="text-center">COMPAÑÍA</h1>
+
       <div class="row">
-        <div class="col-md-10 offset-md-2">
+        <div class="col-md-12">
           <section class="section">
             <div class="contenido">
               <div class="texto">
-                <h2>¿QUIÉNES SOMOS?</h2>
+                <h2>Sobre Akroma</h2>
                 <p>Somos un grupo de especialistas apasionados por la tecnología informática. En conjunto nuestro equipo acumula 
-                  más de 40 años de experiencia trabajando para grandes empresas del sector IT, enfocados principalmente en 
+                  <strong>más de 40 años de experiencia</strong> trabajando para grandes empresas del sector IT, enfocados principalmente en 
                   infraestructura y redes.
-                  Nuestro conocimiento abarca desde manejo de servidores Windows y Linux, equipamiento de red multi marca, 
-                  monitoreo de infraestructura informática y desarrollo web sobre diferentes plataformas.</p>
+                  <strong>Impulsamos la eficiencia y seguridad con consultoría estratégica, capacitación y despliegue de soluciones. Desde redes y servidores hasta automatización, monitoreo y cloud, optimizamos cada proceso con las mejores prácticas y tecnología de vanguardia.</strong></p>
               </div>
               <div class="imagen" id="quienessomos"></div>
             </div>
@@ -97,287 +100,314 @@
         </div>
       </div>
 
-
-      <div class="row">
-        <div class="col-md-10 offset-md-1">
-          <section class="section">
-            <div class="contenido">
-              <div class="texto">
-                <h2>UNA MIRADA HACIA EL FUTURO</h2>
-                <p>El mundo de la informática se expande a pasos acelerados y la centralización de servicios bajo grandes corporaciones a 
-                  degradado el soporte ofrecido.      
-                  En Akroma creemos que las empresas de mediano y pequeño porte merecen tener la misma calidad de soporte que 
-                  empresas de gran tamaño, para solventar problemas que afectan su capacidad de operación.</p>
+      
+      <section id="somos-services" class="somos-services-section py-5">
+        <div class="container somos-container">          
+          <div class="row somos-services-row">
+            <!-- Card 1 - Infraestructura -->
+            <div class="col-md-6 mb-4">
+              <div class="somos-card">
+                <div class="somos-card-inner">
+                  <div class="somos-card-icon">
+                    <img src="img/server.png" alt="Infraestructura" class="somos-icon">
+                  </div>
+                  <div class="somos-card-content">
+                    <h3 class="somos-card-title">Infraestructura y Sistemas</h3>
+                    <p class="somos-card-text">Especialistas en Windows, Linux, Active Directory y Azure, con experiencia en dominios multi-bosque, virtualización (VMware, Hyper-V) y optimización de infraestructuras críticas.</p>
+                  </div>
+                </div>
               </div>
-              <div class="imagen" id="futuro"></div>
             </div>
-          </section>
-        </div>
-      </div>
-
-      <div class="row">
-        <div class="col-md-10">
-          <section class="section">
-            <div class="contenido">
-              <div class="texto">
-                <h2>PROPOSITO</h2>
-            <p>En Akroma, nuestro principal objetivo es, facilitar el acceso a servicios y conocimiento de calidad, sobre tecnologías 
-              fundamentales para la operativa de empresas modernas.
-              
-              Ofrecemos soporte informático personalizado hacia empresas, independiente de rubros, alcance, tamaño país o idiomas.</p>
+            
+            <!-- Card 2 - Redes -->
+            <div class="col-md-6 mb-4">
+              <div class="somos-card">
+                <div class="somos-card-inner">
+                  <div class="somos-card-icon">
+                    <img src="img/network.png" alt="Redes" class="somos-icon">
+                  </div>
+                  <div class="somos-card-content">
+                    <h3 class="somos-card-title">Redes y Seguridad</h3>
+                    <p class="somos-card-text">Ingenieros certificados en CCNP, CCNA y MTCNA, con experiencia en enrutamiento (BGP), firewalls, redes inalámbricas y automatización con Bash, garantizando redes seguras y escalables.</p>
+                  </div>
+                </div>
               </div>
-              <div class="imagen" id="proposito"></div>
             </div>
-          </section>
-        </div>
-      </div> 
-
-      <!-- ALT 4 -->
-      <h1 class="text-center" id="servicios">NUESTROS SERVICIOS</h1>
-<section class="serviciosalt4 col-md-12">
-  <div class="serviciosalt4">    
-    <div class="container d-flex justify-content-center">
-      <div class="row align-items-start">
-        <!-- Imagen ajustada a la altura del texto -->
-        <div class="col-md-4 d-flex justify-content-center">
-          <div class="imagen-container">
-            <img src="img/soporte.jpg" class="img-fluid" alt="Soporte en Redes">
-          </div>
-        </div>
-  
-        <!-- Texto a la derecha -->
-        <div class="col-md-8">
-          <div class="textoservicio">
-            <h2>Soporte e implementación en redes y servidores</h2>
             
-            <!-- Texto introductorio -->
-            <p class="intro-text">
-              Las infraestructuras tecnológicas modernas permiten la conectividad segura y eficiente entre dispositivos, usuarios y aplicaciones, optimizando el rendimiento y la disponibilidad de los servicios. La gestión y automatización de estos entornos garantizan estabilidad, escalabilidad y protección frente a amenazas, facilitando la operatividad de negocios y organizaciones en entornos locales y en la nube. La integración de diversas tecnologías y herramientas es clave para mejorar la comunicación, el procesamiento de datos y la seguridad de la información.
-            </p>
-            
-            <!-- Lista en dos columnas -->
-            <div class="row services-columns">
-              <!-- Primera columna -->
-              <div class="col-md-6">
-                <ul class="list-unstyled simple-list">
-                  <li>
-                    <span class="dash">-</span> 
-                    <div class="service-item">
-                      <strong>Router, Switching y Wireless Networks:</strong> 
-                      <span>Diseño, configuración y optimización de redes cableadas e inalámbricas.</span>
-                    </div>
-                  </li>
-                  <li>
-                    <span class="dash">-</span> 
-                    <div class="service-item">
-                      <strong>SDWAN:</strong> 
-                      <span>Implementación y gestión de redes definidas por software para optimización de tráfico.</span>
-                    </div>
-                  </li>
-                  <li>
-                    <span class="dash">-</span> 
-                    <div class="service-item">
-                      <strong>Telefonía IP:</strong> 
-                      <span>Configuración de VoIP, centralitas IP y soluciones de comunicación unificada.</span>
-                    </div>
-                  </li>
-                  <li>
-                    <span class="dash">-</span> 
-                    <div class="service-item">
-                      <strong>Herramientas de red (DNS, DHCP, etc.):</strong> 
-                      <span>Administración de servicios esenciales para resolución de nombres y asignación de IPs.</span>
-                    </div>
-                  </li>
-                  <li>
-                    <span class="dash">-</span> 
-                    <div class="service-item">
-                      <strong>Firewalls:</strong> 
-                      <span>Implementación y gestión de seguridad perimetral con control de tráfico y políticas avanzadas.</span>
-                    </div>
-                  </li>
-                  <li>
-                    <span class="dash">-</span> 
-                    <div class="service-item">
-                      <strong>Linux:</strong> 
-                      <span>Administración de servidores, automatización y seguridad en entornos basados en Unix.</span>
-                    </div>
-                  </li>
-                </ul>
+            <!-- Card 3 - Cloud -->
+            <div class="col-md-6 mb-4">
+              <div class="somos-card">
+                <div class="somos-card-inner">
+                  <div class="somos-card-icon">
+                    <img src="img/cloud.png" alt="Cloud" class="somos-icon">
+                  </div>
+                  <div class="somos-card-content">
+                    <h3 class="somos-card-title">Cloud y Virtualización</h3>
+                    <p class="somos-card-text">Certificados en AWS Cloud Practitioner, con experiencia en migraciones híbridas, optimización de costos y seguridad en entornos cloud, asegurando alta disponibilidad.</p>
+                  </div>
+                </div>
               </div>
-              
-              <!-- Segunda columna -->
-              <div class="col-md-6">
-                <ul class="list-unstyled simple-list">
-                  <li>
-                    <span class="dash">-</span> 
-                    <div class="service-item">
-                      <strong>Windows:</strong> 
-                      <span>Gestión de servidores y estaciones de trabajo con Active Directory, GPO y seguridad.</span>
-                    </div>
-                  </li>
-                  <li>
-                    <span class="dash">-</span> 
-                    <div class="service-item">
-                      <strong>Hardware de servidores y redes:</strong> 
-                      <span>Instalación, mantenimiento y optimización de infraestructura física.</span>
-                    </div>
-                  </li>
-                  <li>
-                    <span class="dash">-</span> 
-                    <div class="service-item">
-                      <strong>Plataformas de virtualización:</strong> 
-                      <span>Implementación y administración de VMware, Hyper-V y entornos híbridos.</span>
-                    </div>
-                  </li>
-                  <li>
-                    <span class="dash">-</span> 
-                    <div class="service-item">
-                      <strong>Soluciones Cloud (Azure, AWS):</strong> 
-                      <span>Gestión de servicios en la nube, despliegue de infraestructura y seguridad.</span>
-                    </div>
-                  </li>
-                  <li>
-                    <span class="dash">-</span> 
-                    <div class="service-item">
-                      <strong>Infraestructuras de Certificados y PKI:</strong> 
-                      <span>Implementación y administración de certificados digitales y autenticación segura.</span>
-                    </div>
-                  </li>
-                </ul>
+            </div>
+            
+            <!-- Card 4 - Proyectos -->
+            <div class="col-md-6 mb-4">
+              <div class="somos-card">
+                <div class="somos-card-inner">
+                  <div class="somos-card-icon">
+                    <img src="img/management.png" alt="Proyectos" class="somos-icon">
+                  </div>
+                  <div class="somos-card-content">
+                    <h3 class="somos-card-title">Gestión de Proyectos</h3>
+                    <p class="somos-card-text">Liderazgo en proyectos de infraestructura bajo metodologías ágiles e ITIL, optimización de flujos de trabajo y cumplimiento de SLA, impulsando la mejora continua.</p>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
+      </section>
+
+   <div class="row">
+    <div class="col-md-12">
+      <section class="section">
+        <div class="contenido">
+          <div class="texto">
+            <h2>UNA MIRADA HACIA EL FUTURO</h2>
+            <p>El mundo de la informática se expande a pasos acelerados y la centralización de servicios bajo grandes corporaciones a 
+              degradado el soporte ofrecido.      
+              En Akroma creemos que la excelencia en soporte tecnológico debe estar al alcance de todas las empresas. Por ello, ofrecemos soluciones que combinan precios competitivos para las grandes empresas con accesibilidad en calidad para las medianas y pequeñas.</p>
+          </div>
+          <div class="imagen" id="futuro"></div>
+        </div>
+      </section>
     </div>
   </div>
-</section>
 
-
-
-<div class="despliegue">
-  <div class="deploy-container">
-    <div class="deploy-left">
-      <!-- Header section -->
-      <div class="deploy-header">
-        <h2 class="deploy-title">Despliegue de soluciones y herramientas informáticas</h2>
-        <div class="deploy-line"></div>
-      </div>
-
-      <!-- Service cards -->
-      <div class="deploy-cards-container">
-        <!-- First column -->
-        <div class="deploy-card-column">
-          <div class="deploy-card">
-            <h3 class="deploy-card-title">Soluciones de monitoreo</h3>
-            <p class="deploy-card-description">Supervisión en tiempo real de infraestructuras para detectar y prevenir fallos.</p>
-          </div>
-          
-          <div class="deploy-card">
-            <h3 class="deploy-card-title">Backups</h3>
-            <p class="deploy-card-description">Respaldo y recuperación de datos para garantizar continuidad operativa y protección ante pérdidas.</p>
-          </div>
-          
-          <div class="deploy-card">
-            <h3 class="deploy-card-title">Automatismos</h3>
-            <p class="deploy-card-description">Optimización de procesos mediante scripts y herramientas para reducir tiempos y errores.</p>
+  <section id="somosv" class="somosv-section py-5">
+    <div class="container-fluid somosv-container">
+      <div class="somosv-cards-container">
+        <!-- Card 1 - Experiencia -->
+        <div class="somosv-card somosv-card-primary">
+          <div class="somosv-card-inner">
+            <h3 class="somosv-card-title">Experiencia</h3>
+            <p class="somosv-card-text">
+              Nuestro conocimiento en infraestructuras complejas y entornos corporativos globales nos permite ofrecer soluciones escalables, eficientes y adaptadas a diversas industrias.
+            </p>
           </div>
         </div>
         
-        <!-- Second column -->
-        <div class="deploy-card-column">
-          <div class="deploy-card">
-            <h3 class="deploy-card-title">Domótica</h3>
-            <p class="deploy-card-description">Integración de tecnología para automatizar y controlar entornos residenciales y empresariales.</p>
+        <!-- Plus Symbol -->
+        <div class="somosv-symbol somosv-plus-container">
+          <span class="somosv-plus">+</span>
+        </div>
+        
+        <!-- Card 2 - Accesibilidad -->
+        <div class="somosv-card somosv-card-secondary">
+          <div class="somosv-card-inner">
+            <h3 class="somosv-card-title">Accesibilidad</h3>
+            <p class="somosv-card-text">
+              Brindamos soporte informático sin barreras de rubro, tamaño, idioma o ubicación, asegurando que cada empresa acceda a tecnología de calidad adaptada a sus necesidades.
+            </p>
           </div>
-          
-          <div class="deploy-card">
-            <h3 class="deploy-card-title">Dominios Windows</h3>
-            <p class="deploy-card-description">Administración centralizada de usuarios, políticas y recursos en entornos empresariales.</p>
+        </div>
+        
+        <!-- Arrow Symbol -->
+        <div class="somosv-symbol somosv-arrow-container">
+          <span class="somosv-arrow">→</span>
+        </div>
+        
+        <!-- Card 3 - Optimización -->
+        <div class="somosv-card somosv-card-tertiary">
+          <div class="somosv-card-inner">
+            <h3 class="somosv-card-title">Optimización</h3>
+            <p class="somosv-card-text">
+              Facilitamos el acceso a servicios y conocimiento de calidad sobre tecnologías clave para empresas modernas.
+            </p>
           </div>
-          
-          <div class="deploy-card">
-            <h3 class="deploy-card-title">Ambientes Linux</h3>
-            <p class="deploy-card-description">Gestión y optimización de sistemas basados en Unix para servidores y estaciones de trabajo.</p>
-          </div>
-        </div>        
-      </div>
-      <div class="deploy-text-section">
-        <p class="deploy-final-text">La optimización y gestión eficiente de la infraestructura tecnológica permiten mejorar la seguridad, disponibilidad y automatización de procesos en entornos digitales. La implementación de soluciones que aseguren la continuidad operativa, el control centralizado y la supervisión en tiempo real facilita la administración de sistemas y recursos, reduciendo riesgos y mejorando la eficiencia en distintos ámbitos, desde servidores hasta entornos automatizados.</p>
+        </div>
       </div>
     </div>
-    
-    <!-- Right side for image placement -->
-    <div class="deploy-right">
-      <div class="deploy-image-placeholder">
-        <img src="img/soluciones.jpg" class="img-fluid" alt="Soporte en Redes">
-      </div>
-    </div>
-  </div>
-  
-  
-</div>
+  </section>
 
-  <div class="consultoriaycapacitacion">
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Add entrance animations
+      const cards = document.querySelectorAll('.somosv-card');
+      const symbols = document.querySelectorAll('.somosv-symbol');
+      
+      function animateElements() {
+        // Animate cards first
+        cards.forEach((card, index) => {
+          setTimeout(() => {
+            card.classList.add('somosv-card-visible');
+          }, 200 * index);
+        });
+        
+        // Then animate symbols
+        symbols.forEach((symbol, index) => {
+          setTimeout(() => {
+            symbol.classList.add('somosv-symbol-visible');
+          }, 150 + (200 * index));
+        });
+      }
+      
+      // Function to check if element is in viewport
+      function isInViewport(element) {
+        const rect = element.getBoundingClientRect();
+        return (
+          rect.top <= (window.innerHeight || document.documentElement.clientHeight) &&
+          rect.bottom >= 0 &&
+          rect.left <= (window.innerWidth || document.documentElement.clientWidth) &&
+          rect.right >= 0
+        );
+      }
+      
+      // Animate elements when they come into view
+      function checkElements() {
+        const container = document.querySelector('.somosv-cards-container');
+        if (container && isInViewport(container) && !container.classList.contains('animated')) {
+          container.classList.add('animated');
+          animateElements();
+        }
+      }
+      
+      // Check on load and scroll
+      checkElements();
+      window.addEventListener('scroll', checkElements);
+    });
+  </script>
+
+  <div class="row">
+    <div class="col-md-12">
+      <section class="section">
+        <div class="contenido">
+          <div class="texto">
+            <h2>PROPOSITO</h2>
+        <p>En Akroma, nuestro principal objetivo es, facilitar el acceso a servicios y conocimiento de calidad, sobre tecnologías 
+          fundamentales para la operativa de empresas modernas.
+          
+          Ofrecemos soporte informático personalizado hacia empresas, independiente de rubros, alcance, tamaño país o idiomas.</p>
+          </div>
+          <div class="imagen" id="proposito"></div>
+        </div>
+      </section>
+    </div>
+  </div> 
+
+      <!-- SERVICIOS SECTION -->
+<!-- Nuestros Servicios y Soporte e implementación (dark blue, white text) -->
+<div class="servicios-section">
+  <!-- divisor diagonal -->
+ <div class="diagonal-divider2"></div> 
+  <div class="container">
+    <h1 class="text-center" id="servicios">NUESTROS SERVICIOS</h1>
     <section class="serviciosalt4 col-md-12">
       <div class="serviciosalt4">    
         <div class="container d-flex justify-content-center">
           <div class="row align-items-start">
             <!-- Imagen ajustada a la altura del texto -->
             <div class="col-md-4 d-flex justify-content-center">
-              <div class="imagen-container2">
-                <img src="img/monitoreo.jpg" class="img-fluid" alt="Monitoreo">
+              <div class="imagen-container">
+                <img src="img/soporte.jpg" class="img-fluid" alt="Soporte en Redes">
               </div>
             </div>
       
             <!-- Texto a la derecha -->
             <div class="col-md-8">
               <div class="textoservicio">
-                <h2>Consultoría Informatica y Capacitación</h2>
+                <h2>Soporte e implementación en redes y servidores</h2>
                 
                 <!-- Texto introductorio -->
                 <p class="intro-text">
-                  El desarrollo e implementación de metodologías y herramientas adecuadas en entornos tecnológicos permite mejorar la eficiencia operativa, la gestión de servicios y la relación con clientes. La correcta administración de infraestructuras y el uso de estrategias de monitoreo garantizan estabilidad y rendimiento, mientras que la documentación estructurada facilita la continuidad y optimización de procesos en cualquier organización.
+                  Las infraestructuras tecnológicas modernas permiten la conectividad segura y eficiente entre dispositivos, usuarios y aplicaciones, optimizando el rendimiento y la disponibilidad de los servicios. La gestión y automatización de estos entornos garantizan estabilidad, escalabilidad y protección frente a amenazas, facilitando la operatividad de negocios y organizaciones en entornos locales y en la nube. La integración de diversas tecnologías y herramientas es clave para mejorar la comunicación, el procesamiento de datos y la seguridad de la información.
                 </p>
                 
                 <!-- Lista en dos columnas -->
                 <div class="row services-columns">
                   <!-- Primera columna -->
-                  <div class="col-md-12">
+                  <div class="col-md-6">
                     <ul class="list-unstyled simple-list">
                       <li>
                         <span class="dash">-</span> 
                         <div class="service-item">
-                          <strong>Adopción de prácticas ITIL/Agile:</strong> 
-                          <span>Implementación de metodologías para mejorar la gestión de servicios y proyectos.</span>
+                          <strong>Router, Switching y Wireless Networks:</strong> 
+                          <span>Diseño, configuración y optimización de redes cableadas e inalámbricas.</span>
                         </div>
                       </li>
                       <li>
                         <span class="dash">-</span> 
                         <div class="service-item">
-                          <strong>Implementación de Customer Relationship Managers</strong> 
-                          <span>Optimización de la relación con clientes mediante plataformas especializadas.</span>
+                          <strong>SDWAN:</strong> 
+                          <span>Implementación y gestión de redes definidas por software para optimización de tráfico.</span>
                         </div>
                       </li>
                       <li>
                         <span class="dash">-</span> 
                         <div class="service-item">
-                          <strong>Administración de Sistemas y redes:</strong> 
-                          <span>Gestión eficiente de infraestructuras tecnológicas para garantizar estabilidad y seguridad.</span>
+                          <strong>Telefonía IP:</strong> 
+                          <span>Configuración de VoIP, centralitas IP y soluciones de comunicación unificada.</span>
                         </div>
                       </li>
                       <li>
                         <span class="dash">-</span> 
                         <div class="service-item">
-                          <strong>Estrategias de monitoreo:</strong> 
-                          <span>Desarrollo de enfoques proactivos para supervisar y optimizar el rendimiento de sistemas.</span>
+                          <strong>Herramientas de red (DNS, DHCP, etc.):</strong> 
+                          <span>Administración de servicios esenciales para resolución de nombres y asignación de IPs.</span>
                         </div>
                       </li>
                       <li>
                         <span class="dash">-</span> 
                         <div class="service-item">
-                          <strong>Buenas prácticas de documentación:</strong> 
-                          <span>Estandarización y organización de información clave para mejorar la gestión y el soporte técnico.</span>
+                          <strong>Firewalls:</strong> 
+                          <span>Implementación y gestión de seguridad perimetral con control de tráfico y políticas avanzadas.</span>
+                        </div>
+                      </li>
+                      <li>
+                        <span class="dash">-</span> 
+                        <div class="service-item">
+                          <strong>Linux:</strong> 
+                          <span>Administración de servidores, automatización y seguridad en entornos basados en Unix.</span>
+                        </div>
+                      </li>
+                    </ul>
+                  </div>
+                  
+                  <!-- Segunda columna -->
+                  <div class="col-md-6">
+                    <ul class="list-unstyled simple-list">
+                      <li>
+                        <span class="dash">-</span> 
+                        <div class="service-item">
+                          <strong>Windows:</strong> 
+                          <span>Gestión de servidores y estaciones de trabajo con Active Directory, GPO y seguridad.</span>
+                        </div>
+                      </li>
+                      <li>
+                        <span class="dash">-</span> 
+                        <div class="service-item">
+                          <strong>Hardware de servidores y redes:</strong> 
+                          <span>Instalación, mantenimiento y optimización de infraestructura física.</span>
+                        </div>
+                      </li>
+                      <li>
+                        <span class="dash">-</span> 
+                        <div class="service-item">
+                          <strong>Plataformas de virtualización:</strong> 
+                          <span>Implementación y administración de VMware, Hyper-V y entornos híbridos.</span>
+                        </div>
+                      </li>
+                      <li>
+                        <span class="dash">-</span> 
+                        <div class="service-item">
+                          <strong>Soluciones Cloud (Azure, AWS):</strong> 
+                          <span>Gestión de servicios en la nube, despliegue de infraestructura y seguridad.</span>
+                        </div>
+                      </li>
+                      <li>
+                        <span class="dash">-</span> 
+                        <div class="service-item">
+                          <strong>Infraestructuras de Certificados y PKI:</strong> 
+                          <span>Implementación y administración de certificados digitales y autenticación segura.</span>
                         </div>
                       </li>
                     </ul>
@@ -389,16 +419,168 @@
         </div>
       </div>
     </section>
-
   </div>
-
-
-</section>
-
-</div>
 </div>
 
+<!-- Despliegue de soluciones (transparent background) -->
+<div class="despliegue despliegue-light">
+  <div class="deploy-container">
+    <div class="deploy-header">
+      <h2 class="deploy-title">Despliegue de soluciones y herramientas informáticas</h2>
+      <div class="deploy-line"></div>
+    </div>
+    
+    <div class="deploy-content-wrapper">
+      <!-- Left column with cards -->
+      <div class="deploy-left">
+        <div class="deploy-cards-container">
+          <div class="deploy-card-column">
+            <div class="deploy-card">
+              <h3 class="deploy-card-title">Soluciones de monitoreo</h3>
+              <p class="deploy-card-description">Supervisión en tiempo real de infraestructuras para detectar y prevenir fallos.</p>
+            </div>
+            
+            <div class="deploy-card">
+              <h3 class="deploy-card-title">Backups</h3>
+              <p class="deploy-card-description">Respaldo y recuperación de datos para garantizar continuidad operativa y protección ante pérdidas.</p>
+            </div>
+            
+            <div class="deploy-card">
+              <h3 class="deploy-card-title">Automatismos</h3>
+              <p class="deploy-card-description">Optimización de procesos mediante scripts y herramientas para reducir tiempos y errores.</p>
+            </div>
+          </div>
+          
+          <div class="deploy-card-column">
+            <div class="deploy-card">
+              <h3 class="deploy-card-title">Domótica</h3>
+              <p class="deploy-card-description">Integración de tecnología para automatizar y controlar entornos residenciales y empresariales.</p>
+            </div>
+            
+            <div class="deploy-card">
+              <h3 class="deploy-card-title">Dominios Windows</h3>
+              <p class="deploy-card-description">Administración centralizada de usuarios, políticas y recursos en entornos empresariales.</p>
+            </div>
+            
+            <div class="deploy-card">
+              <h3 class="deploy-card-title">Ambientes Linux</h3>
+              <p class="deploy-card-description">Gestión y optimización de sistemas basados en Unix para servidores y estaciones de trabajo.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Right column with image -->
+      <div class="deploy-right">
+        <div class="deploy-image-placeholder">
+          <img src="img/soluciones.jpg" alt="Soluciones informáticas">
+        </div>
+      </div>
+    </div>
+    
+    <div class="deploy-text-section">
+      <p class="deploy-final-text">La optimización y gestión eficiente de la infraestructura tecnológica permiten mejorar la seguridad, disponibilidad y automatización de procesos en entornos digitales. La implementación de soluciones que aseguren la continuidad operativa, el control centralizado y la supervisión en tiempo real facilita la administración de sistemas y recursos, reduciendo riesgos y mejorando la eficiencia en distintos ámbitos, desde servidores hasta entornos automatizados.</p>
+    </div>
+  </div>
+</div>
 
+      <!-- Consultoría sección (black background, white text) -->
+      <div class="consultoriaycapacitacion">
+        <section class="serviciosalt4 col-md-12">
+          <div class="serviciosalt4">    
+            <div class="container d-flex justify-content-center">
+              <div class="row align-items-start">
+                <!-- Imagen ajustada a la altura del texto -->
+                <div class="col-md-4 d-flex justify-content-center">
+                  <div class="imagen-container2">
+                    <img src="img/monitoreo.jpg" class="img-fluid" alt="Monitoreo">
+                  </div>
+                </div>
+          
+                <!-- Texto a la derecha -->
+                <div class="col-md-8">
+                  <div class="textoservicio">
+                    <h2>Consultoría Informática y Capacitación</h2>
+                    
+                    <!-- Texto introductorio -->
+                    <p class="intro-text">
+                      El desarrollo e implementación de metodologías y herramientas adecuadas en entornos tecnológicos permite mejorar la eficiencia operativa, la gestión de servicios y la relación con clientes. La correcta administración de infraestructuras y el uso de estrategias de monitoreo garantizan estabilidad y rendimiento, mientras que la documentación estructurada facilita la continuidad y optimización de procesos en cualquier organización.
+                    </p>
+                    
+                    <!-- Lista en dos columnas -->
+                    <div class="row services-columns">
+                      <!-- Primera columna -->
+                      <div class="col-md-12">
+                        <ul class="list-unstyled simple-list">
+                          <li>
+                            <span class="dash">-</span> 
+                            <div class="service-item">
+                              <strong>Adopción de prácticas ITIL/Agile:</strong> 
+                              <span>Implementación de metodologías para mejorar la gestión de servicios y proyectos.</span>
+                            </div>
+                          </li>
+                          <li>
+                            <span class="dash">-</span> 
+                            <div class="service-item">
+                              <strong>Implementación de Customer Relationship Managers</strong> 
+                              <span>Optimización de la relación con clientes mediante plataformas especializadas.</span>
+                            </div>
+                          </li>
+                          <li>
+                            <span class="dash">-</span> 
+                            <div class="service-item">
+                              <strong>Administración de Sistemas y redes:</strong> 
+                              <span>Gestión eficiente de infraestructuras tecnológicas para garantizar estabilidad y seguridad.</span>
+                            </div>
+                          </li>
+                          <li>
+                            <span class="dash">-</span> 
+                            <div class="service-item">
+                              <strong>Estrategias de monitoreo:</strong> 
+                              <span>Desarrollo de enfoques proactivos para supervisar y optimizar el rendimiento de sistemas.</span>
+                            </div>
+                          </li>
+                          <li>
+                            <span class="dash">-</span> 
+                            <div class="service-item">
+                              <strong>Buenas prácticas de documentación:</strong> 
+                              <span>Estandarización y organización de información clave para mejorar la gestión y el soporte técnico.</span>
+                            </div>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <!-- New Medium section (pattern background) -->
+      <div class="col-md-12 medium-section">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-12 text-center mb-4">
+              <h1 id="nuestroblog">NUESTRO BLOG</h1>
+              <p class="medium-intro"><strong>¿Queres conocer en detalle cómo transformar la gestión tecnológica de tu empresa? Descubri nuestros artículos en Medium, donde compartimos estrategias, casos de éxito y las últimas tendencias.</strong></p>
+            </div>
+          </div>
+          
+          <div class="row">
+            <div class="col-md-10 offset-md-1">
+              <div class="medium-container">
+                <div class='sk-ww-medium-publication-feed' data-embed-id='25526677'></div>
+                <script src='https://widgets.sociablekit.com/medium-publication-feed/widget.js' defer></script>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
 <div class="skillsymedium">
  <!-- divisor diagonal -->
@@ -474,13 +656,6 @@
         </div>
     </div>
   </section>
-  
-
-<div class="mediumpost col-md-8 offset-md-2 medium">
-    <div class='sk-ww-medium-publication-feed' data-embed-id='25526677'></div>
-<script src='https://widgets.sociablekit.com/medium-publication-feed/widget.js' defer></script>
-</div>
-
 </div>
 
 
@@ -515,7 +690,7 @@
           <div class="col-md-6 text-center text-md-start mt-5 mt-md-0 text-end">
               <h2 class="mb-4 text-end">Información de Contacto</h2>
               <p class="text-end">Chaná 2120 <br class="text-end"> Montevideo, <br class="text-end"> Uruguay</p>
-              <p class="text-end"><strong>Telefono:</strong> +598 98 291 514</p>
+              <p class="text-end"><strong>Teléfono:</strong> +598 98 291 514</p>
               <p class="text-end"><strong>Horario de Atención:</strong> 9am - 6pm UY</p>
 
               <h4 class="mt-4 text-end">¡Seguinos!</h4>
@@ -573,3 +748,4 @@ document.addEventListener('scroll', function () {
   </script>
   </body>
 </html>
+                  
