@@ -17,6 +17,7 @@
      <link rel="icon" type="image/png" sizes="16x16" href="icono/favicon-16x16.png">
      <link rel="shortcut icon" href="icono/favicon.png"> 
      <link rel="manifest" href="icono//site.webmanifest">
+     <script src="https://www.google.com/recaptcha/api.js" defer></script>
     </head>
 <body class="vh-100" id="body">
   <!-- Navbar -->
@@ -682,8 +683,11 @@
                 <div class="mb-3">
                     <textarea class="form-control" placeholder="¿Cómo te podemos ayudar?" rows="4" required name="message" id="message"></textarea>
                 </div>
+                <div class="g-recaptcha mb-3" data-sitekey="6Lf9uukqAAAAAJk1isT38etJxJRCrt_V7gtv5PWG"></div>
+
                 <button id="button" type="submit" class="btn btn-outline-light">Enviar</button>
             </form>
+            
         </div>
 
           <!-- Información de contacto -->
@@ -748,8 +752,7 @@ document.addEventListener('scroll', function () {
   </script>
   
   <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
-  <script src="js/contact.js"></script>
-  <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+  <script src="js/contact.js"></script>  
 </body>
 </html>
                   
