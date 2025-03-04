@@ -8,15 +8,6 @@ document.addEventListener('DOMContentLoaded', function() {
   const emailInput = document.getElementById('email');
   const phoneInput = document.getElementById('phone');
   const messageInput = document.getElementById('message');
-  const submitButton = document.getElementById('button');
-  
-  // Add reCAPTCHA container
-  const recaptchaContainer = document.createElement('div');
-  recaptchaContainer.className = 'g-recaptcha mb-3';
-  recaptchaContainer.setAttribute('data-sitekey', '6LfIgOkqAAAAAOkqOiScAXU_JmUAzXi6vRjtJh1p'); // Replace with your actual site key
-  
-  // Insert reCAPTCHA before submit button
-  submitButton.parentNode.insertBefore(recaptchaContainer, submitButton);
   
   // Set name input attributes for better experience
   nameInput.setAttribute('autocomplete', 'name');
@@ -61,15 +52,6 @@ document.addEventListener('DOMContentLoaded', function() {
   const phoneErrorMsg = createErrorMessage(phoneInput, 'Por favor ingresa un número de teléfono válido');
   const messageErrorMsg = createErrorMessage(messageInput, 'Por favor ingresa un mensaje');
   
-  // Create captcha error message
-  const captchaErrorMsg = document.createElement('div');
-  captchaErrorMsg.className = 'captcha-error';
-  captchaErrorMsg.textContent = 'Por favor completa el captcha';
-  captchaErrorMsg.style.color = 'white';
-  captchaErrorMsg.style.fontWeight = 'bold';
-  captchaErrorMsg.style.display = 'none';
-  recaptchaContainer.parentNode.insertBefore(captchaErrorMsg, recaptchaContainer.nextSibling);
-  
   // Validation functions
   function validateEmail(email) {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -98,20 +80,6 @@ document.addEventListener('DOMContentLoaded', function() {
   function validateMessage(message) {
     // Message should be between 10 and 1000 characters
     return message.trim().length >= 10 && message.trim().length <= 1000;
-  }
-  
-  function validateRecaptcha() {
-    // Verify reCAPTCHA response
-    const recaptchaResponse = grecaptcha.getResponse();
-    const isValid = recaptchaResponse.length !== 0;
-    
-    if (!isValid) {
-      captchaErrorMsg.style.display = 'block';
-    } else {
-      captchaErrorMsg.style.display = 'none';
-    }
-    
-    return isValid;
   }
   
   function sanitizeInput(input) {
@@ -329,11 +297,6 @@ document.addEventListener('DOMContentLoaded', function() {
       isValid = false;
     }
     
-    // Validate reCAPTCHA
-    if (!validateRecaptcha()) {
-      isValid = false;
-    }
-    
     return isValid;
   }
   
@@ -351,7 +314,6 @@ document.addEventListener('DOMContentLoaded', function() {
     const email = sanitizeInput(emailInput.value.trim());
     const phone = sanitizeInput(phoneInput.value.trim());
     const message = sanitizeInput(messageInput.value.trim());
-    const recaptchaResponse = grecaptcha.getResponse();
     
     // Change button text while sending
     const button = document.getElementById('button');
@@ -364,8 +326,7 @@ document.addEventListener('DOMContentLoaded', function() {
       name: name,
       email: email,
       phone: phone,
-      message: message,
-      'g-recaptcha-response': recaptchaResponse
+      message: message
     };
     
     // Send email using EmailJS
@@ -375,9 +336,6 @@ document.addEventListener('DOMContentLoaded', function() {
         alert('¡Mensaje enviado correctamente! Nos pondremos en contacto contigo pronto.');
         contactForm.reset(); // Reset the form
         
-        // Reset reCAPTCHA
-        grecaptcha.reset();
-        
         // Reset character counter
         updateCharacterCounter();
         
@@ -385,9 +343,6 @@ document.addEventListener('DOMContentLoaded', function() {
         document.querySelectorAll('.is-valid, .is-invalid').forEach(el => {
           el.classList.remove('is-valid', 'is-invalid');
         });
-        
-        // Hide captcha error message
-        captchaErrorMsg.style.display = 'none';
         
         // Reset button
         button.innerHTML = originalButtonText;
