@@ -620,7 +620,7 @@ font-size: 1.1rem;
 .contact-section .form-control {
 background-color: rgba(255, 255, 255, 0.70);
 border: none;
-color: white;
+color: #0e0927;
 }
 
 .contact-section .form-control::placeholder {
