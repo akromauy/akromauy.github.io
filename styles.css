@@ -679,7 +679,6 @@ body {
   }
 }
 
-
 /* SERVICES CARDS */
 /* Services Cards - 3 columns with inverted gradient backgrounds */
 .solutions-card-container {
@@ -695,11 +694,11 @@ body {
   overflow: hidden;
   position: relative;
   height: 150px;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
   padding: 20px;
   text-align: center;
   opacity: 1; /* Always 100% opacity */
-  border: 1px solid rgba(255, 255, 255, 0.7); /* Borde blanco semi-transparente */
+  border: 1px solid rgba(255, 255, 255, 0.7); /* Borde blanco semi-transparente */  
 }
 
 .solutions-card:hover {
@@ -712,7 +711,6 @@ body {
   color: white; /* White text for all cards */
   font-size: 16px;
   font-weight: 500;
-
   transition: opacity 0.3s ease;
 }
 
@@ -720,7 +718,6 @@ body {
   width: 70px;
   transition: opacity 0.3s ease;
   color: white; /* White icons for all cards */
-  
 }
 
 .solutions-card-icon {
@@ -762,6 +759,8 @@ body {
   padding: 10px;
   color: white; /* White text for descriptions */
   font-size: 14px;
+  font-weight: 500;
+  font-family: 'Montserrat';
   opacity: 0;
   visibility: hidden;
   transition: opacity 0.3s ease, visibility 0.3s ease;
@@ -771,7 +770,7 @@ body {
 .solutions-card:hover .solutions-card-title,
 .solutions-card:hover .solutions-card-icon,
 .solutions-card:hover .solutions-card-icon2,
-.solutions-card:hover .solutions-card-iconw   {
+.solutions-card:hover .solutions-card-iconw {
   opacity: 0;
   visibility: hidden;
 }
@@ -783,52 +782,88 @@ body {
 
 /* Inverted gradient backgrounds - more #0e0927 with a touch of color */
 .solutions-card.router {
-  background: linear-gradient(140deg, #0e0927 70%, #ff9500);
+  background: linear-gradient(140deg, transparent 70%, #ff9500);
+}
+.solutions-card.router:hover {
+  background: #993d00;
 }
 
 .solutions-card.sdwan {
-  background: linear-gradient(140deg, #0e0927 70%, #7b5afc);
+  background: linear-gradient(140deg, transparent 70%, #7b5afc);
+}
+.solutions-card.sdwan:hover {
+  background: #4a2f9e;
 }
 
 .solutions-card.telephony {
-  background: linear-gradient(140deg, #0e0927 70%, #00b8d4);
+  background: linear-gradient(140deg, transparent 70%, #00b8d4);
+}
+.solutions-card.telephony:hover {
+  background: #006e80;
 }
 
 .solutions-card.tools {
-  background: linear-gradient(140deg, #0e0927 70%, #43a047);
+  background: linear-gradient(140deg, transparent 70%, #43a047);
+}
+.solutions-card.tools:hover {
+  background: #2a632c;
 }
 
 .solutions-card.firewalls {
-  background: linear-gradient(140deg, #0e0927 70%, #e53935);
+  background: linear-gradient(140deg, transparent 70%, #e53935);
+}
+.solutions-card.firewalls:hover {
+  background: #8e211e;
 }
 
 .solutions-card.linux {
-  background: linear-gradient(140deg, #0e0927 70%, #fdd835);
+  background: linear-gradient(140deg, transparent 70%, #fdd835);
+}
+.solutions-card.linux:hover {
+  background: #b79616;
 }
 
 .solutions-card.windows {
-  background: linear-gradient(140deg, #0e0927 70%, #3949ab);
+  background: linear-gradient(140deg, transparent 70%, #3949ab);
+}
+.solutions-card.windows:hover {
+  background: #1c2968;
 }
 
 .solutions-card.hardware {
-  background: linear-gradient(140deg, #0e0927 70%, #8e24aa);
+  background: linear-gradient(140deg, transparent 70%, #8e24aa);
+}
+.solutions-card.hardware:hover {
+  background: #551566;
 }
 
 .solutions-card.virtualization {
-  background: linear-gradient(140deg, #0e0927 70%, #00897b);
+  background: linear-gradient(140deg, transparent 70%, #00897b);
+}
+.solutions-card.virtualization:hover {
+  background: #00534a;
 }
 
 .solutions-card.cloud {
-  background: linear-gradient(140deg, #0e0927 70%, #039be5);
+  background: linear-gradient(140deg, transparent 70%, #039be5);
+}
+.solutions-card.cloud:hover {
+  background: #025f8a;
 }
 
 .solutions-card.certificates {
-  background: linear-gradient(140deg, #0e0927 70%, #546e7a);
+  background: linear-gradient(140deg, transparent 70%, #546e7a);
+}
+.solutions-card.certificates:hover {
+  background: #2c393f;
 }
 
 /* WhatsApp card special styling */
 .solutions-card.whatsapp {
-  background: linear-gradient(140deg, #0e0927 70%, #25D366);
+  background: linear-gradient(140deg, transparent 70%, #25D366);
+}
+.solutions-card.whatsapp:hover {
+  background: #128C7E;
 }
 
 .solutions-card-link {
@@ -871,6 +906,9 @@ body {
     padding-top: 10px;
   }
 }
+
+
+
 /* SERVICE SECTIONS */
 #soporteyredesimagen {
   flex: 1;
@@ -908,208 +946,289 @@ body {
   clip-path: polygon(30% 0%, 100% 0%, 100% 100%, 0% 100%);
 }
 
-/* DESPLIEGUE / DEPLOYMENT */
+
+
+
+/* HERRAMIENTAS */
 .despliegue {
-  width: 100vw;
-  background-color: black;
-  color: white;
-  height: auto;
-  min-height: 650px;
+  width: 100%;
   position: relative;
-  left: 50%;
-  transform: translateX(-50%);
   overflow: hidden;
-  padding: 40px 0;
-}
-
-.deploy-container {
-  display: flex;
-  height: auto;
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 30px;
-  flex-direction: column;
-}
-
-.deploy-content-wrapper {
-  display: flex;
-  flex-direction: row;
-  gap: 30px;
-  margin-bottom: 30px;
-}
-
-.deploy-left {
-  width: 65%;
-  padding-right: 0;
-}
-
-.deploy-header {
-  margin-bottom: 40px;
-  text-align: center;
-}
-
-.deploy-title {
-  color: white;
-  font-size: 28px;
-  margin-bottom: 15px;
-  font-weight: bold;
-  text-align: center;
-}
-
-.deploy-line {
-  height: 1px;
-  background-color: white;
-  width: 80%;
-  margin: 0 auto 40px;
-}
-
-.deploy-subtitle {
-  color: white;
-  font-size: 16px;
-  margin-bottom: 15px;
-}
-
-.deploy-cards-container {
-  display: flex;
-  gap: 30px;
-  justify-content: space-between;
-}
-
-.deploy-card-column {
-  width: 48%;
-}
-
-.deploy-card {
-  margin-bottom: 30px;
-}
-
-.deploy-card-title {
-  color: white;
-  font-size: 18px;
-  font-weight: bold;
-  margin-bottom: 5px;
-}
-
-.deploy-card-description {
-  color: white;
-  font-size: 14px;
-  line-height: 1.4;
-}
-
-.deploy-right {
-  display: block;
-  width: 40%;
-}
-
-.deploy-image-placeholder {
-  background-color: rgba(255, 255, 255, 0.1);
-  width: 100%;
-  height: 100%;
-  border-radius: 8px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.deploy-text-section {
-  margin-top: 20px;
-}
-
-.deploy-final-text {
-  font-size: 15px;
-  line-height: 1.6;
-  color: white;
-}
-
-.deploy-image-placeholder img {
-  width: 100%;
-  height: auto;
-  max-height: 500px;
-  object-fit: cover;
-  border-radius: 8px;
+  padding: 100px 0;
+  --background-color: transparent;
 }
 
 .despliegue-light {
   background-color: transparent;
   color: #0e0927;
-  width: 100%;
-  padding: 50px 0;
+}
+
+.deploy-header {
+  text-align: center;
+  margin-bottom: 60px;
+}
+
+.deploy-title {
+  color: #0e0927;
+  font-size: 28px;
+  margin-bottom: 20px;
+  font-weight: bold;
+}
+
+.despliegue-circle-wrapper {
   position: relative;
-  left: auto;
-  transform: none;
-  overflow: visible;
-  height: auto;
+  width: 600px;
+  height: 600px;
+  margin: 0 auto;
 }
 
-.despliegue-light .deploy-container {
+.despliegue-circle {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 2px solid #ccc;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+  z-index: 10;
+  background-color: transparent; /* Ensures transparent background */
+}
+
+.despliegue-circle-image {
+  width: 100%;
+  height: 100%;
+  background-image: url('img/soluciones.jpg');
+  background-size: cover;
+  background-position: center;
+  border-radius: 50%;
+  transition: opacity 0.5s ease; /* Añadida transición para el carrusel */
+  background-color: transparent; /* Asegura fondo transparente */
+}
+
+.despliegue-info-box {
+  position: absolute;
+  width: 200px;
+  border-radius: 8px;
+  padding: 10px;
+  z-index: 5;
+  text-align: center;
+  transition: transform 0.3s ease;
+}
+
+.despliegue-info-box:hover {
+  transform: scale(1.30);
+  z-index: 20;
+}
+
+.despliegue-card-title {
+  margin: 0 0 5px 0;
+  font-size: 1.2rem;
   color: #0e0927;
+  font-weight: 600;
 }
 
-.despliegue-light .deploy-title,
-.despliegue-light .deploy-card-title,
-.despliegue-light .deploy-card-description,
-.despliegue-light .deploy-final-text {
+.despliegue-card-description {
+  margin: 0;
+  font-size: 0.8rem;
   color: #0e0927;
+  line-height: 1.4;
 }
 
-.despliegue-light .deploy-line {
-  background-color: #0e0927;
+.deploy-text-section {  
+  display: flex;  
+  border-left: 2px solid #0e0927;
+  padding-left: 20px;
 }
 
-@media (max-width: 992px) {
-  .deploy-content-wrapper {
-    flex-direction: column;
+.deploy-final-text {
+  font-size: 1rem;  
+  color: #0e0927;
+  margin: 0;    
+}
+
+@media (max-width: 991px) {
+  .despliegue-circle-wrapper {
+    width: 500px;
+    height: 500px;
   }
   
-  .deploy-left, .deploy-right {
-    width: 100%;
+  .despliegue-info-box {
+    width: 150px;
+    padding: 8px;
   }
   
-  .deploy-right {
-    margin-top: 20px;
+  .deploy-text-section {
+    margin-top: 30px;
+    border-left: none;    
+    padding-top: 20px;
   }
 }
 
-@media (max-width: 768px) {
-  .deploy-cards-container {
-    flex-direction: column;
+@media (max-width: 576px) {
+  .despliegue-circle-wrapper {
+    width: 400px;
+    height: 400px;
   }
   
-  .deploy-card-column {
-    width: 100%;
+  .despliegue-circle {
+    width: 200px;
+    height: 200px;
+  }
+  
+  .despliegue-info-box {
+    width: 130px;
+    padding: 8px;
+  }
+  
+  .despliegue-card-title {
+    font-size: 0.9rem;
+  }
+  
+  .despliegue-card-description {
+    font-size: 0.7rem;
   }
 }
 
-/* CONSULTORIA */
-.consultoriaycapacitacion {
+@media (max-width: 450px) {
+  .despliegue-circle-wrapper {
+    width: 300px;
+    height: 300px;
+  }
+  
+  .despliegue-circle {
+    width: 150px;
+    height: 150px;
+  }
+  
+  .despliegue-info-box {
+    width: 100px;
+    padding: 6px;
+  }
+}
+
+/* CONSULTORIA - Renamed classes */
+.consulting-section {
   width: 100vw;
   position: relative;
   left: 50%;
   transform: translateX(-50%);
-  background-color: black;
+  background: url('img/training.jpg') no-repeat center center/cover;
   color: white;
   overflow: hidden;
   padding: 40px 0;
 }
 
-.container {
-  max-width: 1200px;
-  margin: 0 auto;
+.consulting-content {
+  width: 100%;
+  padding: 0;
+  margin: 0;
+  display: block;
+}
+
+.consulting-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: stretch;
+  width: 100%;
+}
+
+.consulting-col-image {
+  flex: 0 0 33.333%;
+  display: flex;
   padding: 0 15px;
 }
 
-.consultoriaycapacitacion h2,
-.consultoriaycapacitacion p,
-.consultoriaycapacitacion .intro-text,
-.consultoriaycapacitacion .service-item strong,
-.consultoriaycapacitacion .service-item span,
-.consultoriaycapacitacion .dash {
-  color: white;
+.consulting-col-text {
+  flex: 0 0 66.666%;
+  display: flex;
+  padding: 0 15px;
 }
 
-.servicios-section .simple-list li,
-.consultoriaycapacitacion .simple-list li {
-  color: white;
+.consulting-image-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.consulting-image-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+.consulting-text-content {
+  width: 100%;
+}
+
+.consulting-text-content h2 {
+  color: black;
+  font-size: 28px;
+  margin-bottom: 20px;
+  font-weight: bold;
+}
+
+.consulting-intro-text {
+  color: black;
+  line-height: 1.6;
+}
+
+.consulting-services-columns {
+  margin-top: 20px;
+}
+
+.consulting-services-list {
+  padding: 0;
+  margin: 0;
+}
+
+.consulting-services-list li {
+  display: flex;
+  margin-bottom: 15px;
+  align-items: flex-start;
+}
+
+.consulting-dash {
+  color: black;
+  margin-right: 10px;
+  font-weight: bold;
+}
+
+.consulting-service-item {
+  flex: 1;
+}
+
+.consulting-service-item strong {
+  display: block;
+  color: black;
+  margin-bottom: 5px;
+}
+
+.consulting-service-item span {
+  color: #0e0927;
+  color: black;
+  line-height: 1.4;
+}
+
+/* For mobile responsiveness */
+@media (max-width: 767px) {
+  .consulting-row {
+    flex-direction: column;
+  }
+ 
+
+  .consulting-col-text {
+    flex: 0 0 100%;
+    width: 100%;
+  }
+  
+  .consulting-text-content {
+    padding-left: 15px;
+    padding-right: 15px;
+  }
 }
 
 /* BLOG/MEDIUM */
@@ -1352,8 +1471,7 @@ body {
 }
 
 .contact-section .form-control {
-  background-color: rgba(255, 255, 255, 0.70);
-  border: 1px solid #0e0927;
+  background-color: rgba(255, 255, 255, 0.70);  
   color: #0e0927;
 }
 

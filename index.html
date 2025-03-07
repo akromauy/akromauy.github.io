@@ -15,7 +15,6 @@
      <link rel="apple-touch-icon" sizes="180x180" href="icono/apple-touch-icon.png">
      <link rel="icon" type="image/png" sizes="32x32" href="icono/favicon-32x32.png">
      <link rel="icon" type="image/png" sizes="16x16" href="icono/favicon-16x16.png">
-     <link rel="shortcut icon" href="icono/favicon.png"> 
      <link rel="manifest" href="icono//site.webmanifest">
      <script src="https://www.google.com/recaptcha/api.js" defer></script>
     </head>
@@ -43,10 +42,13 @@
               <a class="nav-link" aria-current="page" href="#body">INICIO</a>
             </li>
             <li class="nav-item mx-2">
-              <a class="nav-link" href="#compania">COMPAÑÍA</a>
+              <a class="nav-link" href="#dividercompania">COMPAÑÍA</a>
             </li>
             <li class="nav-item mx-2">
-              <a class="nav-link" href="#servicios">SERVICIOS</a>
+              <a class="nav-link" href="#dividerservicios">SERVICIOS</a>
+            </li>
+            <li class="nav-item mx-2">
+              <a class="nav-link" href="#mediumblog">BLOG</a>
             </li>
             <li class="nav-item mx-2">
               <a class="nav-link" href="#contacto">CONTACTO</a>
@@ -77,7 +79,7 @@
   </div>
 
   <!-- divisor diagonal -->
-  <div class="diagonal-divider"></div>        
+  <div id="dividercompania" class="diagonal-divider"></div>        
 
 <div class="offbackcompania"> 
   <div id="companiayservicios">      
@@ -284,10 +286,10 @@
         <div class="contenido">
           <div class="texto">
             <h2>PROPOSITO</h2>
-        <p>En Akroma, nuestro principal objetivo es, facilitar el acceso a servicios y conocimiento de calidad, sobre tecnologías 
+        <p>En Akroma, nuestro principal objetivo es facilitar el acceso a servicios y conocimiento de calidad, sobre tecnologías 
           fundamentales para la operativa de empresas modernas.
           
-          Ofrecemos soporte informático personalizado hacia empresas, independiente de rubros, alcance, tamaño país o idiomas.</p>
+          Ofrecemos soporte informático personalizado hacia empresas, independiente de rubros, alcance, tamaño, país o idiomas.</p>
           </div>
           <div class="imagen" id="proposito"></div>
         </div>
@@ -298,7 +300,7 @@
       <!-- SERVICIOS SECTION -->
 <div class="servicios-section">
   <!-- divisor diagonal -->
- <div class="diagonal-divider2"></div> 
+ <div id="dividerservicios" class="diagonal-divider2"></div> 
   <div class="container">
     <h1 class="text-center" id="servicios">SERVICIOS</h1>
     <section class="serviciosalt4 col-md-12">
@@ -473,144 +475,244 @@
   </div>
 </div>
 
-<!-- Despliegue de soluciones (transparent background) -->
-<div class="despliegue despliegue-light">
-  <div class="deploy-container">
-    <div class="deploy-header">
-      <h2 class="deploy-title">Despliegue de soluciones y herramientas informáticas</h2>
-      <div class="deploy-line"></div>
-    </div>
-    
-    <div class="deploy-content-wrapper">
-      <!-- Left column with cards -->
-      <div class="deploy-left">
-        <div class="deploy-cards-container">
-          <div class="deploy-card-column">
-            <div class="deploy-card">
-              <h3 class="deploy-card-title">Soluciones de monitoreo</h3>
-              <p class="deploy-card-description">Supervisión en tiempo real de infraestructuras para detectar y prevenir fallos.</p>
-            </div>
-            
-            <div class="deploy-card">
-              <h3 class="deploy-card-title">Backups</h3>
-              <p class="deploy-card-description">Respaldo y recuperación de datos para garantizar continuidad operativa y protección ante pérdidas.</p>
-            </div>
-            
-            <div class="deploy-card">
-              <h3 class="deploy-card-title">Automatismos</h3>
-              <p class="deploy-card-description">Optimización de procesos mediante scripts y herramientas para reducir tiempos y errores.</p>
-            </div>
-          </div>
-          
-          <div class="deploy-card-column">
-            <div class="deploy-card">
-              <h3 class="deploy-card-title">Domótica</h3>
-              <p class="deploy-card-description">Integración de tecnología para automatizar y controlar entornos residenciales y empresariales.</p>
-            </div>
-            
-            <div class="deploy-card">
-              <h3 class="deploy-card-title">Dominios Windows</h3>
-              <p class="deploy-card-description">Administración centralizada de usuarios, políticas y recursos en entornos empresariales.</p>
-            </div>
-            
-            <div class="deploy-card">
-              <h3 class="deploy-card-title">Ambientes Linux</h3>
-              <p class="deploy-card-description">Gestión y optimización de sistemas basados en Unix para servidores y estaciones de trabajo.</p>
-            </div>
-          </div>
+
+<!-- HERRAMIENTAS START -->
+<section class="rueda">
+  <div class="despliegue despliegue-light">
+    <div class="container">
+      <!-- Centered title that spans across all columns -->
+      <div class="row mb-4">
+        <div class="col-12 text-center">
         </div>
       </div>
       
-      <!-- Right column with image -->
-      <div class="deploy-right">
-        <div class="deploy-image-placeholder">
-          <img src="img/soluciones.jpg" alt="Soluciones informáticas">
+      <!-- Main content with 8-4 column layout -->
+      <div class="row">
+        <!-- Main carousel content in 8 columns -->
+        <div class="col-md-7">
+          <div class="despliegue-circle-wrapper">
+            <div class="despliegue-circle">
+              <div class="despliegue-circle-image">
+                <!-- Images will be controlled by JavaScript -->
+              </div>
+            </div>
+            
+            <div id="box1" class="despliegue-info-box">
+              <h3 class="despliegue-card-title">Soluciones de monitoreo</h3>
+              <p class="despliegue-card-description">Supervisión en tiempo real de infraestructuras para detectar y prevenir fallos.</p>
+            </div>
+            
+            <div id="box2" class="despliegue-info-box">
+              <h3 class="despliegue-card-title">Domótica</h3>
+              <p class="despliegue-card-description">Integración de tecnología para automatizar y controlar entornos residenciales y empresariales.</p>
+            </div>
+            
+            <div id="box3" class="despliegue-info-box">
+              <h3 class="despliegue-card-title">Dominios Windows</h3>
+              <p class="despliegue-card-description">Administración centralizada de usuarios, políticas y recursos en entornos empresariales.</p>
+            </div>
+            
+            <div id="box4" class="despliegue-info-box">
+              <h3 class="despliegue-card-title">Ambientes Linux</h3>
+              <p class="despliegue-card-description">Gestión y optimización de sistemas basados en Linux para servidores y estaciones de trabajo.</p>
+            </div>
+            
+            <div id="box5" class="despliegue-info-box">
+              <h3 class="despliegue-card-title">Automatismos</h3>
+              <p class="despliegue-card-description">Optimización de procesos mediante scripts y herramientas para reducir tiempos y errores.</p>
+            </div>
+            
+            <div id="box6" class="despliegue-info-box">
+              <h3 class="despliegue-card-title">Backups</h3>
+              <p class="despliegue-card-description">Respaldo y recuperación de datos para garantizar continuidad operativa y protección ante pérdidas.</p>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Text section in 4 columns -->
+        <div class="col-md-4 align-items-center contenedor4 offset-md-1">
+          <div class="deploy-header">
+            <h2 class="deploy-title">Despliegue de soluciones y herramientas informáticas</h2>
+            <div class="deploy-line"></div>
+          </div>
+          <div class="deploy-text-section">
+            <p class="deploy-final-text">La optimización y gestión eficiente de la infraestructura tecnológica permiten mejorar la <strong>seguridad, disponibilidad y automatización</strong> de procesos en entornos digitales. La implementación de <strong>soluciones que aseguren la continuidad</strong> operativa, el control centralizado y la supervisión en tiempo real facilita la administración de sistemas y recursos, <strong>reduciendo riesgos</strong> y mejorando la eficiencia en distintos ámbitos, desde servidores hasta entornos automatizados.</p>
+          </div>
         </div>
       </div>
     </div>
-    
-    <div class="deploy-text-section">
-      <p class="deploy-final-text">La optimización y gestión eficiente de la infraestructura tecnológica permiten mejorar la seguridad, disponibilidad y automatización de procesos en entornos digitales. La implementación de soluciones que aseguren la continuidad operativa, el control centralizado y la supervisión en tiempo real facilita la administración de sistemas y recursos, reduciendo riesgos y mejorando la eficiencia en distintos ámbitos, desde servidores hasta entornos automatizados.</p>
-    </div>
   </div>
-</div>
-
-      <!-- Consultoría sección (black background, white text) -->
-      <div class="consultoriaycapacitacion">
-        <section class="serviciosalt4 col-md-12">
-          <div class="serviciosalt4">    
-            <div class="container d-flex justify-content-center">
-              <div class="row align-items-start">
-                <!-- Imagen ajustada a la altura del texto -->
-                <div class="col-md-4 d-flex justify-content-center">
-                  <div class="imagen-container2">
-                    <img src="img/monitoreo.jpg" class="img-fluid" alt="Monitoreo">
-                  </div>
-                </div>
+  
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Configuración para la rotación de las cajas informativas
+      let angle = 0;
+      const speed = 0.04; // Velocidad del giro (más bajo = más lento)
+      const boxes = document.querySelectorAll('.despliegue-info-box');
+      
+      // Obtener el elemento del círculo central y su posición
+      const circleContainer = document.querySelector('.despliegue-circle');
+      const circleImage = document.querySelector('.despliegue-circle-image');
+      
+      // Calcular el centro exacto del círculo
+      const centerX = 300; // Mitad del contenedor (600px / 2)
+      const centerY = 300; // Mitad del contenedor (600px / 2)
+      
+      // Calcular el radio basado en el tamaño del círculo central
+      const circleRadius = circleContainer.offsetWidth / 2;
+      const orbitRadius = circleRadius + 140; // Aumentado para mayor separación
+      
+      // Configuración del carrusel de imágenes
+      const images = [
+        'img/soluciones.jpg',
+        'img/soluciones2.jpg',
+        'img/soluciones3.jpg'
+      ];
+      let currentImageIndex = 0;
+      
+      // Precargar todas las imágenes al inicio
+      function preloadImages() {
+        images.forEach(src => {
+          const img = new Image();
+          img.src = src;
+        });
+      }
+      
+      // Función para cambiar la imagen cada 4 segundos
+      function changeImage() {
+        // Cambiar a la siguiente imagen
+        currentImageIndex = (currentImageIndex + 1) % images.length;
+        
+        // Precargar la siguiente imagen para evitar destellos
+        const nextImage = new Image();
+        nextImage.src = images[currentImageIndex];
+        
+        nextImage.onload = function() {
+          // Aplicar efecto de transición
+          circleImage.style.opacity = '0';
           
-                <!-- Texto a la derecha -->
-                <div class="col-md-8">
-                  <div class="textoservicio">
-                    <h2>Consultoría Informática y Capacitación</h2>
-                    
-                    <!-- Texto introductorio -->
-                    <p class="intro-text">
-                      El desarrollo e implementación de metodologías y herramientas adecuadas en entornos tecnológicos permite mejorar la eficiencia operativa, la gestión de servicios y la relación con clientes. La correcta administración de infraestructuras y el uso de estrategias de monitoreo garantizan estabilidad y rendimiento, mientras que la documentación estructurada facilita la continuidad y optimización de procesos en cualquier organización.
-                    </p>
-                    
-                    <!-- Lista en dos columnas -->
-                    <div class="row services-columns">
-                      <!-- Primera columna -->
-                      <div class="col-md-12">
-                        <ul class="list-unstyled simple-list">
-                          <li>
-                            <span class="dash">-</span> 
-                            <div class="service-item">
-                              <strong>Adopción de prácticas ITIL/Agile:</strong> 
-                              <span>Implementación de metodologías para mejorar la gestión de servicios y proyectos.</span>
-                            </div>
-                          </li>
-                          <li>
-                            <span class="dash">-</span> 
-                            <div class="service-item">
-                              <strong>Implementación de Customer Relationship Managers</strong> 
-                              <span>Optimización de la relación con clientes mediante plataformas especializadas.</span>
-                            </div>
-                          </li>
-                          <li>
-                            <span class="dash">-</span> 
-                            <div class="service-item">
-                              <strong>Administración de Sistemas y redes:</strong> 
-                              <span>Gestión eficiente de infraestructuras tecnológicas para garantizar estabilidad y seguridad.</span>
-                            </div>
-                          </li>
-                          <li>
-                            <span class="dash">-</span> 
-                            <div class="service-item">
-                              <strong>Estrategias de monitoreo:</strong> 
-                              <span>Desarrollo de enfoques proactivos para supervisar y optimizar el rendimiento de sistemas.</span>
-                            </div>
-                          </li>
-                          <li>
-                            <span class="dash">-</span> 
-                            <div class="service-item">
-                              <strong>Buenas prácticas de documentación:</strong> 
-                              <span>Estandarización y organización de información clave para mejorar la gestión y el soporte técnico.</span>
-                            </div>
-                          </li>
-                        </ul>
+          setTimeout(() => {
+            // Cambiar la URL de la imagen
+            circleImage.style.backgroundImage = `url('${images[currentImageIndex]}')`;
+            // Volver a mostrar la imagen
+            circleImage.style.opacity = '1';
+          }, 500); // Esperar a que termine la transición de opacidad
+        };
+      }
+      
+      // Precargar imágenes
+      preloadImages();
+      
+      // Iniciar el carrusel de imágenes con un intervalo de 4 segundos
+      setInterval(changeImage, 4000);
+      
+      function animateBoxes() {
+        boxes.forEach((box, index) => {
+          // Distribuir las cajas uniformemente alrededor del círculo
+          const boxAngle = angle + (index * (360 / boxes.length));
+          
+          // Convertir de grados a radianes
+          const radians = boxAngle * Math.PI / 180;
+          
+          // Calcular la posición X e Y desde el centro exacto
+          const x = centerX + orbitRadius * Math.cos(radians);
+          const y = centerY + orbitRadius * Math.sin(radians);
+          
+          // Ajustar la posición considerando el tamaño de la caja
+          const boxWidth = box.offsetWidth;
+          const boxHeight = box.offsetHeight;
+          
+          box.style.left = (x - boxWidth / 2) + 'px';
+          box.style.top = (y - boxHeight / 2) + 'px';
+        });
+        
+        // Incrementar el ángulo para la siguiente animación
+        angle += speed;
+        if (angle >= 360) angle = 0;
+        
+        // Continuar la animación
+        requestAnimationFrame(animateBoxes);
+      }
+      
+      // Iniciar la animación después de un pequeño retraso
+      setTimeout(animateBoxes, 100);
+    });
+  </script>
+</section>
+
+          <!-- HERRAMIENTAS END -->
+
+          <!-- CONSULTORIA -->
+<div class="consulting-section">
+  <section class="consulting-content col-md-12">
+    <div class="consulting-content">    
+      <div class="container d-flex justify-content-center">
+        <div class="consulting-row">
+    
+          <!-- Texto a la derecha -->
+          <div class="consulting-col-text">
+            <div class="consulting-text-content col-md-4 offset-md-8">
+              <h2>Consultoría Informática y Capacitación</h2>
+              
+              <!-- Texto introductorio -->
+              <p class="consulting-intro-text">
+                El desarrollo e implementación de <strong>metodologías y herramientas adecuadas</strong> en entornos tecnológicos permite mejorar la <strong>eficiencia operativa, la gestión de servicios y la relación con clientes.</strong> La correcta administración de infraestructuras y el uso de estrategias de monitoreo garantizan <strong>estabilidad y rendimiento</strong>, mientras que la documentación estructurada facilita la continuidad y optimización de procesos en cualquier organización.
+              </p>
+              
+              <!-- Lista en dos columnas -->
+              <div class="consulting-services-columns">
+                <!-- Primera columna -->
+                <div class="consulting-services-list-container">
+                  <ul class="list-unstyled consulting-services-list">
+                    <li>
+                      <span class="consulting-dash">-</span> 
+                      <div class="consulting-service-item">
+                        <strong>Adopción de prácticas ITIL/Agile:</strong> 
+                        <span>Implementación de metodologías para mejorar la gestión de servicios y proyectos.</span>
                       </div>
-                    </div>
-                  </div>
+                    </li>
+                    <li>
+                      <span class="consulting-dash">-</span> 
+                      <div class="consulting-service-item">
+                        <strong>Implementación de Customer Relationship Managers</strong> 
+                        <span>Optimización de la relación con clientes mediante plataformas especializadas.</span>
+                      </div>
+                    </li>
+                    <li>
+                      <span class="consulting-dash">-</span> 
+                      <div class="consulting-service-item">
+                        <strong>Administración de Sistemas y redes:</strong> 
+                        <span>Gestión eficiente de infraestructuras tecnológicas para garantizar estabilidad y seguridad.</span>
+                      </div>
+                    </li>
+                    <li>
+                      <span class="consulting-dash">-</span> 
+                      <div class="consulting-service-item">
+                        <strong>Estrategias de monitoreo:</strong> 
+                        <span>Desarrollo de enfoques proactivos para supervisar y optimizar el rendimiento de sistemas.</span>
+                      </div>
+                    </li>
+                    <li>
+                      <span class="consulting-dash">-</span> 
+                      <div class="consulting-service-item">
+                        <strong>Buenas prácticas de documentación:</strong> 
+                        <span>Estandarización y organización de información clave para mejorar la gestión y el soporte técnico.</span>
+                      </div>
+                    </li>
+                  </ul>
                 </div>
               </div>
             </div>
           </div>
-        </section>
+        </div>
       </div>
+    </div>
+  </section>
+</div>
+<!-- END CONSULTORIA -->
 
       <!-- New Medium section (pattern background) -->
-      <div class="col-md-12 medium-section">
+      <div id="mediumblog" class="col-md-12 medium-section">
         <div class="container">
           <div class="row">
             <div class="col-md-12 text-center mb-4">
@@ -761,8 +863,6 @@
    
   <!-- Bootstrap JS -->
   <script src="bootstrap/bootstrap-5.3.3-dist/js/bootstrap.min.js"></script>
-  <!-- Popper JS -->
-  <script src="popper/"></script>
   <script>
 document.addEventListener('scroll', function () {
   const navbar = document.querySelector('.navbar');
