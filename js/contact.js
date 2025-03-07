@@ -10,23 +10,140 @@ document.addEventListener('DOMContentLoaded', function() {
   const messageInput = document.getElementById('message');
   const submitButton = document.getElementById('button');
 
-   // Add this line here
-   const recaptchaContainer = document.querySelector('.g-recaptcha');
+  // Add this line here
+  const recaptchaContainer = document.querySelector('.g-recaptcha');
+  
+  // Set position relative for input containers and add more spacing
+  const inputContainers = document.querySelectorAll('.form-control');
+  inputContainers.forEach(container => {
+    // Set all containers to relative positioning for proper error message placement
+    container.parentNode.style.position = 'relative';
+    
+    // Reduce the bottom margin of inputs to make room for error messages
+    container.style.marginBottom = '8px';
+    
+    // Increase the bottom margin of the parent element to accommodate the error message
+    if (container.parentNode) {
+      container.parentNode.style.marginBottom = '25px';
+    }
+  });
   
   // Set name input attributes for better experience
   nameInput.setAttribute('autocomplete', 'name');
-  nameInput.setAttribute('placeholder', 'e.g., Juan Pérez');
+  nameInput.setAttribute('placeholder', 'ej. Juan Pérez');
   nameInput.setAttribute('type', 'text');
+  nameInput.style.textAlign = 'left';
+  nameInput.style.paddingLeft = '5px';
   
   // Set phone input attributes for better mobile experience
   phoneInput.setAttribute('type', 'tel');
   phoneInput.setAttribute('autocomplete', 'tel');
-  phoneInput.setAttribute('placeholder', 'e.g., +1 234 567 8901');
+  phoneInput.setAttribute('placeholder', 'ej. +1 234 567 8901');
+  phoneInput.style.textAlign = 'left';
+  phoneInput.style.paddingLeft = '5px';
   
   // Set message input attributes
   messageInput.setAttribute('autocomplete', 'off');
   messageInput.setAttribute('placeholder', '¿Cómo te podemos ayudar?');
   messageInput.setAttribute('maxlength', '1000');
+  messageInput.style.textAlign = 'left';
+  messageInput.style.paddingLeft = '5px';
+  
+  // Set email input attributes
+  emailInput.style.textAlign = 'left';
+  emailInput.style.paddingLeft = '5px';
+  
+  // Add CSS for placeholder styling and text color
+  const style = document.createElement('style');
+  style.textContent = `
+    ::placeholder {
+      color: #666666 !important;
+      opacity: 1;
+      text-align: left;
+      padding-left: 5px;
+    }
+    :-ms-input-placeholder {
+      color: #666666 !important;
+      text-align: left;
+      padding-left: 5px;
+    }
+    ::-ms-input-placeholder {
+      color: #666666 !important;
+      text-align: left;
+      padding-left: 5px;
+    }
+    .form-control {
+      color: #0e0927 !important;
+      position: relative;
+      text-align: left;
+      padding-left: 5px !important;
+    }
+    input.form-control, textarea.form-control {
+      margin-bottom: 8px !important;
+    }
+    /* Fix for error messages causing height changes */
+    .invalid-feedback {
+      position: absolute !important;
+      bottom: -22px !important;
+      width: 100% !important;
+      height: 22px !important;
+      opacity: 0 !important;
+      visibility: hidden !important;
+      transition: opacity 0.2s ease !important;
+      margin: 0 !important;
+      padding: 0 !important;
+      z-index: 5 !important;
+      letter-spacing: 0.2px !important;
+    }
+    /* Specific alignment for different error messages */
+    #name + .invalid-feedback, 
+    #email + .invalid-feedback, 
+    #phone + .invalid-feedback {
+      text-align: center !important;
+      left: 0 !important;
+    }
+    #message + .invalid-feedback {
+      text-align: left !important;
+      left: 5px !important;
+    }
+    .invalid-feedback.visible {
+      opacity: 1 !important;
+      visibility: visible !important;
+    }
+    /* Add bottom margin to form fields to accommodate error messages */
+    .form-group {
+      margin-bottom: 25px !important;
+      position: relative !important;
+    }
+    /* Fix for recaptcha error */
+    .captcha-error {
+      position: absolute !important;
+      bottom: -22px !important;
+      left: 5px !important;
+      opacity: 0 !important;
+      visibility: hidden !important;
+      transition: opacity 0.2s ease !important;
+      margin: 0 !important;
+      padding: 0 !important;
+      height: 22px !important;
+      width: 100% !important;
+      text-align: left !important;
+    }
+    .captcha-error.visible {
+      opacity: 1 !important;
+      visibility: visible !important;
+    }
+    /* Character counter positioning */
+    .character-counter {
+      position: absolute !important;
+      right: 5px !important;
+      bottom: -22px !important;
+      margin-top: 2px !important;
+      text-align: right !important;
+      z-index: 10 !important;
+    }
+  `;
+  document.head.appendChild(style);
   
   // Create character counter for message field
   const messageContainer = messageInput.parentNode;
@@ -35,24 +152,59 @@ document.addEventListener('DOMContentLoaded', function() {
   characterCounter.style.color = 'white';
   characterCounter.style.fontSize = '0.8rem';
   characterCounter.style.textAlign = 'right';
-  characterCounter.style.marginTop = '5px';
+  characterCounter.style.position = 'absolute';
+  characterCounter.style.right = '0';
+  characterCounter.style.bottom = '-22px';
+  characterCounter.style.zIndex = '10';
   characterCounter.textContent = '0/1000 caracteres';
   messageContainer.appendChild(characterCounter);
   
-  // Create error messages with white text for all fields
+  // Create error messages with white text for all fields (positioned absolutely)
   function createErrorMessage(input, message) {
     const errorMsg = document.createElement('div');
     errorMsg.className = 'invalid-feedback';
     errorMsg.textContent = message;
     errorMsg.style.color = 'white';
-    errorMsg.style.fontWeight = 'bold';
-    input.parentNode.appendChild(errorMsg);
+    errorMsg.style.fontSize = '0.8rem';
+    
+    // Special handling for name, email, and phone fields
+    if (input.id === 'name' || input.id === 'email' || input.id === 'phone') {
+      errorMsg.style.textAlign = 'center';
+    } else {
+      errorMsg.style.textAlign = 'left';
+    }
+    
+    errorMsg.style.padding = '2px 0';
+    errorMsg.style.position = 'absolute';
+    errorMsg.style.bottom = '-22px';
+    errorMsg.style.left = '0';
+    errorMsg.style.width = '100%';
+    errorMsg.style.zIndex = '10';
+    
+    // Add !important to crucial styles
+    const importantStyles = `
+      .invalid-feedback {
+        position: absolute !important;
+        bottom: -22px !important;
+        z-index: 10 !important;
+      }
+      #name + .invalid-feedback, #email + .invalid-feedback, #phone + .invalid-feedback {
+        text-align: center !important;
+        left: 0 !important;
+      }
+    `;
+    const styleEl = document.createElement('style');
+    styleEl.textContent = importantStyles;
+    document.head.appendChild(styleEl);
+    
+    // Insertar justo después del input
+    input.insertAdjacentElement('afterend', errorMsg);
     return errorMsg;
   }
   
   // Create error messages for all fields
   const nameErrorMsg = createErrorMessage(nameInput, 'Por favor ingresa tu nombre completo');
-  const emailErrorMsg = createErrorMessage(emailInput, 'Por favor ingresa un email válido (debe contener @ y un dominio)');
+  const emailErrorMsg = createErrorMessage(emailInput, 'Por favor ingresa un email válido');
   const phoneErrorMsg = createErrorMessage(phoneInput, 'Por favor ingresa un número de teléfono válido');
   const messageErrorMsg = createErrorMessage(messageInput, 'Por favor ingresa un mensaje');
   
@@ -61,8 +213,15 @@ document.addEventListener('DOMContentLoaded', function() {
   captchaErrorMsg.className = 'captcha-error';
   captchaErrorMsg.textContent = 'Por favor completa el captcha';
   captchaErrorMsg.style.color = 'white';
-  captchaErrorMsg.style.fontWeight = 'bold';
-  captchaErrorMsg.style.display = 'none';
+  captchaErrorMsg.style.fontSize = '0.8rem';
+  captchaErrorMsg.style.padding = '2px 0';
+  captchaErrorMsg.style.letterSpacing = '0.2px';
+  captchaErrorMsg.style.textAlign = 'left';
+  captchaErrorMsg.style.position = 'absolute';
+  captchaErrorMsg.style.bottom = '-22px';
+  captchaErrorMsg.style.left = '5px';
+  captchaErrorMsg.style.width = '100%';
+  captchaErrorMsg.style.zIndex = '10';
   recaptchaContainer.parentNode.insertBefore(captchaErrorMsg, recaptchaContainer.nextSibling);
   
   // Validation functions
@@ -101,9 +260,9 @@ document.addEventListener('DOMContentLoaded', function() {
     const isValid = recaptchaResponse.length !== 0;
     
     if (!isValid) {
-      captchaErrorMsg.style.display = 'block';
+      captchaErrorMsg.classList.add('visible');
     } else {
-      captchaErrorMsg.style.display = 'none';
+      captchaErrorMsg.classList.remove('visible');
     }
     
     return isValid;
@@ -174,14 +333,43 @@ document.addEventListener('DOMContentLoaded', function() {
     const maxLength = messageInput.getAttribute('maxlength');
     characterCounter.textContent = `${currentLength}/${maxLength} caracteres`;
     
-    // Change color based on length
+    // Change color based on length (updated to be more visible)
     if (currentLength > maxLength * 0.9) {
-      characterCounter.style.color = '#ffc107'; // Yellow warning when approaching limit
+      // Getting close to limit - make it yellow
+      characterCounter.style.color = '#ffc107';
     } else if (currentLength < 10) {
-      characterCounter.style.color = '#dc3545'; // Red for too short
+      // Too short - keep it white but user knows it's not valid
+      characterCounter.style.color = 'white';
     } else {
-      characterCounter.style.color = 'white'; // Normal color
+      // Good length - make it green
+      characterCounter.style.color = '#28a745';
     }
+    
+    // Ensure the counter stays outside the textarea
+    characterCounter.style.bottom = '-22px';
+  }
+  
+  // Modified function to show error messages
+  function showErrorMessage(errorMsg, message) {
+    errorMsg.textContent = message;
+    errorMsg.classList.add('visible');
+    
+    // Ensure proper positioning based on input type
+    if (errorMsg.previousElementSibling) {
+      const inputId = errorMsg.previousElementSibling.id;
+      if (inputId === 'name' || inputId === 'email' || inputId === 'phone') {
+        errorMsg.style.textAlign = 'center';
+        errorMsg.style.left = '0';
+      } else if (inputId === 'message') {
+        errorMsg.style.textAlign = 'left';
+        errorMsg.style.left = '5px';
+      }
+    }
+  }
+  
+  // Modified function to hide error messages
+  function hideErrorMessage(errorMsg) {
+    errorMsg.classList.remove('visible');
   }
   
   // Name input handling
@@ -206,22 +394,23 @@ document.addEventListener('DOMContentLoaded', function() {
     if (!validateRequired(this.value)) {
       this.classList.add('is-invalid');
       this.classList.remove('is-valid');
-      nameErrorMsg.textContent = 'Por favor ingresa tu nombre';
+      showErrorMessage(nameErrorMsg, 'Por favor ingresa tu nombre');
     } else if (this.value.length < 2) {
       this.classList.add('is-invalid');
       this.classList.remove('is-valid');
-      nameErrorMsg.textContent = 'El nombre debe tener al menos 2 caracteres';
+      showErrorMessage(nameErrorMsg, 'El nombre debe tener al menos 2 caracteres');
     } else if (this.value.length > 50) {
       this.classList.add('is-invalid');
       this.classList.remove('is-valid');
-      nameErrorMsg.textContent = 'El nombre no debe exceder los 50 caracteres';
+      showErrorMessage(nameErrorMsg, 'El nombre no debe exceder los 50 caracteres');
     } else if (!validateName(this.value)) {
       this.classList.add('is-invalid');
       this.classList.remove('is-valid');
-      nameErrorMsg.textContent = 'El nombre solo debe contener letras, espacios, guiones o apóstrofes';
+      showErrorMessage(nameErrorMsg, 'El nombre solo debe contener letras, espacios, guiones o apóstrofes');
     } else {
       this.classList.add('is-valid');
       this.classList.remove('is-invalid');
+      hideErrorMessage(nameErrorMsg);
     }
   });
   
@@ -242,14 +431,15 @@ document.addEventListener('DOMContentLoaded', function() {
     if (!validateRequired(this.value)) {
       this.classList.add('is-invalid');
       this.classList.remove('is-valid');
-      phoneErrorMsg.textContent = 'Por favor ingresa un número de teléfono';
+      showErrorMessage(phoneErrorMsg, 'Por favor ingresa un número de teléfono');
     } else if (!validatePhone(this.value)) {
       this.classList.add('is-invalid');
       this.classList.remove('is-valid');
-      phoneErrorMsg.textContent = 'Por favor ingresa un número de teléfono válido (mínimo 7 dígitos)';
+      showErrorMessage(phoneErrorMsg, 'Por favor ingresa un número de teléfono válido (mínimo 7 dígitos)');
     } else {
       this.classList.add('is-valid');
       this.classList.remove('is-invalid');
+      hideErrorMessage(phoneErrorMsg);
     }
   });
   
@@ -262,18 +452,19 @@ document.addEventListener('DOMContentLoaded', function() {
     if (!validateRequired(this.value)) {
       this.classList.add('is-invalid');
       this.classList.remove('is-valid');
-      messageErrorMsg.textContent = 'Por favor ingresa un mensaje';
+      showErrorMessage(messageErrorMsg, 'Por favor ingresa un mensaje');
     } else if (this.value.trim().length < 10) {
       this.classList.add('is-invalid');
       this.classList.remove('is-valid');
-      messageErrorMsg.textContent = 'El mensaje debe tener al menos 10 caracteres';
+      showErrorMessage(messageErrorMsg, 'El mensaje debe tener al menos 10 caracteres');
     } else if (this.value.length > 1000) {
       this.classList.add('is-invalid');
       this.classList.remove('is-valid');
-      messageErrorMsg.textContent = 'El mensaje no debe exceder los 1000 caracteres';
+      showErrorMessage(messageErrorMsg, 'El mensaje no debe exceder los 1000 caracteres');
     } else {
       this.classList.add('is-valid');
       this.classList.remove('is-invalid');
+      hideErrorMessage(messageErrorMsg);
     }
   });
   
@@ -282,14 +473,15 @@ document.addEventListener('DOMContentLoaded', function() {
     if (!validateRequired(this.value)) {
       this.classList.add('is-invalid');
       this.classList.remove('is-valid');
-      emailErrorMsg.textContent = 'Por favor ingresa tu email';
+      showErrorMessage(emailErrorMsg, 'Por favor ingresa tu email');
     } else if (!validateEmail(this.value)) {
       this.classList.add('is-invalid');
       this.classList.remove('is-valid');
-      emailErrorMsg.textContent = 'Por favor ingresa un email válido (debe contener @ y un dominio)';
+      showErrorMessage(emailErrorMsg, 'Por favor ingresa un email válido');
     } else {
       this.classList.add('is-valid');
       this.classList.remove('is-invalid');
+      hideErrorMessage(emailErrorMsg);
     }
   });
   
@@ -303,24 +495,28 @@ document.addEventListener('DOMContentLoaded', function() {
     // Validate name
     if (!validateRequired(nameInput.value) || !validateName(nameInput.value)) {
       nameInput.classList.add('is-invalid');
+      showErrorMessage(nameErrorMsg, 'Por favor ingresa un nombre válido');
       isValid = false;
     }
     
     // Validate email
     if (!validateRequired(emailInput.value) || !validateEmail(emailInput.value)) {
       emailInput.classList.add('is-invalid');
+      showErrorMessage(emailErrorMsg, 'Por favor ingresa un email válido');
       isValid = false;
     }
     
     // Validate phone
     if (!validateRequired(phoneInput.value) || !validatePhone(phoneInput.value)) {
       phoneInput.classList.add('is-invalid');
+      showErrorMessage(phoneErrorMsg, 'Por favor ingresa un número de teléfono válido');
       isValid = false;
     }
     
     // Validate message
     if (!validateRequired(messageInput.value) || !validateMessage(messageInput.value)) {
       messageInput.classList.add('is-invalid');
+      showErrorMessage(messageErrorMsg, 'Por favor ingresa un mensaje válido (10-1000 caracteres)');
       isValid = false;
     }
     
@@ -376,13 +572,17 @@ document.addEventListener('DOMContentLoaded', function() {
         // Reset character counter
         updateCharacterCounter();
         
-        // Remove validation classes
+        // Remove validation classes and hide error messages
         document.querySelectorAll('.is-valid, .is-invalid').forEach(el => {
           el.classList.remove('is-valid', 'is-invalid');
         });
         
+        document.querySelectorAll('.invalid-feedback').forEach(el => {
+          el.classList.remove('visible');
+        });
+        
         // Hide captcha error message
-        captchaErrorMsg.style.display = 'none';
+        captchaErrorMsg.classList.remove('visible');
         
         // Reset button
         button.innerHTML = originalButtonText;
