@@ -598,3 +598,82 @@ document.addEventListener('DOMContentLoaded', function() {
       });
   });
 });
+
+/**
+ * Add this JavaScript to fix the tools section circle on mobile
+ * This should be added to your existing JavaScript files
+ */
+document.addEventListener('DOMContentLoaded', function() {
+  // Check if mobile view
+  function isMobile() {
+    return window.innerWidth <= 991;
+  }
+  
+  // The original animation function reference
+  let originalAnimateBoxes = null;
+  
+  // Function to stop circle animation on mobile
+  function handleMobileView() {
+    const boxes = document.querySelectorAll('.despliegue-info-box');
+    
+    if (isMobile()) {
+      // Capture the original function if we haven't already
+      if (!originalAnimateBoxes && window.animateBoxes) {
+        originalAnimateBoxes = window.animateBoxes;
+      }
+      
+      // Override the animation function
+      window.animateBoxes = function() {
+        // Do nothing on mobile
+      };
+      
+      // Force position static on all boxes
+      boxes.forEach(box => {
+        box.style.position = 'static';
+        box.style.left = 'auto';
+        box.style.top = 'auto';
+        box.style.transform = 'none';
+      });
+    } else {
+      // Restore original function if available
+      if (originalAnimateBoxes) {
+        window.animateBoxes = originalAnimateBoxes;
+        
+        // Run it once
+        window.animateBoxes();
+      }
+    }
+  }
+  
+  // Run on page load
+  handleMobileView();
+  
+  // Run on window resize
+  window.addEventListener('resize', handleMobileView);
+});
+
+
+document.addEventListener('DOMContentLoaded', function() {
+  // Function to check viewport width and update arrow
+  function updateArrow() {
+    const arrowElement = document.querySelector('.somosv-arrow');
+    if (arrowElement) {
+      if (window.innerWidth <= 991) {
+        // Mobile view - downward arrow
+        arrowElement.textContent = '↓';
+      } else {
+        // Desktop view - rightward arrow
+        arrowElement.textContent = '→';
+      }
+    }
+  }
+  
+  // Run on page load
+  updateArrow();
+  
+  // Run when window is resized
+  window.addEventListener('resize', updateArrow);
+});
+
+
+

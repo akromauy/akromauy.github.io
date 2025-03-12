@@ -280,23 +280,6 @@
     });
   </script>
 
-  <div class="row">
-    <div class="col-md-12">
-      <section class="section">
-        <div class="contenido">
-          <div class="texto">
-            <h2>PROPOSITO</h2>
-        <p>En Akroma, nuestro principal objetivo es facilitar el acceso a servicios y conocimiento de calidad, sobre tecnologías 
-          fundamentales para la operativa de empresas modernas.
-          
-          Ofrecemos soporte informático personalizado hacia empresas, independiente de rubros, alcance, tamaño, país o idiomas.</p>
-          </div>
-          <div class="imagen" id="proposito"></div>
-        </div>
-      </section>
-    </div>
-  </div> 
-
       <!-- SERVICIOS SECTION -->
 <div class="servicios-section">
   <!-- divisor diagonal -->
@@ -477,19 +460,89 @@
 
 
 <!-- HERRAMIENTAS START -->
-<section class="rueda">
-  <div class="despliegue despliegue-light">
-    <div class="container">
-      <!-- Centered title that spans across all columns -->
-      <div class="row mb-4">
-        <div class="col-12 text-center">
+
+<section>
+  <div id="deploymobile" class="despliegue despliegue-light">
+    <div class="deploy-container">
+      <div class="deploy-header">
+        <h2 class="deploy-title">Despliegue de soluciones y herramientas informáticas</h2>
+        <div class="deploy-line"></div>
+      </div>
+      
+      <div class="deploy-content-wrapper">
+        <!-- Left column with cards -->
+        <div class="deploy-left">
+          <div class="deploy-cards-container">
+            <div class="deploy-card-column">
+              <div class="deploy-card">
+                <h3 class="deploy-card-title">Soluciones de monitoreo</h3>
+                <p class="deploy-card-description">Supervisión en tiempo real de infraestructuras para detectar y prevenir fallos.</p>
+              </div>
+              
+              <div class="deploy-card">
+                <h3 class="deploy-card-title">Backups</h3>
+                <p class="deploy-card-description">Respaldo y recuperación de datos para garantizar continuidad operativa y protección ante pérdidas.</p>
+              </div>
+              
+              <div class="deploy-card">
+                <h3 class="deploy-card-title">Automatismos</h3>
+                <p class="deploy-card-description">Optimización de procesos mediante scripts y herramientas para reducir tiempos y errores.</p>
+              </div>
+            </div>
+            
+            <div class="deploy-card-column">
+              <div class="deploy-card">
+                <h3 class="deploy-card-title">Domótica</h3>
+                <p class="deploy-card-description">Integración de tecnología para automatizar y controlar entornos residenciales y empresariales.</p>
+              </div>
+              
+              <div class="deploy-card">
+                <h3 class="deploy-card-title">Dominios Windows</h3>
+                <p class="deploy-card-description">Administración centralizada de usuarios, políticas y recursos en entornos empresariales.</p>
+              </div>
+              
+              <div class="deploy-card">
+                <h3 class="deploy-card-title">Ambientes Linux</h3>
+                <p class="deploy-card-description">Gestión y optimización de sistemas basados en Unix para servidores y estaciones de trabajo.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Right column with image -->
+        <div class="deploy-right">
+          <div class="deploy-image-placeholder">
+            <img src="img/soluciones.jpg" alt="Soluciones informáticas">
+          </div>
         </div>
       </div>
       
-      <!-- Main content with 8-4 column layout -->
-      <div class="row">
-        <!-- Main carousel content in 8 columns -->
-        <div class="col-md-7">
+      <div class="deploy-text-section">
+        <p class="deploy-final-text">La optimización y gestión eficiente de la infraestructura tecnológica permiten mejorar la seguridad, disponibilidad y automatización de procesos en entornos digitales. La implementación de soluciones que aseguren la continuidad operativa, el control centralizado y la supervisión en tiempo real facilita la administración de sistemas y recursos, reduciendo riesgos y mejorando la eficiencia en distintos ámbitos, desde servidores hasta entornos automatizados.</p>
+      </div>
+    </div>
+  </div>
+
+
+</section>
+
+<section class="rueda">
+  <div class="despliegue despliegue-light">
+    <div class="container">
+      <!-- Title row - at the top of the section -->
+      <div class="row mb-4">
+        <div class="col-12 text-center">
+          <div class="deploy-header">
+            <h2 class="deploy-title">Despliegue de soluciones y herramientas informáticas</h2>
+            <div class="deploy-line"></div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Main content with 7-4 column layout -->
+      <div class="row despliegue-content-row">
+        <!-- Main carousel content in 7 columns -->
+        <div class="col-md-7 despliegue-boxes-container">
           <div class="despliegue-circle-wrapper">
             <div class="despliegue-circle">
               <div class="despliegue-circle-image">
@@ -529,12 +582,8 @@
           </div>
         </div>
         
-        <!-- Text section in 4 columns -->
-        <div class="col-md-4 align-items-center contenedor4 offset-md-1">
-          <div class="deploy-header">
-            <h2 class="deploy-title">Despliegue de soluciones y herramientas informáticas</h2>
-            <div class="deploy-line"></div>
-          </div>
+        <!-- Text section in 4 columns - with specific container class -->
+        <div class="col-md-4 align-items-center contenedor4 offset-md-1 deploy-text-container">
           <div class="deploy-text-section">
             <p class="deploy-final-text">La optimización y gestión eficiente de la infraestructura tecnológica permiten mejorar la <strong>seguridad, disponibilidad y automatización</strong> de procesos en entornos digitales. La implementación de <strong>soluciones que aseguren la continuidad</strong> operativa, el control centralizado y la supervisión en tiempo real facilita la administración de sistemas y recursos, <strong>reduciendo riesgos</strong> y mejorando la eficiencia en distintos ámbitos, desde servidores hasta entornos automatizados.</p>
           </div>
@@ -545,24 +594,24 @@
   
   <script>
     document.addEventListener('DOMContentLoaded', function() {
-      // Configuración para la rotación de las cajas informativas
+      // Configuration for the rotating info boxes
       let angle = 0;
-      const speed = 0.04; // Velocidad del giro (más bajo = más lento)
+      const speed = 0.04; // Rotation speed (lower = slower)
       const boxes = document.querySelectorAll('.despliegue-info-box');
       
-      // Obtener el elemento del círculo central y su posición
+      // Get the center circle element
       const circleContainer = document.querySelector('.despliegue-circle');
       const circleImage = document.querySelector('.despliegue-circle-image');
       
-      // Calcular el centro exacto del círculo
-      const centerX = 300; // Mitad del contenedor (600px / 2)
-      const centerY = 300; // Mitad del contenedor (600px / 2)
+      // Calculate the exact center of the circle
+      const centerX = 300; // Half of the container (600px / 2)
+      const centerY = 300; // Half of the container (600px / 2)
       
-      // Calcular el radio basado en el tamaño del círculo central
-      const circleRadius = circleContainer.offsetWidth / 2;
-      const orbitRadius = circleRadius + 140; // Aumentado para mayor separación
+      // Calculate the radius based on the center circle size
+      const circleRadius = circleContainer ? circleContainer.offsetWidth / 2 : 150;
+      const orbitRadius = circleRadius + 140; // Increased for more separation
       
-      // Configuración del carrusel de imágenes
+      // Image carousel configuration
       const images = [
         'img/soluciones.jpg',
         'img/soluciones2.jpg',
@@ -570,7 +619,7 @@
       ];
       let currentImageIndex = 0;
       
-      // Precargar todas las imágenes al inicio
+      // Preload all images at the start
       function preloadImages() {
         images.forEach(src => {
           const img = new Image();
@@ -578,47 +627,58 @@
         });
       }
       
-      // Función para cambiar la imagen cada 4 segundos
+      // Function to change the image every 4 seconds
       function changeImage() {
-        // Cambiar a la siguiente imagen
+        if (!circleImage) return;
+        
+        // Change to the next image
         currentImageIndex = (currentImageIndex + 1) % images.length;
         
-        // Precargar la siguiente imagen para evitar destellos
+        // Preload the next image to avoid flashing
         const nextImage = new Image();
         nextImage.src = images[currentImageIndex];
         
         nextImage.onload = function() {
-          // Aplicar efecto de transición
+          // Apply transition effect
           circleImage.style.opacity = '0';
           
           setTimeout(() => {
-            // Cambiar la URL de la imagen
+            // Change the image URL
             circleImage.style.backgroundImage = `url('${images[currentImageIndex]}')`;
-            // Volver a mostrar la imagen
+            // Show the image again
             circleImage.style.opacity = '1';
-          }, 500); // Esperar a que termine la transición de opacidad
+          }, 500); // Wait for opacity transition to finish
         };
       }
       
-      // Precargar imágenes
+      // Function to check if we're in mobile view
+      function isMobile() {
+        return window.innerWidth <= 991;
+      }
+      
+      // Preload images
       preloadImages();
       
-      // Iniciar el carrusel de imágenes con un intervalo de 4 segundos
+      // Start the image carousel with a 4-second interval
       setInterval(changeImage, 4000);
       
+      // Function to animate boxes in desktop view
       function animateBoxes() {
+        // Skip animation in mobile view
+        if (isMobile()) return;
+        
         boxes.forEach((box, index) => {
-          // Distribuir las cajas uniformemente alrededor del círculo
+          // Distribute boxes evenly around the circle
           const boxAngle = angle + (index * (360 / boxes.length));
           
-          // Convertir de grados a radianes
+          // Convert from degrees to radians
           const radians = boxAngle * Math.PI / 180;
           
-          // Calcular la posición X e Y desde el centro exacto
+          // Calculate X and Y position from the exact center
           const x = centerX + orbitRadius * Math.cos(radians);
           const y = centerY + orbitRadius * Math.sin(radians);
           
-          // Ajustar la posición considerando el tamaño de la caja
+          // Adjust position considering box size
           const boxWidth = box.offsetWidth;
           const boxHeight = box.offsetHeight;
           
@@ -626,21 +686,57 @@
           box.style.top = (y - boxHeight / 2) + 'px';
         });
         
-        // Incrementar el ángulo para la siguiente animación
+        // Increment angle for next animation
         angle += speed;
         if (angle >= 360) angle = 0;
         
-        // Continuar la animación
-        requestAnimationFrame(animateBoxes);
+        // Continue animation
+        if (!isMobile()) {
+          requestAnimationFrame(animateBoxes);
+        }
       }
       
-      // Iniciar la animación después de un pequeño retraso
-      setTimeout(animateBoxes, 100);
+      // Handle mobile vs desktop view
+      function handleResponsiveLayout() {
+        const textContainer = document.querySelector('.deploy-text-container');
+        const boxesContainer = document.querySelector('.despliegue-boxes-container');
+        
+        if (isMobile()) {
+          // Mobile: apply mobile-specific classes
+          document.body.classList.add('mobile-view');
+          if (circleContainer) circleContainer.classList.add('mobile-hidden');
+          if (textContainer) textContainer.classList.add('mobile-text');
+          if (boxesContainer) boxesContainer.classList.add('mobile-boxes');
+          
+          boxes.forEach(box => {
+            box.classList.add('mobile-box');
+          });
+        } else {
+          // Desktop: remove mobile classes
+          document.body.classList.remove('mobile-view');
+          if (circleContainer) circleContainer.classList.remove('mobile-hidden');
+          if (textContainer) textContainer.classList.remove('mobile-text');
+          if (boxesContainer) boxesContainer.classList.remove('mobile-boxes');
+          
+          boxes.forEach(box => {
+            box.classList.remove('mobile-box');
+          });
+          
+          // Start animation for desktop
+          requestAnimationFrame(animateBoxes);
+        }
+      }
+      
+      // Run on page load and window resize
+      handleResponsiveLayout();
+      window.addEventListener('resize', handleResponsiveLayout);
     });
   </script>
 </section>
+<!-- HERRAMIENTAS END -->
 
-          <!-- HERRAMIENTAS END -->
+
+
 
           <!-- CONSULTORIA -->
 <div class="consulting-section">
@@ -845,13 +941,34 @@
           <!-- Información de contacto -->
           <div class="col-md-6 text-center text-md-start mt-5 mt-md-0 text-end">
               <h2 class="mb-4 text-end">Información de Contacto</h2>
-              <p class="text-end">Chaná 2120 <br class="text-end"> Montevideo, <br class="text-end"> Uruguay</p>
+              <p class="text-end"><strong>Email: </strong>info@akromauy.com                 
               <p class="text-end"><strong>Teléfono:</strong> +598 92 712 491</p>
               <p class="text-end"><strong>Horario de Atención:</strong> 9am - 6pm UY</p>
+              <p class="text-end"> Montevideo, Uruguay</p>
 
               <h4 class="mt-4 text-end">¡Seguinos!</h4>
-              <p class="text-end">Facebook - Instagram - Linkedin - <a class="contact-link" href="https://medium.com/@akromauy" target="_blank">Medium</a></p>
-          </div>
+              <div class="social-icons text-end">
+                <a href="https://facebook.com/akromauy" target="_blank" class="social-icon">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="white">
+                    <path d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.596 0-5.192 1.583-5.192 4.615v3.385z"/>
+                  </svg>
+                </a>
+                <a href="https://instagram.com/akromauy" target="_blank" class="social-icon">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="white">
+                    <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                  </svg>
+                </a>
+                <a href="https://linkedin.com/company/akromauy" target="_blank" class="social-icon">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="white">
+                    <path d="M4.98 3.5c0 1.381-1.11 2.5-2.48 2.5s-2.48-1.119-2.48-2.5c0-1.38 1.11-2.5 2.48-2.5s2.48 1.12 2.48 2.5zm.02 4.5h-5v16h5v-16zm7.982 0h-4.968v16h4.969v-8.399c0-4.67 6.029-5.052 6.029 0v8.399h4.988v-10.131c0-7.88-8.922-7.593-11.018-3.714v-2.155z"/>
+                  </svg>
+                </a>
+                <a href="https://medium.com/@akromauy" target="_blank" class="social-icon">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="white">
+                    <path d="M2.846 6.887c.03-.295-.083-.586-.303-.784l-2.24-2.7v-.403h6.958l5.378 11.795 4.728-11.795h6.633v.403l-1.916 1.837c-.165.126-.247.333-.213.538v13.498c-.034.204.048.411.213.537l1.871 1.837v.403h-9.412v-.403l1.939-1.882c.19-.19.19-.246.19-.537v-10.91l-5.389 13.688h-.728l-6.275-13.688v9.174c-.052.385.076.774.347 1.052l2.521 3.058v.404h-7.148v-.404l2.521-3.058c.27-.279.39-.67.325-1.052v-10.608z"/>
+                  </svg>
+                </a>
+              </div>
       </div>
 
       <!-- Derechos reservados -->
