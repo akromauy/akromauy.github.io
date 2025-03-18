@@ -2107,8 +2107,11 @@ h1{
   }
   
   .solutions-card-description {
-    padding-top: 10px;
+    display: none;
+    content: ""!important;
   }
+
+  
   
   .somosv-card {
     padding: 30px 20px;
@@ -2249,3 +2252,87 @@ h1{
   }
 }
 
+
+/* TITULOS CHETOS */
+
+
+.titulo-container {
+  height: 45px;
+  display: flex;
+  align-items: center;  
+  background-color: transparent;
+  overflow: hidden;
+  width: 100%;
+}
+
+.titulo-console {
+  color: #0e0927;
+  margin: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 100%;
+  font-weight: 200; /* Default light weight */
+}
+
+/* Cursor blinking effect */
+.titulo-cursor-blink::after {
+  content: '|';
+  color: #0e0927;
+  font-weight: bold;
+  margin-left: 2px;
+  animation: blink-animation 0.8s steps(2, start) infinite;
+  -webkit-animation: blink-animation 0.8s steps(2, start) infinite;
+}
+
+@keyframes blink-animation {
+  to {
+      visibility: hidden;
+  }
+}
+@-webkit-keyframes blink-animation {
+  to {
+      visibility: hidden;
+  }
+}
+
+/* Responsive styles */
+@media (max-width: 991px) {
+  .titulo-container {
+      height: 100px;
+      min-height: 60px;
+  }
+  
+  .titulo-console {
+      font-size: 1.4rem;
+      white-space: normal; /* Allow text to wrap to next line */
+      overflow: visible;   /* Show overflowing text */
+      text-overflow: clip; /* Don't use ellipsis */
+      width: 100%;
+  }
+
+  .consulting-text-content h2 {    
+    font-size: 1.4rem;    
+}
+}
+
+/* Individual title styles */
+#sobre-akroma {
+  animation-delay: 0.5s;
+}
+
+#future {
+  animation-delay: 1s;
+}
+
+#soporte {
+  animation-delay: 1.5s;
+}
+
+#despliegue {
+  animation-delay: 2s;
+}
+
+#consultoria {
+  animation-delay: 2.5s;
+}

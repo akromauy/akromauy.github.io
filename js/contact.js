@@ -675,5 +675,200 @@ document.addEventListener('DOMContentLoaded', function() {
   window.addEventListener('resize', updateArrow);
 });
 
+// TITULOS CHETOS
+
+document.addEventListener('DOMContentLoaded', function() {
+  // Select all console title elements
+  const titles = document.querySelectorAll('.titulo-console');
+  
+  // Set up Intersection Observer to detect when titles are visible
+  setupScrollObserver();
+  
+  // Handle window resize
+  window.addEventListener('resize', function() {
+      titles.forEach(title => {
+          if (window.innerWidth <= 991) {
+              title.style.fontSize = '1.1rem';
+          } else {
+              title.style.fontSize = '1.4rem';
+          }
+      });
+  });
+});
+
+// Function to set up the Intersection Observer
+function setupScrollObserver() {
+  const options = {
+      root: null, // use viewport
+      rootMargin: '0px',
+      threshold: 0.3 // trigger when 30% of the element is visible
+  };
+  
+  const observer = new IntersectionObserver((entries, observer) => {
+      entries.forEach(entry => {
+          // Check if element is intersecting (visible)
+          if (entry.isIntersecting) {
+              const title = entry.target;
+              
+              // If the element hasn't been animated yet
+              if (!title.dataset.animated || title.dataset.animated === 'false') {
+                  // Animate the title
+                  animateTitle(title, 500);
+                  
+                  // Mark as animated
+                  title.dataset.animated = 'true';
+              }
+              
+              // Optional: unobserve if you only want to animate once
+              // observer.unobserve(title);
+          }
+      });
+  }, options);
+  
+  // Observe all titles
+  document.querySelectorAll('.titulo-console').forEach(title => {
+      observer.observe(title);
+  });
+}
+
+// Function to reset animations
+function resetAnimation() {
+  const titles = document.querySelectorAll('.titulo-console');
+  
+  titles.forEach(title => {
+      // Clear any existing intervals for this element
+      if (title.blinkIntervalId) {
+          clearInterval(title.blinkIntervalId);
+          title.blinkIntervalId = null;
+      }
+      
+      title.innerHTML = '';
+      title.classList.remove('titulo-cursor-blink');
+      
+      // Reset the animated state
+      title.dataset.animated = 'false';
+  });
+  
+  // Re-observe all titles
+  setupScrollObserver();
+}
+
+// Function to animate a title
+function animateTitle(title, delay) {
+  if (!title) return;
+  
+  // Get the text from data attribute
+  const fullText = title.getAttribute('data-text');
+  
+  // Extract the important part based on the id
+  let importantPart = '';
+  let pathPart = '';
+  let extensionPart = '';
+  
+  switch(title.id) {
+      case 'sobre-akroma':
+          pathPart = 'C:\\compañía\\';
+          importantPart = 'Sobre Akroma';
+          extensionPart = '.txt';
+          break;
+      case 'future': // Changed from 'futuro' to 'future'
+          pathPart = 'C:\\compañía\\';
+          importantPart = 'Futuro';
+          extensionPart = '.txt';
+          break;
+      case 'soporte':
+          pathPart = 'C:\\servicios\\';
+          importantPart = 'Soporte e implementación';
+          extensionPart = '.xlsx';
+          break;
+      case 'despliegue':
+          pathPart = 'C:\\servicios\\';
+          importantPart = 'Despliegue de soluciones y herramientas informáticas';
+          extensionPart = '.exe';
+          break;
+      case 'consultoria':
+          pathPart = 'C:\\servicios\\';
+          importantPart = 'Consultoría Informática y Capacitación';
+          extensionPart = '.docx';
+          break;
+  }
+  
+  // Clear any existing content and intervals
+  title.innerHTML = '';
+  if (title.blinkIntervalId) {
+      clearInterval(title.blinkIntervalId);
+      title.blinkIntervalId = null;
+  }
+  title.classList.remove('titulo-cursor-blink');
+  
+  // Set base font-weight to 200
+  title.style.fontWeight = '200';
+  
+  // Start animation after delay
+  setTimeout(() => {
+      // Create elements for each part
+      const pathElement = document.createElement('span');
+      const importantElement = document.createElement('span');
+      const extensionElement = document.createElement('span');
+      
+      // Set styles
+      pathElement.style.fontWeight = '200';
+      importantElement.style.fontWeight = '700'; // Bold weight for important part
+      extensionElement.style.fontWeight = '200';
+      
+      // Append elements to title
+      title.appendChild(pathElement);
+      title.appendChild(importantElement);
+      title.appendChild(extensionElement);
+      
+      // Type path part
+      let pathIndex = 0;
+      const typePath = setInterval(() => {
+          if (pathIndex < pathPart.length) {
+              pathElement.textContent += pathPart.charAt(pathIndex);
+              pathIndex++;
+          } else {
+              clearInterval(typePath);
+              
+              // Type important part (bold)
+              let importantIndex = 0;
+              const typeImportant = setInterval(() => {
+                  if (importantIndex < importantPart.length) {
+                      importantElement.textContent += importantPart.charAt(importantIndex);
+                      importantIndex++;
+                  } else {
+                      clearInterval(typeImportant);
+                      
+                      // Type extension part
+                      let extensionIndex = 0;
+                      const typeExtension = setInterval(() => {
+                          if (extensionIndex < extensionPart.length) {
+                              extensionElement.textContent += extensionPart.charAt(extensionIndex);
+                              extensionIndex++;
+                          } else {
+                              clearInterval(typeExtension);
+                              
+                              // Add blinking cursor class once typing is complete
+                              title.classList.add('titulo-cursor-blink');
+                              
+                              // Count blinks and remove cursor after 10 blinks
+                              let blinkCount = 0;
+                              title.blinkIntervalId = setInterval(() => {
+                                  blinkCount++;
+                                  
+                                  if (blinkCount >= 10) {
+                                      clearInterval(title.blinkIntervalId);
+                                      title.classList.remove('titulo-cursor-blink');
+                                  }
+                              }, 800); // Each blink is about 800ms (full cycle)
+                          }
+                      }, 50);
+                  }
+              }, 50);
+          }
+      }, 50);
+  }, delay);
+}
+
 
 
