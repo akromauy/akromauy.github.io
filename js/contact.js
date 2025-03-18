@@ -435,7 +435,7 @@ document.addEventListener('DOMContentLoaded', function() {
     } else if (!validatePhone(this.value)) {
       this.classList.add('is-invalid');
       this.classList.remove('is-valid');
-      showErrorMessage(phoneErrorMsg, 'Por favor ingresa un número de teléfono válido (mínimo 7 dígitos)');
+      showErrorMessage(phoneErrorMsg, 'Por favor ingresa un número de teléfono válido');
     } else {
       this.classList.add('is-valid');
       this.classList.remove('is-invalid');
