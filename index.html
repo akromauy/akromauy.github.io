@@ -19,6 +19,52 @@
      <link rel="manifest" href="icono//site.webmanifest">
      <script src="https://www.google.com/recaptcha/api.js" defer></script>
     </head>
+<!-- SCRIPT LINKS START -->
+    <script>
+  const routeMap = {
+    inicio: "body",
+    compania: "dividercompania",
+    servicios: "dividerservicios",
+    blog: "mediumblog",
+    contacto: "contacto",
+    idioma: "idioma"
+  };
+
+  function scrollToId(id) {
+    const el = document.getElementById(id);
+    if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+  }
+
+  // Click en links
+  document.addEventListener("click", (e) => {
+    const link = e.target.closest("a[data-target]");
+    if (!link) return;
+
+    e.preventDefault();
+
+    const targetId = link.dataset.target;
+    const newPath = link.getAttribute("href");
+
+    history.pushState({ targetId }, "", newPath);
+    scrollToId(targetId);
+  });
+
+  // Entrada directa por URL (ej: /servicios)
+  window.addEventListener("DOMContentLoaded", () => {
+    const path = location.pathname.replace("/", "");
+    const targetId = routeMap[path];
+    if (targetId) scrollToId(targetId);
+  });
+
+  // Back / Forward
+  window.addEventListener("popstate", () => {
+    const path = location.pathname.replace("/", "");
+    const targetId = routeMap[path];
+    if (targetId) scrollToId(targetId);
+  });
+</script>
+<!-- SCRIPT LINKS END -->
+
 <body class="vh-100" id="body">
   <!-- Navbar -->
   <nav class="navbar navbar-expand-lg navbar-dark bg-transparent fixed-top" id="navbar">
@@ -40,22 +86,22 @@
         <div class="offcanvas-body d-flex flex-column p-4 p-lg-0">
           <ul class="navbar-nav justify-content-center flex-grow-1 pe-3 align-items-center fs-5">
             <li class="nav-item mx-2">
-              <a class="nav-link" aria-current="page" href="#body">INICIO</a>
+              <a class="nav-link" aria-current="page" href="/inicio" data-target="body">INICIO</a>
             </li>
             <li class="nav-item mx-2">
-              <a class="nav-link" href="#dividercompania">COMPAÑÍA</a>
+              <a class="nav-link" href="/compania" data-target="dividercompania">COMPAÑÍA</a>
             </li>
             <li class="nav-item mx-2">
-              <a class="nav-link" href="#dividerservicios">SERVICIOS</a>
+              <a class="nav-link" href="/servicios" data-target="dividerservicios">SERVICIOS</a>
             </li>
             <li class="nav-item mx-2">
-              <a class="nav-link" href="#mediumblog">BLOG</a>
+              <a class="nav-link" href="/blog" data-target="mediumblog">BLOG</a>
             </li>
             <li class="nav-item mx-2">
-              <a class="nav-link" href="#contacto">CONTACTO</a>
+              <a class="nav-link" href="/contacto" data-target="contacto">CONTACTO</a>
             </li>
             <li class="nav-item mx-2">
-              <a class="nav-link" href="#idioma">EN</a>
+              <a class="nav-link" href="/idioma" data-target="idioma">EN</a>
             </li>            
           </ul>
         </div>
@@ -95,7 +141,7 @@
               <div class="texto">               
 
                 <div class="titulo-container">
-                  <h2 id="sobre-akroma" class="titulo-console" data-text="C:\compañía\Sobre Akroma.txt"></h2>
+                  <h2 id="sobre-akroma" class="titulo-console" data-text="cat /home/akroma/Sobre_Akroma.txt"></h2>
               </div>
 
                 <p class="sinserifa">Somos un grupo de especialistas apasionados por la tecnología informática. En conjunto nuestro equipo acumula 
@@ -182,7 +228,7 @@
         <div class="contenido">
           <div class="texto">
             <div class="titulo-container">
-              <h2 id="future" class="titulo-console" data-text="C:\compañía\Futuro.txt"></h2>
+              <h2 id="future" class="titulo-console" data-text="cat /home/akroma/Futuro.txt"></h2>
           </div>
             <p class="sinserifa">El mundo de la informática se expande a pasos acelerados y la centralización de servicios bajo grandes corporaciones a 
               degradado el soporte ofrecido.      
@@ -748,80 +794,6 @@
 </section>
 <!-- HERRAMIENTAS END -->
 
-
-
-
-          <!-- CONSULTORIA -->
-<div class="consulting-section">
-  <section class="consulting-content col-md-12">
-    <div class="consulting-content">    
-      <div class="container d-flex justify-content-center">
-        <div class="consulting-row">
-    
-          <!-- Texto a la derecha -->
-          <div class="consulting-col-text">
-            <div class="consulting-text-content col-md-4 offset-md-8">
-              <div class="titulo-container">
-                <h2 id="consultoria" class="titulo-console" data-text="C:\servicios\Consultoría Informática y Capacitación.docx"></h2>
-            </div>
-              
-              <!-- Texto introductorio -->
-              <p class="consulting-intro-text sinserifa">
-                El desarrollo e implementación de <strong>metodologías y herramientas adecuadas</strong> en entornos tecnológicos permite mejorar la <strong>eficiencia operativa, la gestión de servicios y la relación con clientes.</strong> La correcta administración de infraestructuras y el uso de estrategias de monitoreo garantizan <strong>estabilidad y rendimiento</strong>, mientras que la documentación estructurada facilita la continuidad y optimización de procesos en cualquier organización.
-              </p>
-              
-              <!-- Lista en dos columnas -->
-              <div class="consulting-services-columns">
-                <!-- Primera columna -->
-                <div class="consulting-services-list-container">
-                  <ul class="list-unstyled consulting-services-list">
-                    <li>
-                      <span class="consulting-dash">-</span> 
-                      <div class="consulting-service-item">
-                        <strong>Adopción de prácticas ITIL/Agile:</strong> 
-                        <span class="sinserifa">Implementación de metodologías para mejorar la gestión de servicios y proyectos.</span>
-                      </div>
-                    </li>
-                    <li>
-                      <span class="consulting-dash">-</span> 
-                      <div class="consulting-service-item">
-                        <strong>Implementación de Customer Relationship Managers</strong> 
-                        <span class="sinserifa">Optimización de la relación con clientes mediante plataformas especializadas.</span>
-                      </div>
-                    </li>
-                    <li>
-                      <span class="consulting-dash">-</span> 
-                      <div class="consulting-service-item">
-                        <strong>Administración de Sistemas y redes:</strong> 
-                        <span class="sinserifa">Gestión eficiente de infraestructuras tecnológicas para garantizar estabilidad y seguridad.</span>
-                      </div>
-                    </li>
-                    <li>
-                      <span class="consulting-dash">-</span> 
-                      <div class="consulting-service-item">
-                        <strong>Estrategias de monitoreo:</strong> 
-                        <span class="sinserifa">Desarrollo de enfoques proactivos para supervisar y optimizar el rendimiento de sistemas.</span>
-                      </div>
-                    </li>
-                    <li>
-                      <span class="consulting-dash">-</span> 
-                      <div class="consulting-service-item">
-                        <strong>Buenas prácticas de documentación:</strong> 
-                        <span class="sinserifa">Estandarización y organización de información clave para mejorar la gestión y el soporte técnico.</span>
-                      </div>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-</div>
-<!-- END CONSULTORIA -->
-
       <!-- New Medium section (pattern background) -->
       <div id="mediumblog" class="col-md-12 medium-section">
         <div class="container">
@@ -990,7 +962,7 @@
 
       <!-- Derechos reservados -->
       <div class="text-center mt-5 fw-bold sinserifa">
-          <p>&copy; 2025. All Rights Reserved. AkromaUy</p>
+          <p>&copy; 2026. All Rights Reserved. AkromaUy</p>
       </div>
   </div>
 </section>

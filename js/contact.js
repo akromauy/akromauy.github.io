@@ -767,12 +767,12 @@ function animateTitle(title, delay) {
   
   switch(title.id) {
       case 'sobre-akroma':
-          pathPart = 'C:\\compañía\\';
-          importantPart = 'Sobre Akroma';
+          pathPart = 'cat /home/akroma/';
+          importantPart = 'Sobre_Akroma';
           extensionPart = '.txt';
           break;
       case 'future': // Changed from 'futuro' to 'future'
-          pathPart = 'C:\\compañía\\';
+          pathPart = 'cat /home/akroma/';
           importantPart = 'Futuro';
           extensionPart = '.txt';
           break;
