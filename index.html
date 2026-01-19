@@ -22,20 +22,40 @@
 <!-- SCRIPT LINKS START -->
     <script>
   const routeMap = {
-    inicio: "body",
-    compania: "dividercompania",
-    servicios: "dividerservicios",
-    blog: "mediumblog",
-    contacto: "contacto",
-    idioma: "idioma"
+    "inicio": "body",
+    "compania": "dividercompania",
+    "servicios": "dividerservicios",
+    "blog": "mediumblog",
+    "contacto": "contacto",
+    "idioma": "idioma"
   };
+
+  function normalizePath(path) {
+    return path.replace(/^\/|\/$/g, "");
+  }
 
   function scrollToId(id) {
     const el = document.getElementById(id);
     if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
   }
 
-  // Click en links
+  // 🔥 NUEVO: manejar redirect desde 404.html
+  window.addEventListener("DOMContentLoaded", () => {
+    const params = new URLSearchParams(location.search);
+    const redirectedPath = params.get("redirect");
+
+    let path = redirectedPath
+      ? normalizePath(redirectedPath)
+      : normalizePath(location.pathname);
+
+    const targetId = routeMap[path];
+    if (targetId) {
+      history.replaceState({}, "", `/${path}/`);
+      scrollToId(targetId);
+    }
+  });
+
+  // Clicks normales
   document.addEventListener("click", (e) => {
     const link = e.target.closest("a[data-target]");
     if (!link) return;
@@ -43,26 +63,19 @@
     e.preventDefault();
 
     const targetId = link.dataset.target;
-    const newPath = link.getAttribute("href");
+    const path = normalizePath(link.getAttribute("href"));
 
-    history.pushState({ targetId }, "", newPath);
+    history.pushState({}, "", `/${path}/`);
     scrollToId(targetId);
   });
 
-  // Entrada directa por URL (ej: /servicios)
-  window.addEventListener("DOMContentLoaded", () => {
-    const path = location.pathname.replace("/", "");
-    const targetId = routeMap[path];
-    if (targetId) scrollToId(targetId);
-  });
-
-  // Back / Forward
   window.addEventListener("popstate", () => {
-    const path = location.pathname.replace("/", "");
+    const path = normalizePath(location.pathname);
     const targetId = routeMap[path];
     if (targetId) scrollToId(targetId);
   });
 </script>
+
 <!-- SCRIPT LINKS END -->
 
 <body class="vh-100" id="body">
@@ -1011,4 +1024,5 @@ document.addEventListener('scroll', function () {
   <script src="js/contact.js"></script>  
 </body>
 </html>
+
                   
