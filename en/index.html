@@ -63,18 +63,29 @@ document.addEventListener("click", (e) => {
 <!-- SCRIPT LANG END --> 
     
 <!-- SCRIPT LINKS START -->
-   <script>
-  const routeMap = {
-    "inicio": "body",
-    "compania": "dividercompania",
-    "servicios": "dividerservicios",
+<script>
+  // ✅ EN route -> section ID (IDs NO cambian)
+  const routeMapEn = {
+    "home": "body",
+    "company": "dividercompania",
+    "services": "dividerservicios",
     "blog": "mediumblog",
-    "contacto": "contacto",
-    "idioma": "idioma"
+    "contact": "contacto",
+    "language": "idioma"
+  };
+
+  // ✅ Compatibilidad: rutas viejas en español -> ruta nueva en inglés
+  const legacyToEn = {
+    "inicio": "home",
+    "compania": "company",
+    "servicios": "services",
+    "blog": "blog",
+    "contacto": "contact",
+    "idioma": "language"
   };
 
   function normalizePath(path) {
-    return path.replace(/^\/|\/$/g, "");
+    return (path || "").replace(/^\/|\/$/g, "");
   }
 
   function stripEnPrefix(p) {
@@ -86,44 +97,66 @@ document.addEventListener("click", (e) => {
     if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
   }
 
+  function resolveEnRoute(rawPath) {
+    // rawPath puede venir como "en/company" o "company"
+    let p = stripEnPrefix(normalizePath(rawPath));
+
+    // si viene vacío, lo tratamos como home
+    if (!p) p = "home";
+
+    // si viene con la ruta vieja en español, la convertimos a EN
+    if (legacyToEn[p]) p = legacyToEn[p];
+
+    return p; // "home" | "company" | ...
+  }
+
+  function goToEnRoute(route, replace = false) {
+    const targetId = routeMapEn[route];
+    if (!targetId) return;
+
+    const url = route === "home" ? "/en/" : `/en/${route}/`;
+    if (replace) history.replaceState({}, "", url);
+    else history.pushState({}, "", url);
+
+    scrollToId(targetId);
+  }
+
   window.addEventListener("DOMContentLoaded", () => {
     const params = new URLSearchParams(location.search);
-    const redirectedPath = params.get("redirect"); // ej: "/en/compania/"
+    const redirectedPath = params.get("redirect"); // ej: "/en/compania/" o "/en/company/"
 
-    let path = redirectedPath
-      ? normalizePath(redirectedPath)
-      : normalizePath(location.pathname);
+    const raw = redirectedPath ? redirectedPath : location.pathname;
+    const route = resolveEnRoute(raw);
 
-    path = stripEnPrefix(path); // <- clave
-
-    const targetId = routeMap[path];
-    if (targetId) {
-      history.replaceState({}, "", `/en/${path}/`);
-      scrollToId(targetId);
-    }
+    // ✅ Si entró por /en/compania/ lo normaliza a /en/company/
+    goToEnRoute(route, true);
   });
 
   document.addEventListener("click", (e) => {
     const link = e.target.closest("a[data-target]");
     if (!link) return;
 
-    e.preventDefault();
-    const targetId = link.dataset.target;
-    const path = normalizePath(link.getAttribute("href")); // "compania" etc.
+    // ⚠️ No interceptar el switch de idioma si por error tiene data-target
+    if (link.id === "langSwitch") return;
 
-    history.pushState({}, "", `/en/${path}/`);
-    scrollToId(targetId);
+    e.preventDefault();
+
+    // En EN, el href debería ser "/en/company/" o "/company/" o "company"
+    // Tomamos el href y resolvemos la ruta final
+    const href = link.getAttribute("href") || "";
+    const route = resolveEnRoute(href);
+
+    goToEnRoute(route, false);
   });
 
   window.addEventListener("popstate", () => {
-    let path = normalizePath(location.pathname);
-    path = stripEnPrefix(path);
-    const targetId = routeMap[path];
+    const route = resolveEnRoute(location.pathname);
+    const targetId = routeMapEn[route];
     if (targetId) scrollToId(targetId);
   });
 </script>
-
 <!-- SCRIPT LINKS END -->
+
 
 <body class="vh-100" id="body">
   <!-- Navbar -->
@@ -146,19 +179,19 @@ document.addEventListener("click", (e) => {
         <div class="offcanvas-body d-flex flex-column p-4 p-lg-0">
           <ul class="navbar-nav justify-content-center flex-grow-1 pe-3 align-items-center fs-5">
             <li class="nav-item mx-2">
-              <a class="nav-link" aria-current="page" href="/inicio" data-target="body">HOME</a>
+              <a class="nav-link" aria-current="page" href="/en/" data-target="body">HOME</a>
             </li>
             <li class="nav-item mx-2">
-              <a class="nav-link" href="/compania" data-target="dividercompania">COMPANY</a>
+              <a class="nav-link" href="/en/company/" data-target="dividercompania">COMPANY</a>
             </li>
             <li class="nav-item mx-2">
-              <a class="nav-link" href="/servicios" data-target="dividerservicios">SERVICES</a>
+              <a class="nav-link" href="/en/services/" data-target="dividerservicios">SERVICES</a>
             </li>
             <li class="nav-item mx-2">
-              <a class="nav-link" href="/blog" data-target="mediumblog">BLOG</a>
+              <a class="nav-link" href="/en/blog/" data-target="mediumblog">BLOG</a>
             </li>
             <li class="nav-item mx-2">
-              <a class="nav-link" href="/contacto" data-target="contacto">CONTACT</a>
+              <a class="nav-link" href="/en/contact/" data-target="contacto">CONTACT</a>
             </li>
             <li class="nav-item mx-2">
               <a href="/" id="langSwitch" class="nav-link lang-switch" aria-label="Switch to English">
