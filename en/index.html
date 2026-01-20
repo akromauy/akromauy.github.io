@@ -1,91 +1,47 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AkromaUy</title>
-    <!-- Boostrap -->
-    <link rel="stylesheet" href="bootstrap/bootstrap-5.3.3-dist/css/bootstrap.min.css">    
-    <!-- Custom CSS -->
-     <link rel="stylesheet" href="styles.css">     
-     <link rel="preconnect" href="https://fonts.googleapis.com">
-     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-     <link href="https://fonts.googleapis.com/css2?family=Oxanium:wght@200..800&display=swap" rel="stylesheet">
-     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Oxanium:wght@200..800&display=swap" rel="stylesheet">
-     <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
-     <link rel="apple-touch-icon" sizes="180x180" href="icono/apple-touch-icon.png">
-     <link rel="icon" type="image/png" sizes="32x32" href="icono/favicon-32x32.png">
-     <link rel="icon" type="image/png" sizes="16x16" href="icono/favicon-16x16.png">
-     <link rel="manifest" href="icono//site.webmanifest">
-     <script src="https://www.google.com/recaptcha/api.js" defer></script>
-    </head>
-<!-- SCRIPT LANG START -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AkromaUy</title>
+
+  <!-- Bootstrap -->
+  <link rel="stylesheet" href="/bootstrap/bootstrap-5.3.3-dist/css/bootstrap.min.css">
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="/styles.css">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Oxanium:wght@200..800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Oxanium:wght@200..800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/icono/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/icono/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/icono/favicon-16x16.png">
+  <link rel="manifest" href="/icono/site.webmanifest">
+
+  <script src="https://www.google.com/recaptcha/api.js" defer></script>
+</head>
+
+
+
+
+
+    <!-- SCRIPT LANG START -->
 <script>
   (function () {
-    // Si el usuario ya eligió idioma antes, respetarlo
     const saved = localStorage.getItem("akroma_lang");
-    if (saved) return;
-
-    // Detectar idioma del navegador (ej: "es-ES", "en-US")
-    const lang = (navigator.language || "").toLowerCase();
-
-    // Si NO es español -> mandar a inglés
-    if (!lang.startsWith("es")) {
-      localStorage.setItem("akroma_lang", "en");
-      window.location.replace("/en/");
+    if (saved === "es") {
+      window.location.replace("/");
       return;
     }
-
-    // Si es español -> guardar preferencia
-    localStorage.setItem("akroma_lang", "es");
+    if (!saved) localStorage.setItem("akroma_lang", "en");
   })();
 </script>
 
 <script>
-  document.addEventListener("click", (e) => {
-    const a = e.target.closest("#langSwitch");
-    if (!a) return;
-    localStorage.setItem("akroma_lang", "en");
-  });
-</script>
-<!-- SCRIPT LANG END -->    
-<!-- SCRIPT LINKS START -->
-   <script>
-  const routeMap = {
-    "inicio": "body",
-    "compania": "dividercompania",
-    "servicios": "dividerservicios",
-    "blog": "mediumblog",
-    "contacto": "contacto",
-    "idioma": "idioma"
-  };
-
-  function normalizePath(path) {
-    return path.replace(/^\/|\/$/g, "");
-  }
-
-  function scrollToId(id) {
-    const el = document.getElementById(id);
-    if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
-  }
-
-  // 🔥 NUEVO: manejar redirect desde 404.html
-  window.addEventListener("DOMContentLoaded", () => {
-    const params = new URLSearchParams(location.search);
-    const redirectedPath = params.get("redirect");
-
-    let path = redirectedPath
-      ? normalizePath(redirectedPath)
-      : normalizePath(location.pathname);
-
-    const targetId = routeMap[path];
-    if (targetId) {
-      history.replaceState({}, "", `/${path}/`);
-      scrollToId(targetId);
-    }
-  });
-
-  // Clicks normales
 document.addEventListener("click", (e) => {
   const link = e.target.closest("a[data-target]");
   if (!link) return;
@@ -102,13 +58,71 @@ document.addEventListener("click", (e) => {
   history.pushState({ targetId }, "", `/${path}/`);
   scrollToId(targetId);
 });
+</script>
+
+<!-- SCRIPT LANG END --> 
+    
+<!-- SCRIPT LINKS START -->
+   <script>
+  const routeMap = {
+    "inicio": "body",
+    "compania": "dividercompania",
+    "servicios": "dividerservicios",
+    "blog": "mediumblog",
+    "contacto": "contacto",
+    "idioma": "idioma"
+  };
+
+  function normalizePath(path) {
+    return path.replace(/^\/|\/$/g, "");
+  }
+
+  function stripEnPrefix(p) {
+    return p.startsWith("en/") ? p.slice(3) : p; // quita "en/"
+  }
+
+  function scrollToId(id) {
+    const el = document.getElementById(id);
+    if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+  }
+
+  window.addEventListener("DOMContentLoaded", () => {
+    const params = new URLSearchParams(location.search);
+    const redirectedPath = params.get("redirect"); // ej: "/en/compania/"
+
+    let path = redirectedPath
+      ? normalizePath(redirectedPath)
+      : normalizePath(location.pathname);
+
+    path = stripEnPrefix(path); // <- clave
+
+    const targetId = routeMap[path];
+    if (targetId) {
+      history.replaceState({}, "", `/en/${path}/`);
+      scrollToId(targetId);
+    }
+  });
+
+  document.addEventListener("click", (e) => {
+    const link = e.target.closest("a[data-target]");
+    if (!link) return;
+
+    e.preventDefault();
+    const targetId = link.dataset.target;
+    const path = normalizePath(link.getAttribute("href")); // "compania" etc.
+
+    history.pushState({}, "", `/en/${path}/`);
+    scrollToId(targetId);
+  });
 
   window.addEventListener("popstate", () => {
-    const path = normalizePath(location.pathname);
+    let path = normalizePath(location.pathname);
+    path = stripEnPrefix(path);
     const targetId = routeMap[path];
     if (targetId) scrollToId(targetId);
   });
 </script>
+
 <!-- SCRIPT LINKS END -->
 
 <body class="vh-100" id="body">
@@ -116,7 +130,7 @@ document.addEventListener("click", (e) => {
   <nav class="navbar navbar-expand-lg navbar-dark bg-transparent fixed-top" id="navbar">
     <div class="container position-relative">
       <!-- Logo -->
-      <a class="navbar-brand fs-4" href="#body"><img src="img/AkromaNav.png" alt="Logo" class="d-inline-block align-text-top img-fluid logoimg"></a>
+      <a class="navbar-brand fs-4" href="#body"><img src="/img/AkromaNav.png" alt="Logo" class="d-inline-block align-text-top img-fluid logoimg"></a>
     <!-- Toggle Btn -->
       <button class="navbar-toggler justify-self-end border-0" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -132,23 +146,23 @@ document.addEventListener("click", (e) => {
         <div class="offcanvas-body d-flex flex-column p-4 p-lg-0">
           <ul class="navbar-nav justify-content-center flex-grow-1 pe-3 align-items-center fs-5">
             <li class="nav-item mx-2">
-              <a class="nav-link" aria-current="page" href="/inicio" data-target="body">INICIO</a>
+              <a class="nav-link" aria-current="page" href="/inicio" data-target="body">HOME</a>
             </li>
             <li class="nav-item mx-2">
-              <a class="nav-link" href="/compania" data-target="dividercompania">COMPAÑÍA</a>
+              <a class="nav-link" href="/compania" data-target="dividercompania">COMPANY</a>
             </li>
             <li class="nav-item mx-2">
-              <a class="nav-link" href="/servicios" data-target="dividerservicios">SERVICIOS</a>
+              <a class="nav-link" href="/servicios" data-target="dividerservicios">SERVICES</a>
             </li>
             <li class="nav-item mx-2">
               <a class="nav-link" href="/blog" data-target="mediumblog">BLOG</a>
             </li>
             <li class="nav-item mx-2">
-              <a class="nav-link" href="/contacto" data-target="contacto">CONTACTO</a>
+              <a class="nav-link" href="/contacto" data-target="contacto">CONTACT</a>
             </li>
             <li class="nav-item mx-2">
-              <a href="/en/" id="langSwitch" class="nav-link lang-switch" aria-label="Switch to English">
-  <img src="/img/LangEN.png" alt="English" width="45" height="45">
+              <a href="/" id="langSwitch" class="nav-link lang-switch" aria-label="Switch to English">
+  <img src="/img/LangES.png" alt="English" width="45" height="45">
 </a>
             </li>            
           </ul>
@@ -161,13 +175,13 @@ document.addEventListener("click", (e) => {
     <div class="container">
       <div class="col-md-12 ms-auto text-end">
         <h1 id="bienvenido" class="pt-5 sinserifa">
-          BIENVENIDOS A AKROMA
+          WELCOME TO AKROMA
         </h1>
         <p class="landingtext sinserifa">
-          Infraestructura robusta, soporte confiable, tecnología sin límites.
+          Robust infrastructure, reliable support, limitless technology.
         </p>
         <a href="https://calendly.com/akromauy-info/30min" class="btn btn-outline-light sabermas" target="_blank">
-          <strong>¡Agenda una reunión de diagnóstico!</strong>
+          <strong>Schedule a diagnostic meeting!</strong>
         </a>
       </div>
     </div>
@@ -179,7 +193,7 @@ document.addEventListener("click", (e) => {
 <div class="offbackcompania"> 
   <div id="companiayservicios" class="">      
     <div class="container companiayservicios" id="compania">
-      <h1 class="text-center">COMPAÑÍA</h1>      
+      <h1 class="text-center">COMPANY</h1>      
               <div class="deploy-line"></div>
 
       <div class="row">
@@ -189,13 +203,16 @@ document.addEventListener("click", (e) => {
               <div class="texto">               
 
                 <div class="titulo-container">
-                  <h2 id="sobre-akroma" class="titulo-console" data-text="cat /home/akroma/Sobre_Akroma.txt"></h2>
+                  <h2 id="sobre-akroma" class="titulo-console" data-text="cat /home/akroma/About_Akroma.txt"></h2>
               </div>
 
-                <p class="sinserifa">Somos un grupo de especialistas apasionados por la tecnología informática. En conjunto nuestro equipo acumula 
-                  <strong>más de 40 años de experiencia</strong> trabajando para grandes empresas del sector IT, enfocados principalmente en 
-                  infraestructura y redes.
-                  <strong>Impulsamos la eficiencia y seguridad con consultoría estratégica, capacitación y despliegue de soluciones. Desde redes y servidores hasta automatización, monitoreo y cloud, optimizamos cada proceso con las mejores prácticas y tecnología de vanguardia.</strong></p>
+                <p class="sinserifa">
+                  We are a group of specialists passionate about information technology. As a team, we collectively bring
+                  <strong>over 40 years of experience</strong> working with large companies in the IT sector, primarily focused on
+                  infrastructure and networking.
+                  <strong>We drive efficiency and security through strategic consulting, training, and solution deployment. From networks and servers to automation, monitoring, and cloud, we optimize every process using best practices and cutting-edge technology.</strong>
+                  </p>
+
               </div>
               <div class="imagen" id="quienessomos"></div>
             </div>
@@ -212,11 +229,14 @@ document.addEventListener("click", (e) => {
               <div class="somos-card">
                 <div class="somos-card-inner">
                   <div class="somos-card-icon">
-                    <img src="img/server.png" alt="Infraestructura" class="somos-icon">
+                    <img src="/img/server.png" alt="Infraestructura" class="somos-icon">
                   </div>
                   <div class="somos-card-content">
-                    <h3 class="somos-card-title">Infraestructura y Sistemas</h3>
-                    <p class="somos-card-text sinserifa">Especialistas en Windows, Linux, Active Directory y Azure, con experiencia en dominios multi-forest, virtualización (VMware, Hyper-V) y optimización de infraestructuras críticas.</p>
+                    <h3 class="somos-card-title">Infrastructure and Systems</h3>
+                    <p class="somos-card-text sinserifa">
+                    Specialists in Windows, Linux, Active Directory, and Azure, with experience in multi-forest domains, virtualization (VMware, Hyper-V), and optimization of critical infrastructures.
+                    </p>
+
                   </div>
                 </div>
               </div>
@@ -227,11 +247,11 @@ document.addEventListener("click", (e) => {
               <div class="somos-card">
                 <div class="somos-card-inner">
                   <div class="somos-card-icon">
-                    <img src="img/network.png" alt="Redes" class="somos-icon">
+                    <img src="/img/network.png" alt="Redes" class="somos-icon">
                   </div>
                   <div class="somos-card-content">
-                    <h3 class="somos-card-title">Redes y Seguridad</h3>
-                    <p class="somos-card-text sinserifa">Ingenieros certificados en CCNP, CCNA y MTCNA, con experiencia en enrutamiento (BGP), firewalls, redes inalámbricas y automatización con Bash, garantizando redes seguras y escalables.</p>
+                    <h3 class="somos-card-title">Networking and Security</h3>
+                    <p class="somos-card-text sinserifa">Certified engineers in CCNP, CCNA, and MTCNA, with experience in routing (BGP), firewalls, wireless networks, and automation using Bash, ensuring secure and scalable networks.</p>
                   </div>
                 </div>
               </div>
@@ -242,7 +262,7 @@ document.addEventListener("click", (e) => {
               <div class="somos-card">
                 <div class="somos-card-inner">
                   <div class="somos-card-icon">
-                    <img src="img/cloud.png" alt="Cloud" class="somos-icon">
+                    <img src="/img/cloud.png" alt="Cloud" class="somos-icon">
                   </div>
                   <div class="somos-card-content">
                     <h3 class="somos-card-title">Cloud y Virtualización</h3>
@@ -257,11 +277,11 @@ document.addEventListener("click", (e) => {
               <div class="somos-card">
                 <div class="somos-card-inner">
                   <div class="somos-card-icon">
-                    <img src="img/management.png" alt="Proyectos" class="somos-icon">
+                    <img src="/img/management.png" alt="Proyectos" class="somos-icon">
                   </div>
                   <div class="somos-card-content">
-                    <h3 class="somos-card-title">Gestión de Proyectos</h3>
-                    <p class="somos-card-text sinserifa">Liderazgo en proyectos de infraestructura bajo metodologías ágiles e ITIL, optimización de flujos de trabajo y cumplimiento de SLA, impulsando la mejora continua.</p>
+                    <h3 class="somos-card-title">Project Management</h3>
+                    <p class="somos-card-text sinserifa">Leadership in infrastructure projects under Agile methodologies and ITIL frameworks, workflow optimization, and SLA compliance, driving continuous improvement.</p>
                   </div>
                 </div>
               </div>
@@ -278,9 +298,8 @@ document.addEventListener("click", (e) => {
             <div class="titulo-container">
               <h2 id="future" class="titulo-console" data-text="cat /home/akroma/Futuro.txt"></h2>
           </div>
-            <p class="sinserifa">El mundo de la informática se expande a pasos acelerados y la centralización de servicios bajo grandes corporaciones a 
-              degradado el soporte ofrecido.      
-              En Akroma creemos que la excelencia en soporte tecnológico debe estar al alcance de todas las empresas. Por ello, ofrecemos soluciones que combinan precios competitivos para las grandes empresas con accesibilidad en calidad para las medianas y pequeñas.</p>
+            <p class="sinserifa">The world of information technology is expanding at an accelerated pace, and the centralization of services under large corporations has
+degraded the level of support being offered. At Akroma, we believe that excellence in technological support should be accessible to all companies. For this reason, we offer solutions that combine competitive pricing for large enterprises with high-quality accessibility for small and medium-sized businesses.</p>
           </div>
           <div class="imagen" id="futuro"></div>
         </div>
@@ -294,9 +313,9 @@ document.addEventListener("click", (e) => {
         <!-- Card 1 - Experiencia -->
         <div class="somosv-card somosv-card-primary">
           <div class="somosv-card-inner">
-            <h3 class="somosv-card-title">Experiencia</h3>
+            <h3 class="somosv-card-title">Experience</h3>
             <p class="somosv-card-text sinserifa">
-              Nuestro conocimiento en infraestructuras complejas y entornos corporativos globales nos permite ofrecer soluciones escalables, eficientes y adaptadas a diversas industrias.
+              Our expertise in complex infrastructures and global corporate environments enables us to deliver scalable, efficient solutions tailored to a wide range of industries.
             </p>
           </div>
         </div>
@@ -309,9 +328,9 @@ document.addEventListener("click", (e) => {
         <!-- Card 2 - Accesibilidad -->
         <div class="somosv-card somosv-card-secondary">
           <div class="somosv-card-inner">
-            <h3 class="somosv-card-title">Accesibilidad</h3>
+            <h3 class="somosv-card-title">Accessibility</h3>
             <p class="somosv-card-text sinserifa">
-              Brindamos soporte informático sin barreras de rubro, tamaño, idioma o ubicación, asegurando que cada empresa acceda a tecnología de calidad adaptada a sus necesidades.
+              We provide IT support without barriers of industry, company size, language, or location, ensuring that every organization has access to high-quality technology tailored to its needs.
             </p>
           </div>
         </div>
@@ -324,9 +343,9 @@ document.addEventListener("click", (e) => {
         <!-- Card 3 - Optimización -->
         <div class="somosv-card somosv-card-tertiary">
           <div class="somosv-card-inner">
-            <h3 class="somosv-card-title">Optimización</h3>
+            <h3 class="somosv-card-title">Optimization</h3>
             <p class="somosv-card-text sinserifa">
-              Facilitamos el acceso a servicios y conocimiento de calidad sobre tecnologías clave para empresas modernas.
+              We facilitate access to high-quality services and expertise in key technologies for modern enterprises.
             </p>
           </div>
         </div>
@@ -396,7 +415,7 @@ document.addEventListener("click", (e) => {
             <!-- Imagen ajustada a la altura del texto -->
             <div class="col-md-5 d-flex justify-content-center">
               <div class="imagen-container">
-                <img src="img/soporte.jpg" class="img-fluid" alt="Soporte en Redes">
+                <img src="/img/soporte.jpg" class="img-fluid" alt="Soporte en Redes">
               </div>
             </div>
       
@@ -409,18 +428,18 @@ document.addEventListener("click", (e) => {
                 
                 <!-- Texto introductorio -->
                 <p class="intro-text sinserifa">
-                  Las infraestructuras tecnológicas modernas permiten la conectividad segura y eficiente entre dispositivos, usuarios y aplicaciones, optimizando el rendimiento y la disponibilidad de los servicios. La gestión y automatización de estos entornos garantizan estabilidad, escalabilidad y protección frente a amenazas, facilitando la operatividad de negocios y organizaciones en entornos locales y en la nube. La integración de diversas tecnologías y herramientas es clave para mejorar la comunicación, el procesamiento de datos y la seguridad de la información.
+                  Modern technology infrastructures enable secure and efficient connectivity between devices, users, and applications, optimizing service performance and availability. The management and automation of these environments ensure stability, scalability, and protection against threats, supporting the operation of businesses and organizations in both on-premises and cloud environments. The integration of diverse technologies and tools is key to improving communication, data processing, and information security.
                 </p>
                 
                 <div class="solutions-card-container">
                   <!-- Router, Switching y Wireless Networks -->
                   <div class="solutions-card router">
-                    <h4 class="solutions-card-title">Router, Switching y Wireless Networks</h4>
+                    <h4 class="solutions-card-title">Router, Switching and Wireless Networks</h4>
                     <div class="solutions-card-icon">
-                      <img src="img/router.png" alt="Router, Switching y Wireless Networks">
+                      <img src="/img/router.png" alt="Router, Switching y Wireless Networks">
                     </div>
                     <div class="solutions-card-description sinserifa">
-                      Diseño, configuración y optimización de redes cableadas e inalámbricas.
+                      Design, configuration, and optimization of wired and wireless networks.
                     </div>
                   </div>
                   
@@ -428,34 +447,34 @@ document.addEventListener("click", (e) => {
                   <div class="solutions-card sdwan">
                     <h4 class="solutions-card-title">SDWAN</h4>
                     <div class="solutions-card-icon">
-                      <img src="img/SDWAN.png" alt="SDWAN">
+                      <img src="/img/SDWAN.png" alt="SDWAN">
                     </div>
                     <div class="solutions-card-description sinserifa">
-                      Implementación y gestión de redes definidas por software para optimización de tráfico.
+                      Implementation and management of software-defined networks for traffic optimization.
                     </div>
                   </div>
                   
                   <!-- Telefonía IP -->
                   <div class="solutions-card telephony">
-                    <h4 class="solutions-card-title">Telefonía IP</h4>
+                    <h4 class="solutions-card-title">IP Telephony</h4>
                     <div class="solutions-card-icon2">
                       <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M20 15.5C18.8 15.5 17.5 15.3 16.4 14.9C16.3 14.9 16.2 14.9 16.1 14.9C15.8 14.9 15.6 15 15.4 15.2L13.2 17.4C10.4 15.9 8 13.6 6.6 10.8L8.8 8.6C9.1 8.3 9.2 7.9 9 7.6C8.7 6.5 8.5 5.2 8.5 4C8.5 3.5 8 3 7.5 3H4C3.5 3 3 3.5 3 4C3 13.4 10.6 21 20 21C20.5 21 21 20.5 21 20V16.5C21 16 20.5 15.5 20 15.5ZM19 12H21C21 7 17 3 12 3V5C15.9 5 19 8.1 19 12ZM15 12H17C17 9.2 14.8 7 12 7V9C13.7 9 15 10.3 15 12Z" fill="currentColor"/>
                       </svg>
                     </div>
                     <div class="solutions-card-description sinserifa">
-                      Configuración de VoIP, centralitas IP y soluciones de comunicación unificada.
+                      Configuration of VoIP, IP PBX systems, and unified communications solutions.
                     </div>
                   </div>
                   
                   <!-- Herramientas de red -->
                   <div class="solutions-card tools">
-                    <h4 class="solutions-card-title">Herramientas de red</h4>
+                    <h4 class="solutions-card-title">Networking Tools</h4>
                     <div class="solutions-card-icon">
-                      <img src="img/hred.png" alt="Herramientas de red">
+                      <img src="/img/hred.png" alt="Herramientas de red">
                     </div>
                     <div class="solutions-card-description sinserifa">
-                      Administración de servicios esenciales para resolución de nombres y asignación de IPs.
+                      Administration of core services for name resolution and IP address allocation.
                     </div>
                   </div>
                   
@@ -468,7 +487,7 @@ document.addEventListener("click", (e) => {
                       </svg>
                     </div>
                     <div class="solutions-card-description sinserifa">
-                      Implementación y gestión de seguridad perimetral con control de tráfico y políticas avanzadas.
+                      Implementation and management of perimeter security solutions with traffic control and advanced security policies.
                     </div>
                   </div>
                   
@@ -476,10 +495,10 @@ document.addEventListener("click", (e) => {
                   <div class="solutions-card linux">
                     <h4 class="solutions-card-title">Linux</h4>
                     <div class="solutions-card-icon">
-                      <img src="img/linus.png" alt="Linux">
+                      <img src="/img/linus.png" alt="Linux">
                     </div>
                     <div class="solutions-card-description sinserifa">
-                      Administración de servidores, automatización y seguridad en entornos basados en Unix.
+                      Administration of servers, automation, and security in Unix-based environments.
                     </div>
                   </div>
                   
@@ -487,69 +506,69 @@ document.addEventListener("click", (e) => {
                   <div class="solutions-card windows">
                     <h4 class="solutions-card-title">Windows</h4>
                     <div class="solutions-card-icon">
-                      <img src="img/windowz.png" alt="Windows">
+                      <img src="/img/windowz.png" alt="Windows">
                     </div>
                     <div class="solutions-card-description sinserifa">
-                      Gestión de servidores y estaciones de trabajo con Active Directory, GPO y seguridad.
+                      Management of servers and workstations using Active Directory, Group Policy (GPO), and security controls.
                     </div>
                   </div>
                   
                   <!-- Hardware de servidores y redes -->
                   <div class="solutions-card hardware">
-                    <h4 class="solutions-card-title">Hardware de servidores y redes</h4>
+                    <h4 class="solutions-card-title">Server and Networking Hardware</h4>
                     <div class="solutions-card-icon2">
                       <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M2 20H22V16H2V20ZM4 17H6V19H4V17ZM2 4V8H22V4H2ZM6 7H4V5H6V7ZM2 14H22V10H2V14ZM4 11H6V13H4V11Z" fill="currentColor"/>
                       </svg>
                     </div>
                     <div class="solutions-card-description sinserifa">
-                      Instalación, mantenimiento y optimización de infraestructura física.
+                      Installation, maintenance, and optimization of physical IT infrastructure.
                     </div>
                   </div>
                   
                   <!-- Plataformas de virtualización -->
                   <div class="solutions-card virtualization">
-                    <h4 class="solutions-card-title">Plataformas de virtualización</h4>
+                    <h4 class="solutions-card-title">Virtualization and Hypervisor Platforms</h4>
                     <div class="solutions-card-icon">
-                      <img src="img/virtual.png" alt="Plataformas de virtualización">
+                      <img src="/img/virtual.png" alt="Plataformas de virtualización">
                     </div>
                     <div class="solutions-card-description sinserifa">
-                      Implementación y administración de VMware, Hyper-V y entornos híbridos.
+                      Implementation and management of VMware, Hyper-V, and hybrid environments.
                     </div>
                   </div>
                   
                   <!-- Soluciones Cloud -->
                   <div class="solutions-card cloud">
-                    <h4 class="solutions-card-title">Soluciones Cloud</h4>
+                    <h4 class="solutions-card-title">Cloud Solutions</h4>
                     <div class="solutions-card-icon">
-                      <img src="img/nube.png" alt="Soluciones Cloud">
+                      <img src="/img/nube.png" alt="Soluciones Cloud">
                     </div>
                     <div class="solutions-card-description sinserifa">
-                      Gestión de servicios en la nube, despliegue de infraestructura y seguridad.
+                      Cloud services management, infrastructure deployment, and security.
                     </div>
                   </div>
                   
                   <!-- Infraestructuras de Certificados y PKI -->
                   <div class="solutions-card certificates">
-                    <h4 class="solutions-card-title">Infraestructuras de Certificados y PKI</h4>
+                    <h4 class="solutions-card-title">Public Key Infrastructure (PKI) and Certificate Services</h4>
                     <div class="solutions-card-icon">
-                      <img src="img/certificados.png" alt="Infraestructuras de Certificados y PKI">
+                      <img src="/img/certificados.png" alt="Infraestructuras de Certificados y PKI">
                     </div>
                     <div class="solutions-card-description sinserifa">
-                      Implementación y administración de certificados digitales y autenticación segura.
+                      Implementation and management of digital certificates and secure authentication mechanisms.
                     </div>
                   </div>
                   
                     <!-- WhatsApp Card -->
                   <div class="solutions-card whatsapp">
-                    <h4 class="solutions-card-title">¿Tenés dudas sobre nuestro poder?</h4>
+                    <h4 class="solutions-card-title">Do you have doubts about our capabilities?</h4>
                     <div class="solutions-card-iconw">
                       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
                         <path fill="currentColor" d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zm-157 341.6c-33.2 0-65.7-8.9-94-25.7l-6.7-4-69.8 18.3L72 359.2l-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.3 18-17.6 21.8-3.2 3.7-6.5 4.2-12 1.4-32.6-16.3-54-29.1-75.5-66-5.7-9.8 5.7-9.1 16.3-30.3 1.8-3.7.9-6.9-.5-9.7-1.4-2.8-12.5-30.1-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 83.8 35.2 15.2 49 16.5 66.6 13.9 10.7-1.6 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6.6z"/>
                       </svg>
                     </div>
                     <div class="solutions-card-description sinserifa">
-                      <strong>¡Hablá con nosotros! 💪</strong>
+                      <strong>Contact us! 💪</strong>
                     </div>
                     <a href="https://api.whatsapp.com/send?phone=59892712491&text=Hola,%20Akroma%20necesito%20ayuda%20con%20..." target="_blank" class="solutions-card-link"></a>
                   </div>
@@ -576,54 +595,66 @@ document.addEventListener("click", (e) => {
       
       <div class="deploy-content-wrapper">
         <!-- Left column with cards -->
-        <div class="deploy-left">
-          <div class="deploy-cards-container">
-            <div class="deploy-card-column">
-              <div class="deploy-card">
-                <h3 class="deploy-card-title">Soluciones de monitoreo</h3>
-                <p class="deploy-card-description sinserifa">Supervisión en tiempo real de infraestructuras para detectar y prevenir fallos.</p>
+          <div class="deploy-left">
+            <div class="deploy-cards-container">
+              <div class="deploy-card-column">
+                <div class="deploy-card">
+                  <h3 class="deploy-card-title">Monitoring Solutions</h3>
+                  <p class="deploy-card-description sinserifa">
+                    Real-time infrastructure monitoring to detect and prevent failures.
+                  </p>
+                </div>
+                
+                <div class="deploy-card">
+                  <h3 class="deploy-card-title">Backups</h3>
+                  <p class="deploy-card-description sinserifa">
+                    Data backup and recovery to ensure operational continuity and protection against data loss.
+                  </p>
+                </div>
+                
+                <div class="deploy-card">
+                  <h3 class="deploy-card-title">Automation</h3>
+                  <p class="deploy-card-description sinserifa">
+                    Process optimization through scripts and tools to reduce time and errors.
+                  </p>
+                </div>
               </div>
               
-              <div class="deploy-card">
-                <h3 class="deploy-card-title">Backups</h3>
-                <p class="deploy-card-description sinserifa">Respaldo y recuperación de datos para garantizar continuidad operativa y protección ante pérdidas.</p>
-              </div>
-              
-              <div class="deploy-card">
-                <h3 class="deploy-card-title">Automatismos</h3>
-                <p class="deploy-card-description sinserifa">Optimización de procesos mediante scripts y herramientas para reducir tiempos y errores.</p>
-              </div>
-            </div>
-            
-            <div class="deploy-card-column">
-              <div class="deploy-card">
-                <h3 class="deploy-card-title">Domótica</h3>
-                <p class="deploy-card-description sinserifa">Integración de tecnología para automatizar y controlar entornos residenciales y empresariales.</p>
-              </div>
-              
-              <div class="deploy-card">
-                <h3 class="deploy-card-title">Dominios Windows</h3>
-                <p class="deploy-card-description sinserifa">Administración centralizada de usuarios, políticas y recursos en entornos empresariales.</p>
-              </div>
-              
-              <div class="deploy-card">
-                <h3 class="deploy-card-title">Ambientes Linux</h3>
-                <p class="deploy-card-description sinserifa">Gestión y optimización de sistemas basados en Unix para servidores y estaciones de trabajo.</p>
+              <div class="deploy-card-column">
+                <div class="deploy-card">
+                  <h3 class="deploy-card-title">Home and Building Automation</h3>
+                  <p class="deploy-card-description sinserifa">
+                    Technology integration to automate and control residential and business environments.
+                  </p>
+                </div>
+                
+                <div class="deploy-card">
+                  <h3 class="deploy-card-title">Windows Domains</h3>
+                  <p class="deploy-card-description sinserifa">
+                    Centralized management of users, policies, and resources in enterprise environments.
+                  </p>
+                </div>
+                
+                <div class="deploy-card">
+                  <h3 class="deploy-card-title">Linux Environments</h3>
+                  <p class="deploy-card-description sinserifa">
+                    Management and optimization of Unix-based systems for servers and workstations.
+                  </p>
+                </div>
               </div>
             </div>
           </div>
-        </div>
         
         <!-- Right column with image -->
         <div class="deploy-right">
           <div class="deploy-image-placeholder">
-            <img src="img/soluciones.jpg" alt="Soluciones informáticas">
+            <img src="/img/soluciones.jpg" alt="Soluciones informáticas">
           </div>
         </div>
       </div>
       
       <div class="deploy-text-section">
-        <p class="deploy-final-text sinserifa">La optimización y gestión eficiente de la infraestructura tecnológica permiten mejorar la seguridad, disponibilidad y automatización de procesos en entornos digitales. La implementación de soluciones que aseguren la continuidad operativa, el control centralizado y la supervisión en tiempo real facilita la administración de sistemas y recursos, reduciendo riesgos y mejorando la eficiencia en distintos ámbitos, desde servidores hasta entornos automatizados.</p>
+        <p class="deploy-final-text sinserifa">The optimization and efficient management of technology infrastructure enable improved security, availability, and process automation in digital environments. The implementation of solutions that ensure operational continuity, centralized control, and real-time monitoring facilitates the administration of systems and resources, reducing risks and improving efficiency across multiple areas, from servers to automated environments.</p>
       </div>
     </div>
   </div>
@@ -655,44 +686,56 @@ document.addEventListener("click", (e) => {
               <div class="despliegue-circle-image">
                 <!-- Images will be controlled by JavaScript -->
               </div>
-            </div>
-            
-            <div id="box1" class="despliegue-info-box">
-              <h3 class="despliegue-card-title">Soluciones de monitoreo</h3>
-              <p class="despliegue-card-description sinserifa">Supervisión en tiempo real de infraestructuras para detectar y prevenir fallos.</p>
-            </div>
-            
-            <div id="box2" class="despliegue-info-box">
-              <h3 class="despliegue-card-title">Domótica</h3>
-              <p class="despliegue-card-description sinserifa">Integración de tecnología para automatizar y controlar entornos residenciales y empresariales.</p>
-            </div>
-            
-            <div id="box3" class="despliegue-info-box">
-              <h3 class="despliegue-card-title">Dominios Windows</h3>
-              <p class="despliegue-card-description sinserifa">Administración centralizada de usuarios, políticas y recursos en entornos empresariales.</p>
-            </div>
-            
-            <div id="box4" class="despliegue-info-box">
-              <h3 class="despliegue-card-title">Ambientes Linux</h3>
-              <p class="despliegue-card-description sinserifa">Gestión y optimización de sistemas basados en Linux para servidores y estaciones de trabajo.</p>
-            </div>
-            
-            <div id="box5" class="despliegue-info-box">
-              <h3 class="despliegue-card-title">Automatismos</h3>
-              <p class="despliegue-card-description sinserifa">Optimización de procesos mediante scripts y herramientas para reducir tiempos y errores.</p>
-            </div>
-            
-            <div id="box6" class="despliegue-info-box">
-              <h3 class="despliegue-card-title">Backups</h3>
-              <p class="despliegue-card-description sinserifa">Respaldo y recuperación de datos para garantizar continuidad operativa y protección ante pérdidas.</p>
-            </div>
+            </div>            
+              <div id="box1" class="despliegue-info-box">
+                <h3 class="despliegue-card-title">Monitoring Solutions</h3>
+                <p class="despliegue-card-description sinserifa">
+                  Real-time infrastructure monitoring to detect and prevent failures.
+                </p>
+              </div>
+
+              <div id="box2" class="despliegue-info-box">
+                <h3 class="despliegue-card-title">Home and Building Automation</h3>
+                <p class="despliegue-card-description sinserifa">
+                  Technology integration to automate and control residential and business environments.
+                </p>
+              </div>
+
+              <div id="box3" class="despliegue-info-box">
+                <h3 class="despliegue-card-title">Windows Domains</h3>
+                <p class="despliegue-card-description sinserifa">
+                  Centralized management of users, policies, and resources in enterprise environments.
+                </p>
+              </div>
+
+              <div id="box4" class="despliegue-info-box">
+                <h3 class="despliegue-card-title">Linux Environments</h3>
+                <p class="despliegue-card-description sinserifa">
+                  Management and optimization of Unix-based systems for servers and workstations.
+                </p>
+              </div>
+
+              <div id="box5" class="despliegue-info-box">
+                <h3 class="despliegue-card-title">Automation</h3>
+                <p class="despliegue-card-description sinserifa">
+                  Process optimization through scripts and tools to reduce time and errors.
+                </p>
+              </div>
+
+              <div id="box6" class="despliegue-info-box">
+                <h3 class="despliegue-card-title">Backups</h3>
+                <p class="despliegue-card-description sinserifa">
+                  Data backup and recovery to ensure operational continuity and protection against data loss.
+                </p>
+              </div>
           </div>
         </div>
         
         <!-- Text section in 4 columns - with specific container class -->
         <div class="col-md-4 align-items-center contenedor4 offset-md-1 deploy-text-container">
           <div class="deploy-text-section">
-            <p class="deploy-final-text sinserifa">La optimización y gestión eficiente de la infraestructura tecnológica permiten mejorar la <strong>seguridad, disponibilidad y automatización</strong> de procesos en entornos digitales. La implementación de <strong>soluciones que aseguren la continuidad</strong> operativa, el control centralizado y la supervisión en tiempo real facilita la administración de sistemas y recursos, <strong>reduciendo riesgos</strong> y mejorando la eficiencia en distintos ámbitos, desde servidores hasta entornos automatizados.</p>
+            <p class="deploy-final-text sinserifa">The optimization and efficient management of technology infrastructure enable improved <strong>security, availability, and automation</strong> of processes in digital environments. The implementation of <strong>solutions that ensure operational continuity</strong>, centralized control, and real-time monitoring facilitates the administration of systems and resources, <strong>reducing risks</strong> and improving efficiency across multiple areas, from servers to automated environments.
+</p>
           </div>
         </div>
       </div>
@@ -720,9 +763,9 @@ document.addEventListener("click", (e) => {
       
       // Image carousel configuration
       const images = [
-        'img/soluciones.jpg',
-        'img/soluciones2.jpg',
-        'img/soluciones3.jpg'
+        '/img/soluciones.jpg',
+        '/img/soluciones2.jpg',
+        '/img/soluciones3.jpg'
       ];
       let currentImageIndex = 0;
       
@@ -849,7 +892,12 @@ document.addEventListener("click", (e) => {
             <div class="col-md-12 text-center mb-4">
               <h1 id="nuestroblog">BLOG</h1>
               <div class="deploy-line"></div>
-              <p class="medium-intro"><strong>¿Queres conocer en detalle cómo transformar la gestión tecnológica de tu empresa? Descubri nuestros artículos en <i><a href="https://medium.com/@akromauy" target="_blank">Medium</a></i>, donde compartimos estrategias, casos de éxito y las últimas tendencias.</strong></p>
+              <p class="medium-intro">
+              <strong>
+                Want to learn in detail how to transform your company’s technology management? Discover our articles on
+                <i><a href="https://medium.com/@akromauy" target="_blank">Medium</a></i>, where we share strategies, success stories, and the latest trends.
+              </strong>
+            </p>
             </div>
           </div>
           
@@ -875,68 +923,68 @@ document.addEventListener("click", (e) => {
   
 <section class="where-we-excel text-center text-white pt-5 col-md-8 offset-md-2">
     <div class="container-fluid destacamos">
-        <h1 class="mb-4">DONDE DESTACAMOS</h1>
+        <h1 class="mb-4">WHAT WE DO BEST</h1>
         <div class="deploy-line2"></div>
         <div class="row g-3 justify-content-center d-flex flex-wrap pt-2">      
           <div class="skill-card col-md-2 windows">
-              <img src="img/windows.png" alt="Windows">
-              <p>Dominio, redes y certificados Windows</p>
+              <img src="/img/windows.png" alt="Windows">
+              <p>Windows Domains, Networking, and Certificates</p>
           </div>
           <div class="skill-card col-md-2 dell">
             <div id="carouselServidores" class="carousel slide" data-bs-ride="carousel" data-bs-interval="2000">
               <div class="carousel-inner">
                 <div class="carousel-item active">
-                  <img src="img/dell.png" alt="DELL" class="d-block mx-auto">
+                  <img src="/img/dell.png" alt="DELL" class="d-block mx-auto">
                 </div>
                 <div class="carousel-item">
-                  <img src="img/hp.png" alt="HP" class="d-block mx-auto">
+                  <img src="/img/hp.png" alt="HP" class="d-block mx-auto">
                 </div>
                 <div class="carousel-item">
-                  <img src="img/ibm.png" alt="IBM" class="d-block mx-auto">
+                  <img src="/img/ibm.png" alt="IBM" class="d-block mx-auto">
                 </div>
               </div>
             </div>
-            <p>Servidores DELL/HP/IBM</p>        
+            <p>DELL/HP/IBM Servers</p>        
           </div>
           <div class="skill-card col-md-2 cisco">
-              <img src="img/cisco.png" alt="Redes">
-              <p>Redes Cisco y HP</p>        
+              <img src="/img/cisco.png" alt="Redes">
+              <p>Cisco and HP Networks</p>        
           </div>
           <div class="skill-card col-md-2 linux">
-              <img src="img/linux.png" alt="Linux">
+              <img src="/img/linux.png" alt="Linux">
               <p>Redhat Enterprise Linux</p>
           </div>
           <div class="skill-card col-md-2 office">
-              <img src="img/office.png" alt="Office365">
+              <img src="/img/office.png" alt="Office365">
               <p>MS Exchange and Office 365</p>        
           </div>
           <div class="skill-card col-md-2 asterix">
-              <img src="img/Asterisk.png" alt="Asterisk">
-              <p>Asterisk Telefonía</p>        
+              <img src="/img/Asterisk.png" alt="Asterisk">
+              <p>Asterisk Telephony</p>        
           </div>
           <div class="skill-card col-md-2 silverpeak">
-              <img src="img/silverpeak.png" alt="SDWAN">
+              <img src="/img/silverpeak.png" alt="SDWAN">
               <p>SDWAN Aruba Silverpeak</p>        
           </div>
           <div class="skill-card col-md-2 docker">
-              <img src="img/docker.png" alt="Docker">
-              <p>Contenedores Docker y Swarm</p>        
+              <img src="/img/docker.png" alt="Docker">
+              <p>Docker and Swarm Containers</p>        
           </div>
           <div class="skill-card col-md-2 azure">
-            <img src="img/azure.png" alt="Azure">
-            <p>Azure y Amazon Web Services</p>        
+            <img src="/img/azure.png" alt="Azure">
+            <p>Azure and Amazon Web Services</p>        
         </div>
 
           <div class="skill-card col-md-2 atlassian">
-              <img src="img/atlassian.png" alt="ITIL">
+              <img src="/img/atlassian.png" alt="ITIL">
               <p>ITIL tools, ServiceNow y Atlassian Tools</p>        
           </div>
           <div class="skill-card col-md-2 fortinet">
-              <img src="img/fortinet.png" alt="Firewalls">
+              <img src="/img/fortinet.png" alt="Firewalls">
               <p>Firewalls FortiGate y Sophos</p>        
           </div>
           <div class="skill-card col-md-2 veeam">
-              <img src="img/veeam.png" alt="VEEAM">
+              <img src="/img/veeam.png" alt="VEEAM">
               <p>VEEAM Backup</p>        
           </div>
         </div>
@@ -950,7 +998,7 @@ document.addEventListener("click", (e) => {
       <div class="row">
           <!-- Formulario de contacto -->
           <div class="col-md-6">
-            <h2 class="mb-4">¡Hablemos!</h2>
+            <h2 class="mb-4">Lets Talk!</h2>
             <form id="contact-form">
                 <div class="row">
                     <div class="col-md-12">
@@ -966,7 +1014,7 @@ document.addEventListener("click", (e) => {
                     </div>
                 </div>
                 <div class="">
-                    <textarea class="form-control" placeholder="¿Cómo te podemos ayudar?" rows="4" required name="message" id="message"></textarea>
+                    <textarea class="form-control" placeholder="How can we help you?" rows="4" required name="message" id="message"></textarea>
                 </div>
                 <div class="mb-3 g-recaptcha" data-sitekey="6Lf9uukqAAAAAJk1isT38etJxJRCrt_V7gtv5PWG"></div>
 
@@ -977,13 +1025,13 @@ document.addEventListener("click", (e) => {
 
           <!-- Información de contacto -->
           <div class="col-md-6 text-center text-md-start mt-5 mt-md-0 text-end">
-              <h2 class="mb-4 text-end">Información de Contacto</h2>
+              <h2 class="mb-4 text-end">Contact Information</h2>
               <p class="text-end sinserifa"><strong>Email: </strong>info@akromauy.com                 
-              <p class="text-end sinserifa"><strong>Teléfono:</strong> +598 92 712 491</p>
-              <p class="text-end sinserifa"><strong>Horario de Atención:</strong> 9am - 6pm UY</p>
+              <p class="text-end sinserifa"><strong>Phone:</strong> +598 92 712 491</p>
+              <p class="text-end sinserifa"><strong>Support Hours:</strong> 7am - 4pm EST</p>
               <p class="text-end sinserifa"> Montevideo, Uruguay</p>
 
-              <h4 class="mt-4 text-end">¡Seguinos!</h4>
+              <h4 class="mt-4 text-end">Follow Us!</h4>
               <div class="social-icons text-end">
                 <a href="https://facebook.com/akromauy" target="_blank" class="social-icon">
                   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="white">
@@ -1016,7 +1064,7 @@ document.addEventListener("click", (e) => {
 </section>
    
   <!-- Bootstrap JS -->
-  <script src="bootstrap/bootstrap-5.3.3-dist/js/bootstrap.min.js"></script>
+  <script src="/bootstrap/bootstrap-5.3.3-dist/js/bootstrap.min.js"></script>
   <script>
 document.addEventListener('scroll', function () {
   const navbar = document.querySelector('.navbar');
@@ -1056,7 +1104,7 @@ document.addEventListener('scroll', function () {
   </script>
   
   <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
-  <script src="js/contact.js"></script>  
+  <script src="/js/contacten.js"></script>  
 </body>
 </html>
                   

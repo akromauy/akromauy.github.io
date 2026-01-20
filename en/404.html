@@ -1,0 +1,15 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Redirecting…</title>
+  <script>
+    (function () {
+      var path = location.pathname; // /en/compania/
+      var newUrl = "/en/?redirect=" + encodeURIComponent(path);
+      location.replace(newUrl);
+    })();
+  </script>
+</head>
+<body></body>
+</html>

@@ -2336,3 +2336,15 @@ h1{
 #consultoria {
   animation-delay: 2.5s;
 }
+
+
+.lang-switch img {
+  display: block;
+  cursor: pointer;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.lang-switch img:hover {
+  transform: scale(1.1);
+  opacity: 0.9;
+}
