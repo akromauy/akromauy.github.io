@@ -2349,3 +2349,24 @@ h1{
   opacity: 0.9;
 }
 
+/* SociableKit Medium widget - transparent background */
+.sk-ww-medium-publication-feed {
+  --widget-bg-color: transparent !important;
+  --details-bg-color: transparent !important;
+}
+
+.sk-blog-item {
+  background-color: transparent !important;
+  box-shadow: none !important;
+}
+
+.sk-blog-body {
+  background-color: transparent !important;
+}
+
+.sk-blogs-body,
+.sk-blog-carousel,
+.sk-carousel-slider {
+  background-color: transparent !important;
+}
+
