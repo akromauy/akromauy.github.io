@@ -2195,7 +2195,7 @@ h1{
 
 /* Large devices (desktops): 992px to 1199px */
 @media (max-width: 992px) {
-  .row {
+  .consulting-row {
     flex-direction: column-reverse;
   }
   
@@ -2348,3 +2348,4 @@ h1{
   transform: scale(1.1);
   opacity: 0.9;
 }
+
