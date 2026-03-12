@@ -1026,6 +1026,17 @@ document.addEventListener("click", (e) => {
    
   <!-- Bootstrap JS -->
   <script src="bootstrap/bootstrap-5.3.3-dist/js/bootstrap.min.js"></script>
+    <script>
+  // Fix mobile: after offcanvas closes, scroll to the current route target
+  document.addEventListener("DOMContentLoaded", function () {
+    var offcanvasEl = document.getElementById("offcanvasNavbar");
+    offcanvasEl.addEventListener("hidden.bs.offcanvas", function () {
+      var path = normalizePath(location.pathname);
+      var targetId = routeMap[path];
+      if (targetId) scrollToId(targetId);
+    });
+  });
+</script>
   <script>
 document.addEventListener('scroll', function () {
   const navbar = document.querySelector('.navbar');
@@ -1070,3 +1081,4 @@ document.addEventListener('scroll', function () {
 </html>
 
                   
+
