@@ -2352,16 +2352,6 @@ h1{
 /* SociableKit Medium widget - transparent background */
 .sk-ww-medium-publication-feed {
   --widget-bg-color: transparent !important;
-  --details-bg-color: transparent !important;
-}
-
-.sk-blog-item {
-  background-color: transparent !important;
-  box-shadow: none !important;
-}
-
-.sk-blog-body {
-  background-color: transparent !important;
 }
 
 .sk-blogs-body,
@@ -2369,4 +2359,5 @@ h1{
 .sk-carousel-slider {
   background-color: transparent !important;
 }
+
 
