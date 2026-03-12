@@ -40,26 +40,7 @@
     if (!saved) localStorage.setItem("akroma_lang", "en");
   })();
 </script>
-
-<script>
-document.addEventListener("click", (e) => {
-  const link = e.target.closest("a[data-target]");
-  if (!link) return;
-
-  // ✅ No interceptar el botón de idioma
-  if (link.id === "langSwitch") return;
-
-  e.preventDefault();
-
-  const targetId = link.dataset.target;
-  let path = link.getAttribute("href");
-  path = normalizePath(path);
-
-  history.pushState({ targetId }, "", `/${path}/`);
-  scrollToId(targetId);
-});
-</script>
-
+  
 <!-- SCRIPT LANG END --> 
     
 <!-- SCRIPT LINKS START -->
@@ -1142,5 +1123,6 @@ document.addEventListener('scroll', function () {
 </html>
 
                   
+
 
 
