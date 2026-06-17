@@ -11,11 +11,10 @@
   <!-- Custom CSS -->
   <link rel="stylesheet" href="/styles.css">
 
+  <!-- Google Fonts (merged) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Oxanium:wght@200..800&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Oxanium:wght@200..800&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Oxanium:wght@200..800&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
 
   <link rel="apple-touch-icon" sizes="180x180" href="/icono/apple-touch-icon.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/icono/favicon-32x32.png">
@@ -23,121 +22,33 @@
   <link rel="manifest" href="/icono/site.webmanifest">
 
   <script src="https://www.google.com/recaptcha/api.js" defer></script>
+
+  <!-- Language detection (must run synchronously) -->
+  <script>
+    (function () {
+      const saved = localStorage.getItem("akroma_lang");
+      if (saved === "es") {
+        window.location.replace("/");
+        return;
+      }
+      if (!saved) localStorage.setItem("akroma_lang", "en");
+    })();
+  </script>
+
+  <!-- Language switch click handler -->
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const langSwitch = document.getElementById("langSwitch");
+      if (langSwitch) {
+        langSwitch.addEventListener("click", function (e) {
+          e.preventDefault();
+          localStorage.setItem("akroma_lang", "es");
+          window.location.href = "/";
+        });
+      }
+    });
+  </script>
 </head>
-
-
-
-
-
-    <!-- SCRIPT LANG START -->
-<script>
-  (function () {
-    const saved = localStorage.getItem("akroma_lang");
-    if (saved === "es") {
-      window.location.replace("/");
-      return;
-    }
-    if (!saved) localStorage.setItem("akroma_lang", "en");
-  })();
-</script>
-  
-<!-- SCRIPT LANG END --> 
-    
-<!-- SCRIPT LINKS START -->
-<script>
-  // ✅ EN route -> section ID (IDs NO cambian)
-  const routeMapEn = {
-    "home": "body",
-    "company": "compania",
-    "services": "servicios",
-    "blog": "mediumblog",
-    "contact": "contacto",
-    "language": "idioma"
-  };
-
-  // ✅ Compatibilidad: rutas viejas en español -> ruta nueva en inglés
-  const legacyToEn = {
-    "inicio": "home",
-    "compania": "company",
-    "servicios": "services",
-    "blog": "blog",
-    "contacto": "contact",
-    "idioma": "language"
-  };
-
-  function normalizePath(path) {
-    return (path || "").replace(/^\/|\/$/g, "");
-  }
-
-  function stripEnPrefix(p) {
-    return p.startsWith("en/") ? p.slice(3) : p; // quita "en/"
-  }
-
-  function scrollToId(id) {
-    const el = document.getElementById(id);
-    if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
-  }
-
-  function resolveEnRoute(rawPath) {
-    // rawPath puede venir como "en/company" o "company"
-    let p = stripEnPrefix(normalizePath(rawPath));
-
-    // si viene vacío, lo tratamos como home
-    if (!p) p = "home";
-
-    // si viene con la ruta vieja en español, la convertimos a EN
-    if (legacyToEn[p]) p = legacyToEn[p];
-
-    return p; // "home" | "company" | ...
-  }
-
-  function goToEnRoute(route, replace = false) {
-    const targetId = routeMapEn[route];
-    if (!targetId) return;
-
-    const url = route === "home" ? "/en/" : `/en/${route}/`;
-    if (replace) history.replaceState({}, "", url);
-    else history.pushState({}, "", url);
-
-    scrollToId(targetId);
-  }
-
-  window.addEventListener("DOMContentLoaded", () => {
-    const params = new URLSearchParams(location.search);
-    const redirectedPath = params.get("redirect"); // ej: "/en/compania/" o "/en/company/"
-
-    const raw = redirectedPath ? redirectedPath : location.pathname;
-    const route = resolveEnRoute(raw);
-
-    // ✅ Si entró por /en/compania/ lo normaliza a /en/company/
-    goToEnRoute(route, true);
-  });
-
-  document.addEventListener("click", (e) => {
-    const link = e.target.closest("a[data-target]");
-    if (!link) return;
-
-    // ⚠️ No interceptar el switch de idioma si por error tiene data-target
-    if (link.id === "langSwitch") return;
-
-    e.preventDefault();
-
-    // En EN, el href debería ser "/en/company/" o "/company/" o "company"
-    // Tomamos el href y resolvemos la ruta final
-    const href = link.getAttribute("href") || "";
-    const route = resolveEnRoute(href);
-
-    goToEnRoute(route, false);
-  });
-
-  window.addEventListener("popstate", () => {
-    const route = resolveEnRoute(location.pathname);
-    const targetId = routeMapEn[route];
-    if (targetId) scrollToId(targetId);
-  });
-</script>
-<!-- SCRIPT LINKS END -->
-
 
 <body class="vh-100" id="body">
   <!-- Navbar -->
@@ -145,7 +56,7 @@
     <div class="container position-relative">
       <!-- Logo -->
       <a class="navbar-brand fs-4" href="#body"><img src="/img/AkromaNav.png" alt="Logo" class="d-inline-block align-text-top img-fluid logoimg"></a>
-    <!-- Toggle Btn -->
+      <!-- Toggle Btn -->
       <button class="navbar-toggler justify-self-end border-0" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -158,7 +69,7 @@
         </div>
         <!-- Sidebar Body -->
         <div class="offcanvas-body d-flex flex-column p-4 p-lg-0">
-          <ul class="navbar-nav justify-content-center flex-grow-1 pe-3 align-items-center fs-5">
+          <ul class="navbar-nav justify-content-end ms-auto pe-3 align-items-center fs-5">
             <li class="nav-item mx-2">
               <a class="nav-link" aria-current="page" href="/en/" data-target="body">HOME</a>
             </li>
@@ -175,15 +86,16 @@
               <a class="nav-link" href="/en/contact/" data-target="contacto">CONTACT</a>
             </li>
             <li class="nav-item mx-2">
-              <a href="/" id="langSwitch" class="nav-link lang-switch" aria-label="Switch to English">
-  <img src="/img/LangES.png" alt="English" width="45" height="45">
-</a>
-            </li>            
+              <a href="/" id="langSwitch" class="nav-link lang-switch" aria-label="Switch to Spanish">
+                <img src="/img/LangES.png" alt="Spanish" width="45" height="45">
+              </a>
+            </li>
           </ul>
         </div>
       </div>
     </div>
   </nav>
+
   <!-- Landing -->
   <div id="Landing" class="w-100 vh-100 d-flex flex-column justify-content-center align-items-center text-white">
     <div class="container">
@@ -202,724 +114,514 @@
   </div>
 
   <!-- divisor diagonal -->
-  <div id="dividercompania" class="diagonal-divider"></div>        
+  <div id="dividercompania" class="diagonal-divider"></div>
 
-<div class="offbackcompania"> 
-  <div id="companiayservicios" class="">      
-    <div class="container companiayservicios" id="compania">
-      <h1 class="text-center">COMPANY</h1>      
-              <div class="deploy-line"></div>
+  <div class="offbackcompania">
+    <div id="companiayservicios" class="">
+      <div class="container companiayservicios" id="compania">
+        <h1 class="text-center">COMPANY</h1>
+        <div class="deploy-line"></div>
 
-      <div class="row">
-        <div class="col-md-12">
-          <section class="section">
-            <div class="contenido">
-              <div class="texto">               
+        <div class="row">
+          <div class="col-md-12">
+            <section class="section">
+              <div class="contenido">
+                <div class="texto">
+                  <div class="titulo-container">
+                    <h2 id="sobre-akroma" class="titulo-console" data-text="cat /home/akroma/About_Akroma.txt"></h2>
+                  </div>
+                  <p class="sinserifa">
+                    We are a group of specialists passionate about information technology. As a team, we collectively bring
+                    <strong>over 40 years of experience</strong> working with large companies in the IT sector, primarily focused on
+                    infrastructure and networking.
+                    <strong>We drive efficiency and security through strategic consulting, training, and solution deployment. From networks and servers to automation, monitoring, and cloud, we optimize every process using best practices and cutting-edge technology.</strong>
+                  </p>
+                </div>
+                <div class="imagen" id="quienessomos"></div>
+              </div>
+            </section>
+          </div>
+        </div>
 
+        <section id="somos-services" class="somos-services-section py-5">
+          <div class="container somos-container">
+            <div class="row somos-services-row">
+              <!-- Card 1 - Infrastructure -->
+              <div class="col-md-6 mb-4">
+                <div class="somos-card">
+                  <div class="somos-card-inner">
+                    <div class="somos-card-icon">
+                      <img src="/img/server.png" alt="Infraestructura" class="somos-icon">
+                    </div>
+                    <div class="somos-card-content">
+                      <h3 class="somos-card-title">Infrastructure and Systems</h3>
+                      <p class="somos-card-text sinserifa">
+                        Specialists in Windows, Linux, Active Directory, and Azure, with experience in multi-forest domains, virtualization (VMware, Hyper-V), and optimization of critical infrastructures.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Card 2 - Networking -->
+              <div class="col-md-6 mb-4">
+                <div class="somos-card">
+                  <div class="somos-card-inner">
+                    <div class="somos-card-icon">
+                      <img src="/img/network.png" alt="Redes" class="somos-icon">
+                    </div>
+                    <div class="somos-card-content">
+                      <h3 class="somos-card-title">Networking and Security</h3>
+                      <p class="somos-card-text sinserifa">Certified engineers in CCNP, CCNA, and MTCNA, with experience in routing (BGP), firewalls, wireless networks, and automation using Bash, ensuring secure and scalable networks.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Card 3 - Cloud -->
+              <div class="col-md-6 mb-4">
+                <div class="somos-card">
+                  <div class="somos-card-inner">
+                    <div class="somos-card-icon">
+                      <img src="/img/cloud.png" alt="Cloud" class="somos-icon">
+                    </div>
+                    <div class="somos-card-content">
+                      <h3 class="somos-card-title">Cloud and Virtualization</h3>
+                      <p class="somos-card-text sinserifa">AWS Cloud Practitioner–certified professionals with experience in hybrid migrations, cost optimization, and security in cloud environments, ensuring high availability.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Card 4 - Projects -->
+              <div class="col-md-6 mb-4">
+                <div class="somos-card">
+                  <div class="somos-card-inner">
+                    <div class="somos-card-icon">
+                      <img src="/img/management.png" alt="Proyectos" class="somos-icon">
+                    </div>
+                    <div class="somos-card-content">
+                      <h3 class="somos-card-title">Project Management</h3>
+                      <p class="somos-card-text sinserifa">Leadership in infrastructure projects under Agile methodologies and ITIL frameworks, workflow optimization, and SLA compliance, driving continuous improvement.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <div class="row">
+          <div class="col-md-12">
+            <section class="section">
+              <div class="contenido">
+                <div class="texto">
+                  <div class="titulo-container">
+                    <h2 id="future" class="titulo-console" data-text="cat /home/akroma/Futuro.txt"></h2>
+                  </div>
+                  <p class="sinserifa">The world of information technology is expanding at an accelerated pace, and the centralization of services under large corporations has
+                    degraded the level of support being offered. At Akroma, we believe that excellence in technological support should be accessible to all companies. For this reason, we offer solutions that combine competitive pricing for large enterprises with high-quality accessibility for small and medium-sized businesses.</p>
+                </div>
+                <div class="imagen" id="futuro"></div>
+              </div>
+            </section>
+          </div>
+        </div>
+
+        <section id="somosv" class="somosv-section py-5">
+          <div class="container-fluid somosv-container">
+            <div class="somosv-cards-container">
+              <!-- Card 1 - Experience -->
+              <div class="somosv-card somosv-card-primary">
+                <div class="somosv-card-inner">
+                  <h3 class="somosv-card-title">Experience</h3>
+                  <p class="somosv-card-text sinserifa">
+                    Our expertise in complex infrastructures and global corporate environments enables us to deliver scalable, efficient solutions tailored to a wide range of industries.
+                  </p>
+                </div>
+              </div>
+
+              <!-- Plus Symbol -->
+              <div class="somosv-symbol somosv-plus-container">
+                <span class="somosv-plus">+</span>
+              </div>
+
+              <!-- Card 2 - Accessibility -->
+              <div class="somosv-card somosv-card-secondary">
+                <div class="somosv-card-inner">
+                  <h3 class="somosv-card-title">Accessibility</h3>
+                  <p class="somosv-card-text sinserifa">
+                    We provide IT support without barriers of industry, company size, language, or location, ensuring that every organization has access to high-quality technology tailored to its needs.
+                  </p>
+                </div>
+              </div>
+
+              <!-- Arrow Symbol -->
+              <div class="somosv-symbol somosv-arrow-container">
+                <span class="somosv-arrow">→</span>
+              </div>
+
+              <!-- Card 3 - Optimization -->
+              <div class="somosv-card somosv-card-tertiary">
+                <div class="somosv-card-inner">
+                  <h3 class="somosv-card-title">Optimization</h3>
+                  <p class="somosv-card-text sinserifa">
+                    We facilitate access to high-quality services and expertise in key technologies for modern enterprises.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- SERVICIOS SECTION -->
+        <div class="servicios-section">
+          <!-- divisor diagonal -->
+          <div id="dividerservicios" class="diagonal-divider2"></div>
+          <div class="container">
+            <h1 class="text-center" id="servicios">SERVICES</h1>
+            <div class="deploy-line2"></div>
+            <section class="serviciosalt4 col-md-12">
+              <div class="serviciosalt4">
+                <div class="container d-flex justify-content-center">
+                  <div class="row align-items-start">
+                    <!-- Left image -->
+                    <div class="col-md-5 d-flex justify-content-center">
+                      <div class="imagen-container">
+                        <img src="/img/soporte.jpg" class="img-fluid" alt="Soporte en Redes">
+                      </div>
+                    </div>
+
+                    <!-- Right text -->
+                    <div class="col-md-7">
+                      <div class="textoservicio">
+                        <div class="titulo-container">
+                          <h2 id="soporte" class="titulo-console" data-text="C:\servicios\Soporte e implementación.xlsx"></h2>
+                        </div>
+
+                        <p class="intro-text sinserifa">
+                          Modern technology infrastructures enable secure and efficient connectivity between devices, users, and applications, optimizing service performance and availability. The management and automation of these environments ensure stability, scalability, and protection against threats, supporting the operation of businesses and organizations in both on-premises and cloud environments. The integration of diverse technologies and tools is key to improving communication, data processing, and information security.
+                        </p>
+
+                        <div class="solutions-card-container">
+                          <!-- Router, Switching and Wireless -->
+                          <div class="solutions-card router">
+                            <h4 class="solutions-card-title">Router, Switching and Wireless Networks</h4>
+                            <div class="solutions-card-icon">
+                              <img src="/img/router.png" alt="Router, Switching y Wireless Networks">
+                            </div>
+                            <div class="solutions-card-description sinserifa">
+                              Design, configuration, and optimization of wired and wireless networks.
+                            </div>
+                          </div>
+
+                          <!-- SDWAN -->
+                          <div class="solutions-card sdwan">
+                            <h4 class="solutions-card-title">SDWAN</h4>
+                            <div class="solutions-card-icon">
+                              <img src="/img/SDWAN.png" alt="SDWAN">
+                            </div>
+                            <div class="solutions-card-description sinserifa">
+                              Implementation and management of software-defined networks for traffic optimization.
+                            </div>
+                          </div>
+
+                          <!-- IP Telephony -->
+                          <div class="solutions-card telephony">
+                            <h4 class="solutions-card-title">IP Telephony</h4>
+                            <div class="solutions-card-icon2">
+                              <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M20 15.5C18.8 15.5 17.5 15.3 16.4 14.9C16.3 14.9 16.2 14.9 16.1 14.9C15.8 14.9 15.6 15 15.4 15.2L13.2 17.4C10.4 15.9 8 13.6 6.6 10.8L8.8 8.6C9.1 8.3 9.2 7.9 9 7.6C8.7 6.5 8.5 5.2 8.5 4C8.5 3.5 8 3 7.5 3H4C3.5 3 3 3.5 3 4C3 13.4 10.6 21 20 21C20.5 21 21 20.5 21 20V16.5C21 16 20.5 15.5 20 15.5ZM19 12H21C21 7 17 3 12 3V5C15.9 5 19 8.1 19 12ZM15 12H17C17 9.2 14.8 7 12 7V9C13.7 9 15 10.3 15 12Z" fill="currentColor"/>
+                              </svg>
+                            </div>
+                            <div class="solutions-card-description sinserifa">
+                              Configuration of VoIP, IP PBX systems, and unified communications solutions.
+                            </div>
+                          </div>
+
+                          <!-- Networking Tools -->
+                          <div class="solutions-card tools">
+                            <h4 class="solutions-card-title">Networking Tools</h4>
+                            <div class="solutions-card-icon">
+                              <img src="/img/hred.png" alt="Herramientas de red">
+                            </div>
+                            <div class="solutions-card-description sinserifa">
+                              Administration of core services for name resolution and IP address allocation.
+                            </div>
+                          </div>
+
+                          <!-- Firewalls -->
+                          <div class="solutions-card firewalls">
+                            <h4 class="solutions-card-title">Firewalls</h4>
+                            <div class="solutions-card-icon2">
+                              <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M12 1L3 5V11C3 16.55 6.84 21.74 12 23C17.16 21.74 21 16.55 21 11V5L12 1ZM12 11.99H19C18.47 16.11 15.72 19.78 12 20.93V12H5V6.3L12 3.19V11.99Z" fill="currentColor"/>
+                              </svg>
+                            </div>
+                            <div class="solutions-card-description sinserifa">
+                              Implementation and management of perimeter security solutions with traffic control and advanced security policies.
+                            </div>
+                          </div>
+
+                          <!-- Linux -->
+                          <div class="solutions-card linux">
+                            <h4 class="solutions-card-title">Linux</h4>
+                            <div class="solutions-card-icon">
+                              <img src="/img/linus.png" alt="Linux">
+                            </div>
+                            <div class="solutions-card-description sinserifa">
+                              Administration of servers, automation, and security in Unix-based environments.
+                            </div>
+                          </div>
+
+                          <!-- Windows -->
+                          <div class="solutions-card windows">
+                            <h4 class="solutions-card-title">Windows</h4>
+                            <div class="solutions-card-icon">
+                              <img src="/img/windowz.png" alt="Windows">
+                            </div>
+                            <div class="solutions-card-description sinserifa">
+                              Management of servers and workstations using Active Directory, Group Policy (GPO), and security controls.
+                            </div>
+                          </div>
+
+                          <!-- Server and Networking Hardware -->
+                          <div class="solutions-card hardware">
+                            <h4 class="solutions-card-title">Server and Networking Hardware</h4>
+                            <div class="solutions-card-icon2">
+                              <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M2 20H22V16H2V20ZM4 17H6V19H4V17ZM2 4V8H22V4H2ZM6 7H4V5H6V7ZM2 14H22V10H2V14ZM4 11H6V13H4V11Z" fill="currentColor"/>
+                              </svg>
+                            </div>
+                            <div class="solutions-card-description sinserifa">
+                              Installation, maintenance, and optimization of physical IT infrastructure.
+                            </div>
+                          </div>
+
+                          <!-- Virtualization -->
+                          <div class="solutions-card virtualization">
+                            <h4 class="solutions-card-title">Virtualization and Hypervisor Platforms</h4>
+                            <div class="solutions-card-icon">
+                              <img src="/img/virtual.png" alt="Plataformas de virtualización">
+                            </div>
+                            <div class="solutions-card-description sinserifa">
+                              Implementation and management of VMware, Hyper-V, and hybrid environments.
+                            </div>
+                          </div>
+
+                          <!-- Cloud Solutions -->
+                          <div class="solutions-card cloud">
+                            <h4 class="solutions-card-title">Cloud Solutions</h4>
+                            <div class="solutions-card-icon">
+                              <img src="/img/nube.png" alt="Soluciones Cloud">
+                            </div>
+                            <div class="solutions-card-description sinserifa">
+                              Cloud services management, infrastructure deployment, and security.
+                            </div>
+                          </div>
+
+                          <!-- PKI -->
+                          <div class="solutions-card certificates">
+                            <h4 class="solutions-card-title">Public Key Infrastructure (PKI) and Certificate Services</h4>
+                            <div class="solutions-card-icon">
+                              <img src="/img/certificados.png" alt="Infraestructuras de Certificados y PKI">
+                            </div>
+                            <div class="solutions-card-description sinserifa">
+                              Implementation and management of digital certificates and secure authentication mechanisms.
+                            </div>
+                          </div>
+
+                          <!-- WhatsApp -->
+                          <div class="solutions-card whatsapp">
+                            <h4 class="solutions-card-title">Do you have doubts about our capabilities?</h4>
+                            <div class="solutions-card-iconw">
+                              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+                                <path fill="currentColor" d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zm-157 341.6c-33.2 0-65.7-8.9-94-25.7l-6.7-4-69.8 18.3L72 359.2l-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.3 18-17.6 21.8-3.2 3.7-6.5 4.2-12 1.4-32.6-16.3-54-29.1-75.5-66-5.7-9.8 5.7-9.1 16.3-30.3 1.8-3.7.9-6.9-.5-9.7-1.4-2.8-12.5-30.1-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 83.8 35.2 15.2 49 16.5 66.6 13.9 10.7-1.6 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6.6z"/>
+                              </svg>
+                            </div>
+                            <div class="solutions-card-description sinserifa">
+                              <strong>Contact us! 💪</strong>
+                            </div>
+                            <a href="https://api.whatsapp.com/send?phone=59892712491&text=Hola,%20Akroma%20necesito%20ayuda%20con%20..." target="_blank" class="solutions-card-link"></a>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </section>
+          </div>
+        </div>
+
+        <!-- HERRAMIENTAS START -->
+        <section>
+          <div id="deploymobile" class="despliegue despliegue-light">
+            <div class="deploy-container">
+              <div class="deploy-header">
                 <div class="titulo-container">
-                  <h2 id="sobre-akroma" class="titulo-console" data-text="cat /home/akroma/About_Akroma.txt"></h2>
+                  <h2 id="despliegue" class="titulo-console" data-text="C:\servicios\Despliegue de soluciones y herramientas informáticas.exe"></h2>
+                </div>
               </div>
 
-                <p class="sinserifa">
-                  We are a group of specialists passionate about information technology. As a team, we collectively bring
-                  <strong>over 40 years of experience</strong> working with large companies in the IT sector, primarily focused on
-                  infrastructure and networking.
-                  <strong>We drive efficiency and security through strategic consulting, training, and solution deployment. From networks and servers to automation, monitoring, and cloud, we optimize every process using best practices and cutting-edge technology.</strong>
-                  </p>
+              <div class="deploy-content-wrapper">
+                <!-- Left column with cards -->
+                <div class="deploy-left">
+                  <div class="deploy-cards-container">
+                    <div class="deploy-card-column">
+                      <div class="deploy-card">
+                        <h3 class="deploy-card-title">Monitoring Solutions</h3>
+                        <p class="deploy-card-description sinserifa">
+                          Real-time infrastructure monitoring to detect and prevent failures.
+                        </p>
+                      </div>
 
-              </div>
-              <div class="imagen" id="quienessomos"></div>
-            </div>
-          </section>
-        </div>
-      </div>
+                      <div class="deploy-card">
+                        <h3 class="deploy-card-title">Backups</h3>
+                        <p class="deploy-card-description sinserifa">
+                          Data backup and recovery to ensure operational continuity and protection against data loss.
+                        </p>
+                      </div>
 
-      
-      <section id="somos-services" class="somos-services-section py-5">
-        <div class="container somos-container">          
-          <div class="row somos-services-row">
-            <!-- Card 1 - Infraestructura -->
-            <div class="col-md-6 mb-4">
-              <div class="somos-card">
-                <div class="somos-card-inner">
-                  <div class="somos-card-icon">
-                    <img src="/img/server.png" alt="Infraestructura" class="somos-icon">
+                      <div class="deploy-card">
+                        <h3 class="deploy-card-title">Automation</h3>
+                        <p class="deploy-card-description sinserifa">
+                          Process optimization through scripts and tools to reduce time and errors.
+                        </p>
+                      </div>
+                    </div>
+
+                    <div class="deploy-card-column">
+                      <div class="deploy-card">
+                        <h3 class="deploy-card-title">Home and Building Automation</h3>
+                        <p class="deploy-card-description sinserifa">
+                          Technology integration to automate and control residential and business environments.
+                        </p>
+                      </div>
+
+                      <div class="deploy-card">
+                        <h3 class="deploy-card-title">Windows Domains</h3>
+                        <p class="deploy-card-description sinserifa">
+                          Centralized management of users, policies, and resources in enterprise environments.
+                        </p>
+                      </div>
+
+                      <div class="deploy-card">
+                        <h3 class="deploy-card-title">Linux Environments</h3>
+                        <p class="deploy-card-description sinserifa">
+                          Management and optimization of Unix-based systems for servers and workstations.
+                        </p>
+                      </div>
+                    </div>
                   </div>
-                  <div class="somos-card-content">
-                    <h3 class="somos-card-title">Infrastructure and Systems</h3>
-                    <p class="somos-card-text sinserifa">
-                    Specialists in Windows, Linux, Active Directory, and Azure, with experience in multi-forest domains, virtualization (VMware, Hyper-V), and optimization of critical infrastructures.
-                    </p>
+                </div>
 
+                <!-- Right column with image -->
+                <div class="deploy-right">
+                  <div class="deploy-image-placeholder">
+                    <img src="/img/soluciones.jpg" alt="Soluciones informáticas">
                   </div>
                 </div>
               </div>
-            </div>
-            
-            <!-- Card 2 - Redes -->
-            <div class="col-md-6 mb-4">
-              <div class="somos-card">
-                <div class="somos-card-inner">
-                  <div class="somos-card-icon">
-                    <img src="/img/network.png" alt="Redes" class="somos-icon">
-                  </div>
-                  <div class="somos-card-content">
-                    <h3 class="somos-card-title">Networking and Security</h3>
-                    <p class="somos-card-text sinserifa">Certified engineers in CCNP, CCNA, and MTCNA, with experience in routing (BGP), firewalls, wireless networks, and automation using Bash, ensuring secure and scalable networks.</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-            
-            <!-- Card 3 - Cloud -->
-            <div class="col-md-6 mb-4">
-              <div class="somos-card">
-                <div class="somos-card-inner">
-                  <div class="somos-card-icon">
-                    <img src="/img/cloud.png" alt="Cloud" class="somos-icon">
-                  </div>
-                  <div class="somos-card-content">
-                    <h3 class="somos-card-title">Cloud and Virtualization</h3>
-                    <p class="somos-card-text sinserifa">AWS Cloud Practitioner–certified professionals with experience in hybrid migrations, cost optimization, and security in cloud environments, ensuring high availability.</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-            
-            <!-- Card 4 - Proyectos -->
-            <div class="col-md-6 mb-4">
-              <div class="somos-card">
-                <div class="somos-card-inner">
-                  <div class="somos-card-icon">
-                    <img src="/img/management.png" alt="Proyectos" class="somos-icon">
-                  </div>
-                  <div class="somos-card-content">
-                    <h3 class="somos-card-title">Project Management</h3>
-                    <p class="somos-card-text sinserifa">Leadership in infrastructure projects under Agile methodologies and ITIL frameworks, workflow optimization, and SLA compliance, driving continuous improvement.</p>
-                  </div>
-                </div>
+
+              <div class="deploy-text-section">
+                <p class="deploy-final-text sinserifa">The optimization and efficient management of technology infrastructure enable improved security, availability, and process automation in digital environments. The implementation of solutions that ensure operational continuity, centralized control, and real-time monitoring facilitates the administration of systems and resources, reducing risks and improving efficiency across multiple areas, from servers to automated environments.</p>
               </div>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
 
-   <div class="row">
-    <div class="col-md-12">
-      <section class="section">
-        <div class="contenido">
-          <div class="texto">
-            <div class="titulo-container">
-              <h2 id="future" class="titulo-console" data-text="cat /home/akroma/Futuro.txt"></h2>
-          </div>
-            <p class="sinserifa">The world of information technology is expanding at an accelerated pace, and the centralization of services under large corporations has
-degraded the level of support being offered. At Akroma, we believe that excellence in technological support should be accessible to all companies. For this reason, we offer solutions that combine competitive pricing for large enterprises with high-quality accessibility for small and medium-sized businesses.</p>
-          </div>
-          <div class="imagen" id="futuro"></div>
-        </div>
-      </section>
-    </div>
-  </div>
-
-  <section id="somosv" class="somosv-section py-5">
-    <div class="container-fluid somosv-container">
-      <div class="somosv-cards-container">
-        <!-- Card 1 - Experiencia -->
-        <div class="somosv-card somosv-card-primary">
-          <div class="somosv-card-inner">
-            <h3 class="somosv-card-title">Experience</h3>
-            <p class="somosv-card-text sinserifa">
-              Our expertise in complex infrastructures and global corporate environments enables us to deliver scalable, efficient solutions tailored to a wide range of industries.
-            </p>
-          </div>
-        </div>
-        
-        <!-- Plus Symbol -->
-        <div class="somosv-symbol somosv-plus-container">
-          <span class="somosv-plus">+</span>
-        </div>
-        
-        <!-- Card 2 - Accesibilidad -->
-        <div class="somosv-card somosv-card-secondary">
-          <div class="somosv-card-inner">
-            <h3 class="somosv-card-title">Accessibility</h3>
-            <p class="somosv-card-text sinserifa">
-              We provide IT support without barriers of industry, company size, language, or location, ensuring that every organization has access to high-quality technology tailored to its needs.
-            </p>
-          </div>
-        </div>
-        
-        <!-- Arrow Symbol -->
-        <div class="somosv-symbol somosv-arrow-container">
-          <span class="somosv-arrow">→</span>
-        </div>
-        
-        <!-- Card 3 - Optimización -->
-        <div class="somosv-card somosv-card-tertiary">
-          <div class="somosv-card-inner">
-            <h3 class="somosv-card-title">Optimization</h3>
-            <p class="somosv-card-text sinserifa">
-              We facilitate access to high-quality services and expertise in key technologies for modern enterprises.
-            </p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <script>
-    document.addEventListener('DOMContentLoaded', function() {
-      // Add entrance animations
-      const cards = document.querySelectorAll('.somosv-card');
-      const symbols = document.querySelectorAll('.somosv-symbol');
-      
-      function animateElements() {
-        // Animate cards first
-        cards.forEach((card, index) => {
-          setTimeout(() => {
-            card.classList.add('somosv-card-visible');
-          }, 200 * index);
-        });
-        
-        // Then animate symbols
-        symbols.forEach((symbol, index) => {
-          setTimeout(() => {
-            symbol.classList.add('somosv-symbol-visible');
-          }, 150 + (200 * index));
-        });
-      }
-      
-      // Function to check if element is in viewport
-      function isInViewport(element) {
-        const rect = element.getBoundingClientRect();
-        return (
-          rect.top <= (window.innerHeight || document.documentElement.clientHeight) &&
-          rect.bottom >= 0 &&
-          rect.left <= (window.innerWidth || document.documentElement.clientWidth) &&
-          rect.right >= 0
-        );
-      }
-      
-      // Animate elements when they come into view
-      function checkElements() {
-        const container = document.querySelector('.somosv-cards-container');
-        if (container && isInViewport(container) && !container.classList.contains('animated')) {
-          container.classList.add('animated');
-          animateElements();
-        }
-      }
-      
-      // Check on load and scroll
-      checkElements();
-      window.addEventListener('scroll', checkElements);
-    });
-  </script>
-
-      <!-- SERVICIOS SECTION -->
-<div class="servicios-section">
-  <!-- divisor diagonal -->
- <div id="dividerservicios" class="diagonal-divider2"></div> 
-  <div class="container">
-    <h1 class="text-center" id="servicios">SERVICES</h1>
-    <div class="deploy-line2"></div>
-    <section class="serviciosalt4 col-md-12">
-      <div class="serviciosalt4">    
-        <div class="container d-flex justify-content-center">
-          <div class="row align-items-start">
-            <!-- Imagen ajustada a la altura del texto -->
-            <div class="col-md-5 d-flex justify-content-center">
-              <div class="imagen-container">
-                <img src="/img/soporte.jpg" class="img-fluid" alt="Soporte en Redes">
-              </div>
-            </div>
-      
-            <!-- Texto a la derecha -->
-            <div class="col-md-7">
-              <div class="textoservicio">
-                <div class="titulo-container">
-                    <h2 id="soporte" class="titulo-console" data-text="C:\servicios\Soporte e implementación.xlsx"></h2>
-                </div>
-                
-                <!-- Texto introductorio -->
-                <p class="intro-text sinserifa">
-                  Modern technology infrastructures enable secure and efficient connectivity between devices, users, and applications, optimizing service performance and availability. The management and automation of these environments ensure stability, scalability, and protection against threats, supporting the operation of businesses and organizations in both on-premises and cloud environments. The integration of diverse technologies and tools is key to improving communication, data processing, and information security.
-                </p>
-                
-                <div class="solutions-card-container">
-                  <!-- Router, Switching y Wireless Networks -->
-                  <div class="solutions-card router">
-                    <h4 class="solutions-card-title">Router, Switching and Wireless Networks</h4>
-                    <div class="solutions-card-icon">
-                      <img src="/img/router.png" alt="Router, Switching y Wireless Networks">
-                    </div>
-                    <div class="solutions-card-description sinserifa">
-                      Design, configuration, and optimization of wired and wireless networks.
+        <section class="rueda">
+          <div class="despliegue despliegue-light">
+            <div class="container">
+              <div class="row mb-4">
+                <div class="col-12 text-center">
+                  <div class="deploy-header">
+                    <div class="titulo-container">
+                      <h2 id="despliegue-rueda" class="titulo-console" data-text="C:\servicios\Despliegue de soluciones y herramientas informáticas.exe"></h2>
                     </div>
                   </div>
-                  
-                  <!-- SDWAN -->
-                  <div class="solutions-card sdwan">
-                    <h4 class="solutions-card-title">SDWAN</h4>
-                    <div class="solutions-card-icon">
-                      <img src="/img/SDWAN.png" alt="SDWAN">
-                    </div>
-                    <div class="solutions-card-description sinserifa">
-                      Implementation and management of software-defined networks for traffic optimization.
-                    </div>
-                  </div>
-                  
-                  <!-- Telefonía IP -->
-                  <div class="solutions-card telephony">
-                    <h4 class="solutions-card-title">IP Telephony</h4>
-                    <div class="solutions-card-icon2">
-                      <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M20 15.5C18.8 15.5 17.5 15.3 16.4 14.9C16.3 14.9 16.2 14.9 16.1 14.9C15.8 14.9 15.6 15 15.4 15.2L13.2 17.4C10.4 15.9 8 13.6 6.6 10.8L8.8 8.6C9.1 8.3 9.2 7.9 9 7.6C8.7 6.5 8.5 5.2 8.5 4C8.5 3.5 8 3 7.5 3H4C3.5 3 3 3.5 3 4C3 13.4 10.6 21 20 21C20.5 21 21 20.5 21 20V16.5C21 16 20.5 15.5 20 15.5ZM19 12H21C21 7 17 3 12 3V5C15.9 5 19 8.1 19 12ZM15 12H17C17 9.2 14.8 7 12 7V9C13.7 9 15 10.3 15 12Z" fill="currentColor"/>
-                      </svg>
-                    </div>
-                    <div class="solutions-card-description sinserifa">
-                      Configuration of VoIP, IP PBX systems, and unified communications solutions.
-                    </div>
-                  </div>
-                  
-                  <!-- Herramientas de red -->
-                  <div class="solutions-card tools">
-                    <h4 class="solutions-card-title">Networking Tools</h4>
-                    <div class="solutions-card-icon">
-                      <img src="/img/hred.png" alt="Herramientas de red">
-                    </div>
-                    <div class="solutions-card-description sinserifa">
-                      Administration of core services for name resolution and IP address allocation.
-                    </div>
-                  </div>
-                  
-                  <!-- Firewalls -->
-                  <div class="solutions-card firewalls">
-                    <h4 class="solutions-card-title">Firewalls</h4>
-                    <div class="solutions-card-icon2">
-                      <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M12 1L3 5V11C3 16.55 6.84 21.74 12 23C17.16 21.74 21 16.55 21 11V5L12 1ZM12 11.99H19C18.47 16.11 15.72 19.78 12 20.93V12H5V6.3L12 3.19V11.99Z" fill="currentColor"/>
-                      </svg>
-                    </div>
-                    <div class="solutions-card-description sinserifa">
-                      Implementation and management of perimeter security solutions with traffic control and advanced security policies.
-                    </div>
-                  </div>
-                  
-                  <!-- Linux -->
-                  <div class="solutions-card linux">
-                    <h4 class="solutions-card-title">Linux</h4>
-                    <div class="solutions-card-icon">
-                      <img src="/img/linus.png" alt="Linux">
-                    </div>
-                    <div class="solutions-card-description sinserifa">
-                      Administration of servers, automation, and security in Unix-based environments.
-                    </div>
-                  </div>
-                  
-                  <!-- Windows -->
-                  <div class="solutions-card windows">
-                    <h4 class="solutions-card-title">Windows</h4>
-                    <div class="solutions-card-icon">
-                      <img src="/img/windowz.png" alt="Windows">
-                    </div>
-                    <div class="solutions-card-description sinserifa">
-                      Management of servers and workstations using Active Directory, Group Policy (GPO), and security controls.
-                    </div>
-                  </div>
-                  
-                  <!-- Hardware de servidores y redes -->
-                  <div class="solutions-card hardware">
-                    <h4 class="solutions-card-title">Server and Networking Hardware</h4>
-                    <div class="solutions-card-icon2">
-                      <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M2 20H22V16H2V20ZM4 17H6V19H4V17ZM2 4V8H22V4H2ZM6 7H4V5H6V7ZM2 14H22V10H2V14ZM4 11H6V13H4V11Z" fill="currentColor"/>
-                      </svg>
-                    </div>
-                    <div class="solutions-card-description sinserifa">
-                      Installation, maintenance, and optimization of physical IT infrastructure.
-                    </div>
-                  </div>
-                  
-                  <!-- Plataformas de virtualización -->
-                  <div class="solutions-card virtualization">
-                    <h4 class="solutions-card-title">Virtualization and Hypervisor Platforms</h4>
-                    <div class="solutions-card-icon">
-                      <img src="/img/virtual.png" alt="Plataformas de virtualización">
-                    </div>
-                    <div class="solutions-card-description sinserifa">
-                      Implementation and management of VMware, Hyper-V, and hybrid environments.
-                    </div>
-                  </div>
-                  
-                  <!-- Soluciones Cloud -->
-                  <div class="solutions-card cloud">
-                    <h4 class="solutions-card-title">Cloud Solutions</h4>
-                    <div class="solutions-card-icon">
-                      <img src="/img/nube.png" alt="Soluciones Cloud">
-                    </div>
-                    <div class="solutions-card-description sinserifa">
-                      Cloud services management, infrastructure deployment, and security.
-                    </div>
-                  </div>
-                  
-                  <!-- Infraestructuras de Certificados y PKI -->
-                  <div class="solutions-card certificates">
-                    <h4 class="solutions-card-title">Public Key Infrastructure (PKI) and Certificate Services</h4>
-                    <div class="solutions-card-icon">
-                      <img src="/img/certificados.png" alt="Infraestructuras de Certificados y PKI">
-                    </div>
-                    <div class="solutions-card-description sinserifa">
-                      Implementation and management of digital certificates and secure authentication mechanisms.
-                    </div>
-                  </div>
-                  
-                    <!-- WhatsApp Card -->
-                  <div class="solutions-card whatsapp">
-                    <h4 class="solutions-card-title">Do you have doubts about our capabilities?</h4>
-                    <div class="solutions-card-iconw">
-                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
-                        <path fill="currentColor" d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zm-157 341.6c-33.2 0-65.7-8.9-94-25.7l-6.7-4-69.8 18.3L72 359.2l-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.3 18-17.6 21.8-3.2 3.7-6.5 4.2-12 1.4-32.6-16.3-54-29.1-75.5-66-5.7-9.8 5.7-9.1 16.3-30.3 1.8-3.7.9-6.9-.5-9.7-1.4-2.8-12.5-30.1-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 83.8 35.2 15.2 49 16.5 66.6 13.9 10.7-1.6 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6.6z"/>
-                      </svg>
-                    </div>
-                    <div class="solutions-card-description sinserifa">
-                      <strong>Contact us! 💪</strong>
-                    </div>
-                    <a href="https://api.whatsapp.com/send?phone=59892712491&text=Hola,%20Akroma%20necesito%20ayuda%20con%20..." target="_blank" class="solutions-card-link"></a>
-                  </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-  </div>
-</div>
-
-
-<!-- HERRAMIENTAS START -->
-
-<section>
-  <div id="deploymobile" class="despliegue despliegue-light">
-    <div class="deploy-container">
-      <div class="deploy-header">
-        <div class="titulo-container">
-          <h2 id="despliegue" class="titulo-console" data-text="C:\servicios\Despliegue de soluciones y herramientas informáticas.exe"></h2>
-      </div>
-      </div>
-      
-      <div class="deploy-content-wrapper">
-        <!-- Left column with cards -->
-          <div class="deploy-left">
-            <div class="deploy-cards-container">
-              <div class="deploy-card-column">
-                <div class="deploy-card">
-                  <h3 class="deploy-card-title">Monitoring Solutions</h3>
-                  <p class="deploy-card-description sinserifa">
-                    Real-time infrastructure monitoring to detect and prevent failures.
-                  </p>
-                </div>
-                
-                <div class="deploy-card">
-                  <h3 class="deploy-card-title">Backups</h3>
-                  <p class="deploy-card-description sinserifa">
-                    Data backup and recovery to ensure operational continuity and protection against data loss.
-                  </p>
-                </div>
-                
-                <div class="deploy-card">
-                  <h3 class="deploy-card-title">Automation</h3>
-                  <p class="deploy-card-description sinserifa">
-                    Process optimization through scripts and tools to reduce time and errors.
-                  </p>
                 </div>
               </div>
-              
-              <div class="deploy-card-column">
-                <div class="deploy-card">
-                  <h3 class="deploy-card-title">Home and Building Automation</h3>
-                  <p class="deploy-card-description sinserifa">
-                    Technology integration to automate and control residential and business environments.
-                  </p>
+
+              <div class="row despliegue-content-row">
+                <div class="col-md-7 despliegue-boxes-container">
+                  <div class="despliegue-circle-wrapper">
+                    <div class="despliegue-circle">
+                      <div class="despliegue-circle-image"></div>
+                    </div>
+                    <div id="box1" class="despliegue-info-box">
+                      <h3 class="despliegue-card-title">Monitoring Solutions</h3>
+                      <p class="despliegue-card-description sinserifa">
+                        Real-time infrastructure monitoring to detect and prevent failures.
+                      </p>
+                    </div>
+                    <div id="box2" class="despliegue-info-box">
+                      <h3 class="despliegue-card-title">Home and Building Automation</h3>
+                      <p class="despliegue-card-description sinserifa">
+                        Technology integration to automate and control residential and business environments.
+                      </p>
+                    </div>
+                    <div id="box3" class="despliegue-info-box">
+                      <h3 class="despliegue-card-title">Windows Domains</h3>
+                      <p class="despliegue-card-description sinserifa">
+                        Centralized management of users, policies, and resources in enterprise environments.
+                      </p>
+                    </div>
+                    <div id="box4" class="despliegue-info-box">
+                      <h3 class="despliegue-card-title">Linux Environments</h3>
+                      <p class="despliegue-card-description sinserifa">
+                        Management and optimization of Unix-based systems for servers and workstations.
+                      </p>
+                    </div>
+                    <div id="box5" class="despliegue-info-box">
+                      <h3 class="despliegue-card-title">Automation</h3>
+                      <p class="despliegue-card-description sinserifa">
+                        Process optimization through scripts and tools to reduce time and errors.
+                      </p>
+                    </div>
+                    <div id="box6" class="despliegue-info-box">
+                      <h3 class="despliegue-card-title">Backups</h3>
+                      <p class="despliegue-card-description sinserifa">
+                        Data backup and recovery to ensure operational continuity and protection against data loss.
+                      </p>
+                    </div>
+                  </div>
                 </div>
-                
-                <div class="deploy-card">
-                  <h3 class="deploy-card-title">Windows Domains</h3>
-                  <p class="deploy-card-description sinserifa">
-                    Centralized management of users, policies, and resources in enterprise environments.
-                  </p>
-                </div>
-                
-                <div class="deploy-card">
-                  <h3 class="deploy-card-title">Linux Environments</h3>
-                  <p class="deploy-card-description sinserifa">
-                    Management and optimization of Unix-based systems for servers and workstations.
-                  </p>
+
+                <div class="col-md-4 align-items-center contenedor4 offset-md-1 deploy-text-container">
+                  <div class="deploy-text-section">
+                    <p class="deploy-final-text sinserifa">The optimization and efficient management of technology infrastructure enable improved <strong>security, availability, and automation</strong> of processes in digital environments. The implementation of <strong>solutions that ensure operational continuity</strong>, centralized control, and real-time monitoring facilitates the administration of systems and resources, <strong>reducing risks</strong> and improving efficiency across multiple areas, from servers to automated environments.</p>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-        
-        <!-- Right column with image -->
-        <div class="deploy-right">
-          <div class="deploy-image-placeholder">
-            <img src="/img/soluciones.jpg" alt="Soluciones informáticas">
-          </div>
-        </div>
-      </div>
-      
-      <div class="deploy-text-section">
-        <p class="deploy-final-text sinserifa">The optimization and efficient management of technology infrastructure enable improved security, availability, and process automation in digital environments. The implementation of solutions that ensure operational continuity, centralized control, and real-time monitoring facilitates the administration of systems and resources, reducing risks and improving efficiency across multiple areas, from servers to automated environments.</p>
-      </div>
-    </div>
-  </div>
+        </section>
+        <!-- HERRAMIENTAS END -->
 
-
-</section>
-
-<section class="rueda">
-  <div class="despliegue despliegue-light">
-    <div class="container">
-      <!-- Title row - at the top of the section -->
-      <div class="row mb-4">
-        <div class="col-12 text-center">
-          <div class="deploy-header">
-            <div class="titulo-container">
-              <h2 id="despliegue" class="titulo-console" data-text="C:\servicios\Despliegue de soluciones y herramientas informáticas.exe"></h2>
-          </div>
-            
-          </div>
-        </div>
-      </div>
-      
-      <!-- Main content with 7-4 column layout -->
-      <div class="row despliegue-content-row">
-        <!-- Main carousel content in 7 columns -->
-        <div class="col-md-7 despliegue-boxes-container">
-          <div class="despliegue-circle-wrapper">
-            <div class="despliegue-circle">
-              <div class="despliegue-circle-image">
-                <!-- Images will be controlled by JavaScript -->
-              </div>
-            </div>            
-              <div id="box1" class="despliegue-info-box">
-                <h3 class="despliegue-card-title">Monitoring Solutions</h3>
-                <p class="despliegue-card-description sinserifa">
-                  Real-time infrastructure monitoring to detect and prevent failures.
+        <!-- Blog section -->
+        <div id="mediumblog" class="col-md-12 medium-section">
+          <div class="container">
+            <div class="row">
+              <div class="col-md-12 text-center mb-4">
+                <h1 id="nuestroblog">BLOG</h1>
+                <div class="deploy-line"></div>
+                <p class="medium-intro">
+                  <strong>
+                    Want to learn in detail how to transform your company's technology management? Discover our articles on
+                    <i><a href="https://medium.com/@akromauy" target="_blank">Medium</a></i>, where we share strategies, success stories, and the latest trends.
+                  </strong>
                 </p>
               </div>
-
-              <div id="box2" class="despliegue-info-box">
-                <h3 class="despliegue-card-title">Home and Building Automation</h3>
-                <p class="despliegue-card-description sinserifa">
-                  Technology integration to automate and control residential and business environments.
-                </p>
-              </div>
-
-              <div id="box3" class="despliegue-info-box">
-                <h3 class="despliegue-card-title">Windows Domains</h3>
-                <p class="despliegue-card-description sinserifa">
-                  Centralized management of users, policies, and resources in enterprise environments.
-                </p>
-              </div>
-
-              <div id="box4" class="despliegue-info-box">
-                <h3 class="despliegue-card-title">Linux Environments</h3>
-                <p class="despliegue-card-description sinserifa">
-                  Management and optimization of Unix-based systems for servers and workstations.
-                </p>
-              </div>
-
-              <div id="box5" class="despliegue-info-box">
-                <h3 class="despliegue-card-title">Automation</h3>
-                <p class="despliegue-card-description sinserifa">
-                  Process optimization through scripts and tools to reduce time and errors.
-                </p>
-              </div>
-
-              <div id="box6" class="despliegue-info-box">
-                <h3 class="despliegue-card-title">Backups</h3>
-                <p class="despliegue-card-description sinserifa">
-                  Data backup and recovery to ensure operational continuity and protection against data loss.
-                </p>
-              </div>
-          </div>
-        </div>
-        
-        <!-- Text section in 4 columns - with specific container class -->
-        <div class="col-md-4 align-items-center contenedor4 offset-md-1 deploy-text-container">
-          <div class="deploy-text-section">
-            <p class="deploy-final-text sinserifa">The optimization and efficient management of technology infrastructure enable improved <strong>security, availability, and automation</strong> of processes in digital environments. The implementation of <strong>solutions that ensure operational continuity</strong>, centralized control, and real-time monitoring facilitates the administration of systems and resources, <strong>reducing risks</strong> and improving efficiency across multiple areas, from servers to automated environments.
-</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  
-  <script>
-    document.addEventListener('DOMContentLoaded', function() {
-      // Configuration for the rotating info boxes
-      let angle = 0;
-      const speed = 0.04; // Rotation speed (lower = slower)
-      const boxes = document.querySelectorAll('.despliegue-info-box');
-      
-      // Get the center circle element
-      const circleContainer = document.querySelector('.despliegue-circle');
-      const circleImage = document.querySelector('.despliegue-circle-image');
-      
-      // Calculate the exact center of the circle
-      const centerX = 300; // Half of the container (600px / 2)
-      const centerY = 300; // Half of the container (600px / 2)
-      
-      // Calculate the radius based on the center circle size
-      const circleRadius = circleContainer ? circleContainer.offsetWidth / 2 : 150;
-      const orbitRadius = circleRadius + 140; // Increased for more separation
-      
-      // Image carousel configuration
-      const images = [
-        '/img/soluciones.jpg',
-        '/img/soluciones2.jpg',
-        '/img/soluciones3.jpg'
-      ];
-      let currentImageIndex = 0;
-      
-      // Preload all images at the start
-      function preloadImages() {
-        images.forEach(src => {
-          const img = new Image();
-          img.src = src;
-        });
-      }
-      
-      // Function to change the image every 4 seconds
-      function changeImage() {
-        if (!circleImage) return;
-        
-        // Change to the next image
-        currentImageIndex = (currentImageIndex + 1) % images.length;
-        
-        // Preload the next image to avoid flashing
-        const nextImage = new Image();
-        nextImage.src = images[currentImageIndex];
-        
-        nextImage.onload = function() {
-          // Apply transition effect
-          circleImage.style.opacity = '0';
-          
-          setTimeout(() => {
-            // Change the image URL
-            circleImage.style.backgroundImage = `url('${images[currentImageIndex]}')`;
-            // Show the image again
-            circleImage.style.opacity = '1';
-          }, 500); // Wait for opacity transition to finish
-        };
-      }
-      
-      // Function to check if we're in mobile view
-      function isMobile() {
-        return window.innerWidth <= 991;
-      }
-      
-      // Preload images
-      preloadImages();
-      
-      // Start the image carousel with a 4-second interval
-      setInterval(changeImage, 4000);
-      
-      // Function to animate boxes in desktop view
-      function animateBoxes() {
-        // Skip animation in mobile view
-        if (isMobile()) return;
-        
-        boxes.forEach((box, index) => {
-          // Distribute boxes evenly around the circle
-          const boxAngle = angle + (index * (360 / boxes.length));
-          
-          // Convert from degrees to radians
-          const radians = boxAngle * Math.PI / 180;
-          
-          // Calculate X and Y position from the exact center
-          const x = centerX + orbitRadius * Math.cos(radians);
-          const y = centerY + orbitRadius * Math.sin(radians);
-          
-          // Adjust position considering box size
-          const boxWidth = box.offsetWidth;
-          const boxHeight = box.offsetHeight;
-          
-          box.style.left = (x - boxWidth / 2) + 'px';
-          box.style.top = (y - boxHeight / 2) + 'px';
-        });
-        
-        // Increment angle for next animation
-        angle += speed;
-        if (angle >= 360) angle = 0;
-        
-        // Continue animation
-        if (!isMobile()) {
-          requestAnimationFrame(animateBoxes);
-        }
-      }
-      
-      // Handle mobile vs desktop view
-      function handleResponsiveLayout() {
-        const textContainer = document.querySelector('.deploy-text-container');
-        const boxesContainer = document.querySelector('.despliegue-boxes-container');
-        
-        if (isMobile()) {
-          // Mobile: apply mobile-specific classes
-          document.body.classList.add('mobile-view');
-          if (circleContainer) circleContainer.classList.add('mobile-hidden');
-          if (textContainer) textContainer.classList.add('mobile-text');
-          if (boxesContainer) boxesContainer.classList.add('mobile-boxes');
-          
-          boxes.forEach(box => {
-            box.classList.add('mobile-box');
-          });
-        } else {
-          // Desktop: remove mobile classes
-          document.body.classList.remove('mobile-view');
-          if (circleContainer) circleContainer.classList.remove('mobile-hidden');
-          if (textContainer) textContainer.classList.remove('mobile-text');
-          if (boxesContainer) boxesContainer.classList.remove('mobile-boxes');
-          
-          boxes.forEach(box => {
-            box.classList.remove('mobile-box');
-          });
-          
-          // Start animation for desktop
-          requestAnimationFrame(animateBoxes);
-        }
-      }
-      
-      // Run on page load and window resize
-      handleResponsiveLayout();
-      window.addEventListener('resize', handleResponsiveLayout);
-    });
-  </script>
-</section>
-<!-- HERRAMIENTAS END -->
-
-      <!-- New Medium section (pattern background) -->
-      <div id="mediumblog" class="col-md-12 medium-section">
-        <div class="container">
-          <div class="row">
-            <div class="col-md-12 text-center mb-4">
-              <h1 id="nuestroblog">BLOG</h1>
-              <div class="deploy-line"></div>
-              <p class="medium-intro">
-              <strong>
-                Want to learn in detail how to transform your company’s technology management? Discover our articles on
-                <i><a href="https://medium.com/@akromauy" target="_blank">Medium</a></i>, where we share strategies, success stories, and the latest trends.
-              </strong>
-            </p>
             </div>
-          </div>
-          
-          <div class="row">
-            <div class="col-md-10 offset-md-1">
-              <div class="medium-container">
-                <div class='sk-ww-medium-publication-feed' data-embed-id='25526677'></div>
-                <script src='https://widgets.sociablekit.com/medium-publication-feed/widget.js' defer></script>
+
+            <div class="row">
+              <div class="col-md-10 offset-md-1">
+                <div class="medium-container">
+                  <div class='sk-ww-medium-publication-feed' data-embed-id='25526677'></div>
+                  <script src='https://widgets.sociablekit.com/medium-publication-feed/widget.js'></script>
+                </div>
               </div>
             </div>
           </div>
@@ -927,22 +629,20 @@ degraded the level of support being offered. At Akroma, we believe that excellen
       </div>
     </div>
   </div>
-</div>
 
-<div class="skillsymedium">
- <!-- divisor diagonal -->
- <div class="diagonal-divider2"></div> 
-<!-- SKILLS -->
+  <div class="skillsymedium">
+    <!-- divisor diagonal -->
+    <div class="diagonal-divider2"></div>
 
-  
-<section class="where-we-excel text-center text-white pt-5 col-md-8 offset-md-2">
-    <div class="container-fluid destacamos">
+    <!-- SKILLS -->
+    <section class="where-we-excel text-center text-white pt-5 col-md-8 offset-md-2">
+      <div class="container-fluid destacamos">
         <h1 class="mb-4">WHAT WE DO BEST</h1>
         <div class="deploy-line2"></div>
-        <div class="row g-3 justify-content-center d-flex flex-wrap pt-2">      
+        <div class="row g-3 justify-content-center d-flex flex-wrap pt-2">
           <div class="skill-card col-md-2 windows">
-              <img src="/img/windows.png" alt="Windows">
-              <p>Windows Domains, Networking, and Certificates</p>
+            <img src="/img/windows.png" alt="Windows">
+            <p>Windows Domains, Networking, and Certificates</p>
           </div>
           <div class="skill-card col-md-2 dell">
             <div id="carouselServidores" class="carousel slide" data-bs-ride="carousel" data-bs-interval="2000">
@@ -958,171 +658,128 @@ degraded the level of support being offered. At Akroma, we believe that excellen
                 </div>
               </div>
             </div>
-            <p>DELL/HP/IBM Servers</p>        
+            <p>DELL/HP/IBM Servers</p>
           </div>
           <div class="skill-card col-md-2 cisco">
-              <img src="/img/cisco.png" alt="Redes">
-              <p>Cisco and HP Networks</p>        
+            <img src="/img/cisco.png" alt="Redes">
+            <p>Cisco and HP Networks</p>
           </div>
           <div class="skill-card col-md-2 linux">
-              <img src="/img/linux.png" alt="Linux">
-              <p>Redhat Enterprise Linux</p>
+            <img src="/img/linux.png" alt="Linux">
+            <p>Redhat Enterprise Linux</p>
           </div>
           <div class="skill-card col-md-2 office">
-              <img src="/img/office.png" alt="Office365">
-              <p>MS Exchange and Office 365</p>        
+            <img src="/img/office.png" alt="Office365">
+            <p>MS Exchange and Office 365</p>
           </div>
           <div class="skill-card col-md-2 asterix">
-              <img src="/img/Asterisk.png" alt="Asterisk">
-              <p>Asterisk Telephony</p>        
+            <img src="/img/Asterisk.png" alt="Asterisk">
+            <p>Asterisk Telephony</p>
           </div>
           <div class="skill-card col-md-2 silverpeak">
-              <img src="/img/silverpeak.png" alt="SDWAN">
-              <p>SDWAN Aruba Silverpeak</p>        
+            <img src="/img/silverpeak.png" alt="SDWAN">
+            <p>SDWAN Aruba Silverpeak</p>
           </div>
           <div class="skill-card col-md-2 docker">
-              <img src="/img/docker.png" alt="Docker">
-              <p>Docker and Swarm Containers</p>        
+            <img src="/img/docker.png" alt="Docker">
+            <p>Docker and Swarm Containers</p>
           </div>
           <div class="skill-card col-md-2 azure">
             <img src="/img/azure.png" alt="Azure">
-            <p>Azure and Amazon Web Services</p>        
-        </div>
-
+            <p>Azure and Amazon Web Services</p>
+          </div>
           <div class="skill-card col-md-2 atlassian">
-              <img src="/img/atlassian.png" alt="ITIL">
-              <p>ITIL tools, ServiceNow y Atlassian Tools</p>        
+            <img src="/img/atlassian.png" alt="ITIL">
+            <p>ITIL tools, ServiceNow y Atlassian Tools</p>
           </div>
           <div class="skill-card col-md-2 fortinet">
-              <img src="/img/fortinet.png" alt="Firewalls">
-              <p>Firewalls FortiGate y Sophos</p>        
+            <img src="/img/fortinet.png" alt="Firewalls">
+            <p>Firewalls FortiGate y Sophos</p>
           </div>
           <div class="skill-card col-md-2 veeam">
-              <img src="/img/veeam.png" alt="VEEAM">
-              <p>VEEAM Backup</p>        
+            <img src="/img/veeam.png" alt="VEEAM">
+            <p>VEEAM Backup</p>
           </div>
         </div>
-    </div>
-  </section>
-</div>
+      </div>
+    </section>
+  </div>
 
-
-<section class="contact-section py-5 text-white" id="contacto">
-  <div class="container">
+  <section class="contact-section py-5 text-white" id="contacto">
+    <div class="container">
       <div class="row">
-          <!-- Formulario de contacto -->
-          <div class="col-md-6">
-            <h2 class="mb-4">Lets Talk!</h2>
-            <form id="contact-form">
-                <div class="row">
-                    <div class="col-md-12">
-                        <input type="text" class="form-control" placeholder="Nombre Completo" required name="name" id="name">
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-6">
-                        <input type="email" class="form-control" placeholder="E-mail" required name="email" id="email">
-                    </div>
-                    <div class="col-md-6">
-                        <input type="text" class="form-control" placeholder="Telefono" required name="phone" id="phone">
-                    </div>
-                </div>
-                <div class="">
-                    <textarea class="form-control" placeholder="How can we help you?" rows="4" required name="message" id="message"></textarea>
-                </div>
-                <div class="mb-3 g-recaptcha" data-sitekey="6Lf9uukqAAAAAJk1isT38etJxJRCrt_V7gtv5PWG"></div>
-
-                <button id="button" type="submit" class="btn btn-outline-light">Enviar</button>
-            </form>
-            
+        <!-- Contact form -->
+        <div class="col-md-6">
+          <h2 class="mb-4">Lets Talk!</h2>
+          <form id="contact-form">
+            <div class="row">
+              <div class="col-md-12">
+                <input type="text" class="form-control" placeholder="Nombre Completo" required name="name" id="name">
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <input type="email" class="form-control" placeholder="E-mail" required name="email" id="email">
+              </div>
+              <div class="col-md-6">
+                <input type="text" class="form-control" placeholder="Telefono" required name="phone" id="phone">
+              </div>
+            </div>
+            <div class="">
+              <textarea class="form-control" placeholder="How can we help you?" rows="4" required name="message" id="message"></textarea>
+            </div>
+            <div class="mb-3 g-recaptcha" data-sitekey="6Lf9uukqAAAAAJk1isT38etJxJRCrt_V7gtv5PWG"></div>
+            <button id="button" type="submit" class="btn btn-outline-light">Enviar</button>
+          </form>
         </div>
 
-          <!-- Información de contacto -->
-          <div class="col-md-6 text-center text-md-start mt-5 mt-md-0 text-end">
-              <h2 class="mb-4 text-end">Contact Information</h2>
-              <p class="text-end sinserifa"><strong>Email: </strong>info@akromauy.com                 
-              <p class="text-end sinserifa"><strong>Phone:</strong> +598 92 712 491</p>
-              <p class="text-end sinserifa"><strong>Support Hours:</strong> 7am - 4pm EST</p>
-              <p class="text-end sinserifa"> Montevideo, Uruguay</p>
+        <!-- Contact info -->
+        <div class="col-md-6 text-center text-md-start mt-5 mt-md-0 text-end">
+          <h2 class="mb-4 text-end">Contact Information</h2>
+          <p class="text-end sinserifa"><strong>Email: </strong>info@akromauy.com</p>
+          <p class="text-end sinserifa"><strong>Phone:</strong> +598 92 712 491</p>
+          <p class="text-end sinserifa"><strong>Support Hours:</strong> 7am - 4pm EST</p>
+          <p class="text-end sinserifa"> Montevideo, Uruguay</p>
 
-              <h4 class="mt-4 text-end">Follow Us!</h4>
-              <div class="social-icons text-end">
-                <a href="https://facebook.com/akromauy" target="_blank" class="social-icon">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="white">
-                    <path d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.596 0-5.192 1.583-5.192 4.615v3.385z"/>
-                  </svg>
-                </a>
-                <a href="https://instagram.com/akromauy" target="_blank" class="social-icon">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="white">
-                    <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
-                  </svg>
-                </a>
-                <a href="https://linkedin.com/company/akromauy" target="_blank" class="social-icon">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="white">
-                    <path d="M4.98 3.5c0 1.381-1.11 2.5-2.48 2.5s-2.48-1.119-2.48-2.5c0-1.38 1.11-2.5 2.48-2.5s2.48 1.12 2.48 2.5zm.02 4.5h-5v16h5v-16zm7.982 0h-4.968v16h4.969v-8.399c0-4.67 6.029-5.052 6.029 0v8.399h4.988v-10.131c0-7.88-8.922-7.593-11.018-3.714v-2.155z"/>
-                  </svg>
-                </a>
-                <a href="https://medium.com/@akromauy" target="_blank" class="social-icon">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="white">
-                    <path d="M2.846 6.887c.03-.295-.083-.586-.303-.784l-2.24-2.7v-.403h6.958l5.378 11.795 4.728-11.795h6.633v.403l-1.916 1.837c-.165.126-.247.333-.213.538v13.498c-.034.204.048.411.213.537l1.871 1.837v.403h-9.412v-.403l1.939-1.882c.19-.19.19-.246.19-.537v-10.91l-5.389 13.688h-.728l-6.275-13.688v9.174c-.052.385.076.774.347 1.052l2.521 3.058v.404h-7.148v-.404l2.521-3.058c.27-.279.39-.67.325-1.052v-10.608z"/>
-                  </svg>
-                </a>
-              </div>
+          <h4 class="mt-4 text-end">Follow Us!</h4>
+          <div class="social-icons text-end">
+            <a href="https://facebook.com/akromauy" target="_blank" class="social-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="white">
+                <path d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.596 0-5.192 1.583-5.192 4.615v3.385z"/>
+              </svg>
+            </a>
+            <a href="https://instagram.com/akromauy" target="_blank" class="social-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="white">
+                <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+              </svg>
+            </a>
+            <a href="https://linkedin.com/company/akromauy" target="_blank" class="social-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="white">
+                <path d="M4.98 3.5c0 1.381-1.11 2.5-2.48 2.5s-2.48-1.119-2.48-2.5c0-1.38 1.11-2.5 2.48-2.5s2.48 1.12 2.48 2.5zm.02 4.5h-5v16h5v-16zm7.982 0h-4.968v16h4.969v-8.399c0-4.67 6.029-5.052 6.029 0v8.399h4.988v-10.131c0-7.88-8.922-7.593-11.018-3.714v-2.155z"/>
+              </svg>
+            </a>
+            <a href="https://medium.com/@akromauy" target="_blank" class="social-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="white">
+                <path d="M2.846 6.887c.03-.295-.083-.586-.303-.784l-2.24-2.7v-.403h6.958l5.378 11.795 4.728-11.795h6.633v.403l-1.916 1.837c-.165.126-.247.333-.213.538v13.498c-.034.204.048.411.213.537l1.871 1.837v.403h-9.412v-.403l1.939-1.882c.19-.19.19-.246.19-.537v-10.91l-5.389 13.688h-.728l-6.275-13.688v9.174c-.052.385.076.774.347 1.052l2.521 3.058v.404h-7.148v-.404l2.521-3.058c.27-.279.39-.67.325-1.052v-10.608z"/>
+              </svg>
+            </a>
+          </div>
+        </div>
       </div>
 
-      <!-- Derechos reservados -->
+      <!-- Copyright -->
       <div class="text-center mt-5 fw-bold sinserifa">
-          <p>&copy; 2026. All Rights Reserved. AkromaUy</p>
+        <p>&copy; 2026. All Rights Reserved. AkromaUy</p>
       </div>
-  </div>
-</section>
-   
+    </div>
+  </section>
+
   <!-- Bootstrap JS -->
   <script src="/bootstrap/bootstrap-5.3.3-dist/js/bootstrap.min.js"></script>
-  <script>
-document.addEventListener('scroll', function () {
-  const navbar = document.querySelector('.navbar');
-  console.log(window.scrollY); // Imprime la posición del scroll
-  if (window.scrollY > 200) {
-    navbar.classList.add('scrolled');
-    console.log('Navbar scrolled'); // Verifica si se aplica la clase
-  } else {
-    navbar.classList.remove('scrolled');
-    console.log('Navbar not scrolled'); // Verifica si se elimina la clase
-  }
-});
-
-  </script>
-
-  <script>
-    document.querySelectorAll('.card').forEach(card => {
-    card.addEventListener('mouseenter', () => {
-        card.style.boxShadow = '0 10px 20px rgba(255, 255, 255, 0.3)';
-    });
-    card.addEventListener('mouseleave', () => {
-        card.style.boxShadow = 'none';
-    });
-});
-
-  </script>
-
-  <script>
-    document.addEventListener('DOMContentLoaded', function () {
-    let myCarousel = document.querySelector('#multiCardCarousel');
-    let carousel = new bootstrap.Carousel(myCarousel, {
-        interval: 5000, // Cambia cada 3 segundos
-        wrap: true // Se repite al finalizar
-    });
-});
-
-  </script>
-  
+  <!-- EmailJS -->
   <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
-  <script src="/js/contacten.js"></script>  
+  <!-- Main scripts -->
+  <script src="/js/mainen.js" defer></script>
+  <script src="/js/contacten.js" defer></script>
 </body>
 </html>
-
-                  
-
-
-
