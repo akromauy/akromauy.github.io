@@ -48,6 +48,19 @@ window.addEventListener("DOMContentLoaded", () => {
   }
 });
 
+let _pendingScroll = null;
+
+const _offcanvasEl = document.getElementById('offcanvasNavbar');
+if (_offcanvasEl) {
+  _offcanvasEl.addEventListener('hidden.bs.offcanvas', function () {
+    if (_pendingScroll) {
+      scrollToId(_pendingScroll.targetId);
+      history.pushState({ targetId: _pendingScroll.targetId }, "", `/${_pendingScroll.path}/`);
+      _pendingScroll = null;
+    }
+  });
+}
+
 document.addEventListener("click", (e) => {
   const link = e.target.closest("a[data-target]");
   if (!link) return;
@@ -56,8 +69,15 @@ document.addEventListener("click", (e) => {
   e.preventDefault();
   const targetId = link.dataset.target;
   let path = normalizePath(link.getAttribute("href"));
-  history.pushState({ targetId }, "", `/${path}/`);
-  scrollToId(targetId);
+
+  const offcanvas = _offcanvasEl && bootstrap.Offcanvas.getInstance(_offcanvasEl);
+  if (offcanvas && _offcanvasEl.classList.contains('show')) {
+    _pendingScroll = { targetId, path };
+    offcanvas.hide();
+  } else {
+    history.pushState({ targetId }, "", `/${path}/`);
+    scrollToId(targetId);
+  }
 });
 
 window.addEventListener("popstate", () => {
@@ -132,9 +152,9 @@ document.addEventListener('DOMContentLoaded', function () {
   const orbitRadius = circleRadius + 140;
 
   const images = [
-    'img/soluciones.jpg',
-    'img/soluciones2.jpg',
-    'img/soluciones3.jpg'
+    '/img/soluciones.jpg',
+    '/img/soluciones2.jpg',
+    '/img/soluciones3.jpg'
   ];
   let currentImageIndex = 0;
 
